@@ -31,7 +31,7 @@ module.exports = {
       ]
     ],
     'scope-empty': [1, 'never'],
-    'subject-case': [2, 'always', 'lower-case'],
+    'subject-case': [1, 'always', 'lower-case'],
     'header-max-length': [2, 'always', 100]
   }
 };

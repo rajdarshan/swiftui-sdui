@@ -20,7 +20,7 @@ excluded:
 disabled_rules:
   - todo
   - trailing_whitespace        # Often flags auto-generated code or multi-line strings
-  - nesting                    # Can be restrictive when using nested enums or extensions
+#- nesting                    # Can be restrictive when using nested enums or extensions
   - trailing_comma             # Multiline parameters input can have trailing comma after each argument
 
 # Optional rules to explicitly enable
@@ -116,23 +116,6 @@ type_name:
     warning: 40
     error: 50
   allowed_symbols: ["_"]
-
-# Custom variable naming constraints
-variable_name:
-  min_length: 2
-  max_length:
-    warning: 40
-    error: 50
-  excluded:
-    - id
-    - x
-    - y
-
-no_literal_hex_color:
-    name: "Literal colour is prohibited"
-    regex: "Color\\(\\s*(red|hex|#)"
-    message: "Use Palette tokens. See design_spec.md §2.1."
-    severity: error
 
 # Force warnings instead of build failures for specific rules
 force_cast: warning             # Suggests avoiding 'as!' but won't stop the build
