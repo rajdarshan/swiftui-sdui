@@ -1,0 +1,17 @@
+{
+  "name": "sdui-config",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SDUI JSON payloads and manifest for the swiftui-sdui home screen",
+  "scripts": {
+    "lint:json": "for f in config.json payloads/*.json; do jq -e . \"$f\" > /dev/null || exit 1; done && echo 'JSON syntax OK'",
+    "validate": "npm run lint:json && node scripts/validate-payloads.mjs",
+    "sync:version": "node scripts/sync-version.mjs",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major"
+  },
+  "devDependencies": {
+    "standard-version": "^9.5.0"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "manifestVersion": 1,
+  "schemaVersion": "1.0",
+  "releaseVersion": "1.0.0",
+  "payloads": [
+    {
+      "pageId": "home_all",
+      "path": "payloads/home_all.json",
+      "version": "1.0.0",
+      "schemaVersion": "1.0",
+      "minAppVersion": "1.0.0"
+    },
+    {
+      "pageId": "home_buy_used_car",
+      "path": "payloads/home_buy_used_car.json",
+      "version": "1.0.0",
+      "schemaVersion": "1.0",
+      "minAppVersion": "1.0.0"
+    },
+    {
+      "pageId": "home_sell_car",
+      "path": "payloads/home_sell_car.json",
+      "version": "1.0.0",
+      "schemaVersion": "1.0",
+      "minAppVersion": "1.0.0"
+    },
+    {
+      "pageId": "home_loans",
+      "path": "payloads/home_loans.json",
+      "version": "1.0.0",
+      "schemaVersion": "1.0",
+      "minAppVersion": "1.0.0"
+    },
+    {
+      "pageId": "home_challan",
+      "path": "payloads/home_challan.json",
+      "version": "1.0.0",
+      "schemaVersion": "1.0",
+      "minAppVersion": "1.0.0"
+    },
+    {
+      "pageId": "home_car_check",
+      "path": "payloads/home_car_check.json",
+      "version": "1.0.0",
+      "schemaVersion": "1.0",
+      "minAppVersion": "1.0.0"
+    },
+    {
+      "pageId": "home_insurance",
+      "path": "payloads/home_insurance.json",
+      "version": "1.0.0",
+      "schemaVersion": "1.0",
+      "minAppVersion": "1.0.0"
+    },
+    {
+      "pageId": "home_all_fallback_demo",
+      "path": "payloads/home_all_fallback_demo.json",
+      "version": "1.0.0",
+      "schemaVersion": "1.0",
+      "minAppVersion": "1.0.0"
+    }
+  ]
+}

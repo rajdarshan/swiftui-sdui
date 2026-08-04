@@ -1,0 +1,25 @@
+{
+  "header": "# SDUI Config Changelog\n\nVersions of the SDUI payload package. The app negotiates against `schemaVersion`; this file tracks payload content releases.\n",
+  "path": "sdui-config",
+  "bumpFiles": [
+    {
+      "filename": "package.json",
+      "type": "json"
+    }
+  ],
+  "types": [
+    { "type": "feat", "section": "Payload additions" },
+    { "type": "fix", "section": "Payload fixes" },
+    { "type": "chore", "section": "Maintenance", "hidden": false },
+    { "type": "docs", "hidden": true },
+    { "type": "refactor", "section": "Restructuring" },
+    { "type": "test", "hidden": true },
+    { "type": "ci", "hidden": true },
+    { "type": "build", "hidden": true }
+  ],
+  "commitUrlFormat": "{{host}}/{{owner}}/{{repository}}/commit/{{hash}}",
+  "compareUrlFormat": "{{host}}/{{owner}}/{{repository}}/compare/{{previousTag}}...{{currentTag}}",
+  "scripts": {
+    "postbump": "node scripts/sync-version.mjs"
+  }
+}
