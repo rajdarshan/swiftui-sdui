@@ -1,0 +1,23 @@
+{
+  "name": "swiftui-sdui",
+  "version": "0.0.0",
+  "description": "Server-driven UI for SwiftUI — iOS app and SDUI payload package",
+  "main": "index.js",
+  "workspaces": [
+    "sdui-config"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "lint:json": "npm run lint:json --workspace=sdui-config",
+    "validate": "npm run validate --workspace=sdui-config"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.1",
+    "@commitlint/config-conventional": "^21.2.0",
+    "husky": "^9.1.7"
+  }
+}

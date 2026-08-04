@@ -1,0 +1,140 @@
+# Paths to include during linting
+included:
+  - Source
+  - iOS
+  
+# Paths to completely ignore (e.g., third-party code)
+excluded:
+  - Pods
+  - Carthage
+  - .build
+  - .swiftpm
+  - YourProjectNameTests
+  - YourProjectNameUITests
+  - DerivedData
+  - iOS/DerivedData
+  - iOS/**/Generated
+
+
+# Default rules to disable
+disabled_rules:
+  - todo
+  - trailing_whitespace        # Often flags auto-generated code or multi-line strings
+  - nesting                    # Can be restrictive when using nested enums or extensions
+  - trailing_comma             # Multiline parameters input can have trailing comma after each argument
+
+# Optional rules to explicitly enable
+opt_in_rules:
+  - empty_count                # Forces .isEmpty instead of .count == 0
+  - attributes                 # Enforces consistent placement of @objc, @IBOutlet, etc.
+  - closure_end_indentation    # Ensures proper alignment of closing braces
+  - discouraged_object_literal # Enforces programmatic colors/images over UI literals
+  - fatal_error_message        # Requires text explanations inside fatalError()
+  - explicit_init
+  - first_where
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - redundant_nil_coalescing
+  - unneeded_parentheses_in_closure_argument
+  - closure_spacing
+  - sorted_imports
+  - vertical_parameter_alignment_on_call
+
+  # --- RULE CUSTOMIZATIONS ---
+
+attributes:
+  attributes_with_arguments_always_on_line_above: false #Environemnt property wrappers warning variable declaration in same line
+
+# Adjust line length thresholds
+line_length:
+  warning: 150
+  error: 200
+  ignores_urls: true
+  ignores_function_declarations: true
+  ignores_comments: true
+
+type_body_length:
+  warning: 250
+  error: 350
+
+# Adjust file size thresholds
+file_length:
+  warning: 500
+  error: 1000
+
+# Adjust function length thresholds
+function_body_length:
+  warning: 50
+  error: 100
+
+cyclomatic_complexity:
+  warning: 10
+  error: 15
+
+identifier_name:
+  min_length: 2
+  excluded: [id, x, y, T0, T1, T2, T3]
+
+nesting:
+  type_level: 2
+
+custom_rules:
+  no_async_image:
+    name: "AsyncImage is prohibited"
+    regex: "\\bAsyncImage\\s*\\("
+    message: "Use the cached image loader. See design_spec.md §4.1."
+    severity: error
+
+  no_preference_key_offset:
+    name: "PreferenceKey scroll tracking is prohibited"
+    regex: "PreferenceKey"
+    message: "Use onScrollGeometryChange for scroll offset. See design_spec.md §4.2."
+    severity: error
+
+  no_lazy_vgrid:
+    name: "LazyVGrid is prohibited"
+    regex: "\\bLazyVGrid\\b"
+    message: "Fixed 3x2 grids use VStack + HStack. See design_spec.md §4.1."
+    severity: error
+
+  foreach_needs_id:
+    name: "ForEach requires an explicit id"
+    regex: "ForEach\\(\\s*[A-Za-z0-9_.]+\\s*\\)\\s*\\{"
+    message: "Always ForEach(_, id: \\.id). See design_spec.md §3.2."
+    severity: error
+
+  no_literal_hex_color:
+    name: "Literal colour is prohibited"
+    regex: "Color\\(\\s*(red|hex|#)"
+    message: "Use Palette tokens. See design_spec.md §2.1."
+    severity: error
+
+# Custom type naming constraints
+type_name:
+  min_length: 3
+  max_length:
+    warning: 40
+    error: 50
+  allowed_symbols: ["_"]
+
+# Custom variable naming constraints
+variable_name:
+  min_length: 2
+  max_length:
+    warning: 40
+    error: 50
+  excluded:
+    - id
+    - x
+    - y
+
+no_literal_hex_color:
+    name: "Literal colour is prohibited"
+    regex: "Color\\(\\s*(red|hex|#)"
+    message: "Use Palette tokens. See design_spec.md §2.1."
+    severity: error
+
+# Force warnings instead of build failures for specific rules
+force_cast: warning             # Suggests avoiding 'as!' but won't stop the build
+force_try: warning              # Suggests avoiding 'try!' but won't stop the build
+reporter: "xcode"
