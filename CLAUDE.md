@@ -81,7 +81,8 @@ This project uses TDD adapted to a compile-first loop. The distinction matters:
 
 **Executed tests** — pure logic with no SwiftUI dependency: decoder, fallback
 resolution, registry lookup, token resolution, item-width arithmetic, payload
-validation. Written first, run with `xcodebuild test`, must pass.
+validation. Written first, run with `xcodebuild test`, must pass. Framework:
+**Swift Testing** (`import Testing`, `@Test`, `#expect`) — not XCTest.
 
 **Compile-only verification** — SwiftUI views and anything requiring a rendered
 hierarchy. Tests are written and must compile, but are not executed during
