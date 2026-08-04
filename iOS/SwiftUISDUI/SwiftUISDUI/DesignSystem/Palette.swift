@@ -9,7 +9,8 @@ import SwiftUI
 
 private func hexColor(_ hex: String) -> Color {
     var value: UInt64 = 0
-    Scanner(string: hex).scanHexInt64(&value)
+    let digits = hex.hasPrefix("#") ? String(hex.dropFirst()) : hex
+    Scanner(string: digits).scanHexInt64(&value)
     return Color(.sRGB,
                  red: Double((value >> 16) & 0xFF) / 255,
                  green: Double((value >> 8) & 0xFF) / 255,
