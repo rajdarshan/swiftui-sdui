@@ -1,0 +1,1466 @@
+{
+  "schemaVersion": "1.0",
+  "version": "1.0.0",
+  "pageId": "home_all",
+  "sections": [
+    {
+      "id": "app_header",
+      "type": "header",
+      "location": {
+        "text": "Bangalore",
+        "action": {
+          "type": "openSheet",
+          "target": "city_picker"
+        }
+      },
+      "avatar": {
+        "image": {
+          "url": "https://placehold.co/96x96/FFFFFF/382BC3?text=P"
+        },
+        "action": {
+          "type": "navigate",
+          "target": "profile"
+        }
+      },
+      "search": {
+        "placeholders": [
+          "Search Creta",
+          "Search Tata cars",
+          "Search Ertiga",
+          "Search Swift",
+          "Search Maruti cars",
+          "Search Thar",
+          "Search Baleno"
+        ],
+        "rotateMs": 3000,
+        "action": {
+          "type": "search",
+          "target": "search"
+        }
+      },
+      "tabs": {
+        "selectedId": "all",
+        "items": [
+          {
+            "id": "all",
+            "label": "All",
+            "icon": "grid",
+            "action": {
+              "type": "navigate",
+              "target": "home_all"
+            }
+          },
+          {
+            "id": "buy_used_car",
+            "label": "Buy used car",
+            "icon": "car",
+            "action": {
+              "type": "navigate",
+              "target": "home_buy_used_car"
+            }
+          },
+          {
+            "id": "sell_car",
+            "label": "Sell car",
+            "icon": "key",
+            "action": {
+              "type": "navigate",
+              "target": "home_sell_car"
+            }
+          },
+          {
+            "id": "loans",
+            "label": "Loans",
+            "icon": "money",
+            "action": {
+              "type": "navigate",
+              "target": "home_loans"
+            }
+          },
+          {
+            "id": "challan",
+            "label": "Challan",
+            "icon": "receipt",
+            "action": {
+              "type": "navigate",
+              "target": "home_challan"
+            }
+          },
+          {
+            "id": "car_check",
+            "label": "Car check",
+            "icon": "wrench",
+            "action": {
+              "type": "navigate",
+              "target": "home_car_check"
+            }
+          },
+          {
+            "id": "insurance",
+            "label": "Insurance",
+            "icon": "shield",
+            "action": {
+              "type": "navigate",
+              "target": "home_insurance"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "buy_car_rail",
+      "type": "rail",
+      "itemWidth": "sm",
+      "header": {
+        "title": "Buy car",
+        "badge": {
+          "text": "Up to ₹80,000 off",
+          "variant": "danger"
+        }
+      },
+      "items": [
+        {
+          "id": "buy_car_rail__all_used_cars",
+          "type": "tile",
+          "title": "All used cars",
+          "image": {
+            "url": "https://placehold.co/240x160/1E3A8A/FFFFFF?text=Used+cars",
+            "aspect": 1.5
+          },
+          "style": {
+            "background": "tile.blue",
+            "foreground": "text.onDark",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "listing",
+            "params": {
+              "filter": "all"
+            }
+          }
+        },
+        {
+          "id": "buy_car_rail__budget_used_cars",
+          "type": "tile",
+          "title": "Budget used cars",
+          "image": {
+            "url": "https://placehold.co/240x160/1E3A8A/FFFFFF?text=Budget",
+            "aspect": 1.5
+          },
+          "style": {
+            "background": "tile.blue",
+            "foreground": "text.onDark",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "listing",
+            "params": {
+              "filter": "budget"
+            }
+          }
+        },
+        {
+          "id": "buy_car_rail__premium_used_cars",
+          "type": "tile",
+          "title": "Premium used cars",
+          "image": {
+            "url": "https://placehold.co/240x160/1E3A8A/FFFFFF?text=Premium",
+            "aspect": 1.5
+          },
+          "style": {
+            "background": "tile.blue",
+            "foreground": "text.onDark",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "listing",
+            "params": {
+              "filter": "premium"
+            }
+          }
+        },
+        {
+          "id": "buy_car_rail__new_cars",
+          "type": "tile",
+          "title": "New cars",
+          "image": {
+            "url": "https://placehold.co/240x160/1E3A8A/FFFFFF?text=New+cars",
+            "aspect": 1.5
+          },
+          "style": {
+            "background": "tile.blue",
+            "foreground": "text.onDark",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "new_cars"
+          }
+        },
+        {
+          "id": "buy_car_rail__cars_under_5_lakh",
+          "type": "tile",
+          "title": "Cars under ₹5 lakh",
+          "image": {
+            "url": "https://placehold.co/240x160/1E3A8A/FFFFFF?text=Under+5L",
+            "aspect": 1.5
+          },
+          "style": {
+            "background": "tile.blue",
+            "foreground": "text.onDark",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "listing",
+            "params": {
+              "maxPrice": "500000"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sell_car_rail",
+      "type": "rail",
+      "itemWidth": "sm",
+      "header": {
+        "title": "Sell your car"
+      },
+      "items": [
+        {
+          "id": "sell_car_rail__sell_your_car",
+          "type": "tile",
+          "title": "Sell your car",
+          "image": {
+            "url": "https://placehold.co/240x160/2F5D3A/FFFFFF?text=Sell",
+            "aspect": 1.5
+          },
+          "style": {
+            "background": "tile.green",
+            "foreground": "text.onDark",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "sell_flow"
+          }
+        },
+        {
+          "id": "sell_car_rail__check_car_valuation",
+          "type": "tile",
+          "title": "Check car valuation",
+          "image": {
+            "url": "https://placehold.co/240x160/2F5D3A/FFFFFF?text=Valuation",
+            "aspect": 1.5
+          },
+          "style": {
+            "background": "tile.green",
+            "foreground": "text.onDark",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "valuation"
+          }
+        },
+        {
+          "id": "sell_car_rail__scrap_your_car",
+          "type": "tile",
+          "title": "Scrap your car",
+          "image": {
+            "url": "https://placehold.co/240x160/2F5D3A/FFFFFF?text=Scrap",
+            "aspect": 1.5
+          },
+          "style": {
+            "background": "tile.green",
+            "foreground": "text.onDark",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "scrap"
+          }
+        },
+        {
+          "id": "sell_car_rail__exchange_car",
+          "type": "tile",
+          "title": "Exchange car",
+          "image": {
+            "url": "https://placehold.co/240x160/2F5D3A/FFFFFF?text=Exchange",
+            "aspect": 1.5
+          },
+          "style": {
+            "background": "tile.green",
+            "foreground": "text.onDark",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "exchange"
+          }
+        }
+      ]
+    },
+    {
+      "id": "loans_rail",
+      "type": "rail",
+      "itemWidth": "sm",
+      "header": {
+        "title": "Get loans"
+      },
+      "items": [
+        {
+          "id": "loans_rail__used_car_loan",
+          "type": "iconTile",
+          "label": "Used car loan",
+          "image": {
+            "url": "https://placehold.co/280x280/DCE6FB/1E3A8A?text=Car+loan",
+            "aspect": 1.0
+          },
+          "imageShape": "arch",
+          "action": {
+            "type": "navigate",
+            "target": "loan",
+            "params": {
+              "product": "used_car"
+            }
+          }
+        },
+        {
+          "id": "loans_rail__loan_against_car",
+          "type": "iconTile",
+          "label": "Loan against car",
+          "image": {
+            "url": "https://placehold.co/280x280/DCE6FB/1E3A8A?text=Against+car",
+            "aspect": 1.0
+          },
+          "imageShape": "arch",
+          "action": {
+            "type": "navigate",
+            "target": "loan",
+            "params": {
+              "product": "against_car"
+            }
+          }
+        },
+        {
+          "id": "loans_rail__personal_loan",
+          "type": "iconTile",
+          "label": "Personal loan",
+          "image": {
+            "url": "https://placehold.co/280x280/DCE6FB/1E3A8A?text=Personal",
+            "aspect": 1.0
+          },
+          "imageShape": "arch",
+          "action": {
+            "type": "navigate",
+            "target": "loan",
+            "params": {
+              "product": "personal"
+            }
+          }
+        },
+        {
+          "id": "loans_rail__credit_score",
+          "type": "iconTile",
+          "label": "Credit score",
+          "image": {
+            "url": "https://placehold.co/280x280/DCE6FB/1E3A8A?text=Credit",
+            "aspect": 1.0
+          },
+          "imageShape": "arch",
+          "action": {
+            "type": "navigate",
+            "target": "credit_score"
+          }
+        }
+      ]
+    },
+    {
+      "id": "car_check_grid",
+      "type": "grid",
+      "columns": 3,
+      "header": {
+        "title": "Car check services"
+      },
+      "items": [
+        {
+          "id": "car_check_grid__new_car_pdi",
+          "type": "tile",
+          "title": "New car PDI",
+          "image": {
+            "url": "https://placehold.co/160x120/FBF3E4/8A6D3B?text=PDI",
+            "aspect": 1.33
+          },
+          "style": {
+            "background": "tile.cream",
+            "border": "tile.creamBorder",
+            "foreground": "text.primary",
+            "cornerRadius": "md"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "pdi"
+          }
+        },
+        {
+          "id": "car_check_grid__used_car_check",
+          "type": "tile",
+          "title": "Used car check",
+          "image": {
+            "url": "https://placehold.co/160x120/FBF3E4/8A6D3B?text=Check",
+            "aspect": 1.33
+          },
+          "style": {
+            "background": "tile.cream",
+            "border": "tile.creamBorder",
+            "foreground": "text.primary",
+            "cornerRadius": "md"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "used_car_check"
+          }
+        },
+        {
+          "id": "car_check_grid__vehicle_history",
+          "type": "tile",
+          "title": "Vehicle history",
+          "image": {
+            "url": "https://placehold.co/160x120/FBF3E4/8A6D3B?text=History",
+            "aspect": 1.33
+          },
+          "style": {
+            "background": "tile.cream",
+            "border": "tile.creamBorder",
+            "foreground": "text.primary",
+            "cornerRadius": "md"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "vehicle_history"
+          }
+        },
+        {
+          "id": "car_check_grid__check_challan",
+          "type": "tile",
+          "title": "Check challan",
+          "image": {
+            "url": "https://placehold.co/160x120/FBF3E4/8A6D3B?text=Challan",
+            "aspect": 1.33
+          },
+          "style": {
+            "background": "tile.cream",
+            "border": "tile.creamBorder",
+            "foreground": "text.primary",
+            "cornerRadius": "md"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "check_challan"
+          }
+        },
+        {
+          "id": "car_check_grid__check_car_insurance",
+          "type": "tile",
+          "title": "Check car insurance",
+          "image": {
+            "url": "https://placehold.co/160x120/FBF3E4/8A6D3B?text=Insurance",
+            "aspect": 1.33
+          },
+          "style": {
+            "background": "tile.cream",
+            "border": "tile.creamBorder",
+            "foreground": "text.primary",
+            "cornerRadius": "md"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "check_insurance"
+          }
+        },
+        {
+          "id": "car_check_grid__odometer_tampering",
+          "type": "tile",
+          "title": "Odometer tampering",
+          "image": {
+            "url": "https://placehold.co/160x120/FBF3E4/8A6D3B?text=Odometer",
+            "aspect": 1.33
+          },
+          "style": {
+            "background": "tile.cream",
+            "border": "tile.creamBorder",
+            "foreground": "text.primary",
+            "cornerRadius": "md"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "odometer_check"
+          }
+        }
+      ]
+    },
+    {
+      "id": "used_cars_rail",
+      "type": "rail",
+      "itemWidth": "lg",
+      "header": {
+        "title": "Used cars you'll love",
+        "trailing": {
+          "text": "View all",
+          "variant": "ghost",
+          "action": {
+            "type": "navigate",
+            "target": "listing"
+          }
+        }
+      },
+      "filter": {
+        "defaultChipId": "wishlisted",
+        "chips": [
+          {
+            "id": "wishlisted",
+            "label": "Wishlisted",
+            "items": [
+              {
+                "id": "used_cars_rail_wishlisted__2023_mahindra_xuv300",
+                "type": "carCard",
+                "image": {
+                  "url": "https://placehold.co/600x400/F1F3F9/333333?text=XUV300",
+                  "aspect": 1.5
+                },
+                "overlayBadge": {
+                  "text": "Owned stock",
+                  "variant": "accent"
+                },
+                "favorite": {
+                  "selected": true,
+                  "action": {
+                    "type": "toggle",
+                    "target": "car_10021"
+                  }
+                },
+                "title": "2023 Mahindra XUV300",
+                "subtitle": "W6 1.2 PETROL",
+                "specs": [
+                  "25,335 km",
+                  "Petrol",
+                  "Manual",
+                  "MH28"
+                ],
+                "price": "₹6.60 lakh",
+                "priceSuffix": "EMI ₹11,651/m*",
+                "priceNote": {
+                  "text": "+other charges",
+                  "action": {
+                    "type": "openSheet",
+                    "target": "price_breakup",
+                    "params": {
+                      "carId": "car_10021"
+                    }
+                  }
+                },
+                "trustBadges": [
+                  {
+                    "text": "Zero Worry Max",
+                    "icon": "shield",
+                    "variant": "accent"
+                  },
+                  {
+                    "text": "Lifetime warranty",
+                    "icon": "check",
+                    "variant": "neutral"
+                  }
+                ],
+                "action": {
+                  "type": "navigate",
+                  "target": "car_detail",
+                  "params": {
+                    "carId": "car_10021"
+                  }
+                }
+              },
+              {
+                "id": "used_cars_rail_wishlisted__2012_volkswagen_vento",
+                "type": "carCard",
+                "image": {
+                  "url": "https://placehold.co/600x400/F1F3F9/333333?text=Vento",
+                  "aspect": 1.5
+                },
+                "overlayBadge": {
+                  "text": "Verified Direct",
+                  "variant": "warning"
+                },
+                "favorite": {
+                  "selected": true,
+                  "action": {
+                    "type": "toggle",
+                    "target": "car_10022"
+                  }
+                },
+                "title": "2012 Volkswagen Vento",
+                "subtitle": "HIGHLINE DIESEL 1.6",
+                "specs": [
+                  "78,002 km",
+                  "Diesel",
+                  "Manual",
+                  "KA01"
+                ],
+                "price": "₹1.72 lakh",
+                "priceNote": {
+                  "text": "Price negotiable"
+                },
+                "trustBadges": [
+                  {
+                    "text": "Zero Worry",
+                    "icon": "check",
+                    "variant": "accent"
+                  }
+                ],
+                "action": {
+                  "type": "navigate",
+                  "target": "car_detail",
+                  "params": {
+                    "carId": "car_10022"
+                  }
+                }
+              },
+              {
+                "id": "used_cars_rail_wishlisted__2015_maruti_baleno",
+                "type": "carCard",
+                "image": {
+                  "url": "https://placehold.co/600x400/F1F3F9/333333?text=Baleno",
+                  "aspect": 1.5
+                },
+                "overlayBadge": {
+                  "text": "Owned stock",
+                  "variant": "accent"
+                },
+                "favorite": {
+                  "selected": true,
+                  "action": {
+                    "type": "toggle",
+                    "target": "car_10023"
+                  }
+                },
+                "title": "2015 Maruti Baleno",
+                "subtitle": "DELTA CVT PETROL 1.2",
+                "specs": [
+                  "92,838 km",
+                  "Petrol",
+                  "Auto",
+                  "KA05"
+                ],
+                "price": "₹3.87 lakh",
+                "priceSuffix": "EMI ₹10,191/m*",
+                "priceNote": {
+                  "text": "+other charges",
+                  "action": {
+                    "type": "openSheet",
+                    "target": "price_breakup",
+                    "params": {
+                      "carId": "car_10023"
+                    }
+                  }
+                },
+                "trustBadges": [
+                  {
+                    "text": "Zero Worry Max",
+                    "icon": "shield",
+                    "variant": "accent"
+                  },
+                  {
+                    "text": "Lifetime warranty",
+                    "icon": "check",
+                    "variant": "neutral"
+                  }
+                ],
+                "action": {
+                  "type": "navigate",
+                  "target": "car_detail",
+                  "params": {
+                    "carId": "car_10023"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "hot_deals",
+            "label": "Hot deals",
+            "items": [
+              {
+                "id": "used_cars_rail_hot_deals__2019_maruti_swift",
+                "type": "carCard",
+                "image": {
+                  "url": "https://placehold.co/600x400/F1F3F9/333333?text=Swift",
+                  "aspect": 1.5
+                },
+                "overlayBadge": {
+                  "text": "Owned stock",
+                  "variant": "accent"
+                },
+                "favorite": {
+                  "selected": false,
+                  "action": {
+                    "type": "toggle",
+                    "target": "car_10031"
+                  }
+                },
+                "title": "2019 Maruti Swift",
+                "subtitle": "VXI 1.2 PETROL",
+                "specs": [
+                  "41,204 km",
+                  "Petrol",
+                  "Manual",
+                  "KA03"
+                ],
+                "price": "₹4.95 lakh",
+                "priceSuffix": "EMI ₹8,740/m*",
+                "priceNote": {
+                  "text": "+other charges",
+                  "action": {
+                    "type": "openSheet",
+                    "target": "price_breakup",
+                    "params": {
+                      "carId": "car_10031"
+                    }
+                  }
+                },
+                "trustBadges": [
+                  {
+                    "text": "Zero Worry Max",
+                    "icon": "shield",
+                    "variant": "accent"
+                  },
+                  {
+                    "text": "Lifetime warranty",
+                    "icon": "check",
+                    "variant": "neutral"
+                  }
+                ],
+                "action": {
+                  "type": "navigate",
+                  "target": "car_detail",
+                  "params": {
+                    "carId": "car_10031"
+                  }
+                }
+              },
+              {
+                "id": "used_cars_rail_hot_deals__2021_hyundai_i20",
+                "type": "carCard",
+                "image": {
+                  "url": "https://placehold.co/600x400/F1F3F9/333333?text=i20",
+                  "aspect": 1.5
+                },
+                "overlayBadge": {
+                  "text": "Verified Direct",
+                  "variant": "warning"
+                },
+                "favorite": {
+                  "selected": false,
+                  "action": {
+                    "type": "toggle",
+                    "target": "car_10032"
+                  }
+                },
+                "title": "2021 Hyundai i20",
+                "subtitle": "SPORTZ 1.2 PETROL",
+                "specs": [
+                  "29,410 km",
+                  "Petrol",
+                  "Manual",
+                  "KA51"
+                ],
+                "price": "₹7.15 lakh",
+                "priceSuffix": "EMI ₹12,480/m*",
+                "priceNote": {
+                  "text": "+other charges",
+                  "action": {
+                    "type": "openSheet",
+                    "target": "price_breakup",
+                    "params": {
+                      "carId": "car_10032"
+                    }
+                  }
+                },
+                "trustBadges": [
+                  {
+                    "text": "Zero Worry",
+                    "icon": "check",
+                    "variant": "accent"
+                  }
+                ],
+                "action": {
+                  "type": "navigate",
+                  "target": "car_detail",
+                  "params": {
+                    "carId": "car_10032"
+                  }
+                }
+              },
+              {
+                "id": "used_cars_rail_hot_deals__2020_tata_nexon",
+                "type": "carCard",
+                "image": {
+                  "url": "https://placehold.co/600x400/F1F3F9/333333?text=Nexon",
+                  "aspect": 1.5
+                },
+                "overlayBadge": {
+                  "text": "Owned stock",
+                  "variant": "accent"
+                },
+                "favorite": {
+                  "selected": false,
+                  "action": {
+                    "type": "toggle",
+                    "target": "car_10033"
+                  }
+                },
+                "title": "2020 Tata Nexon",
+                "subtitle": "XZ PLUS DIESEL 1.5",
+                "specs": [
+                  "55,120 km",
+                  "Diesel",
+                  "Manual",
+                  "KA02"
+                ],
+                "price": "₹8.40 lakh",
+                "priceSuffix": "EMI ₹14,905/m*",
+                "priceNote": {
+                  "text": "+other charges",
+                  "action": {
+                    "type": "openSheet",
+                    "target": "price_breakup",
+                    "params": {
+                      "carId": "car_10033"
+                    }
+                  }
+                },
+                "trustBadges": [
+                  {
+                    "text": "Zero Worry Max",
+                    "icon": "shield",
+                    "variant": "accent"
+                  },
+                  {
+                    "text": "Lifetime warranty",
+                    "icon": "check",
+                    "variant": "neutral"
+                  }
+                ],
+                "action": {
+                  "type": "navigate",
+                  "target": "car_detail",
+                  "params": {
+                    "carId": "car_10033"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "manage_vehicle_grid",
+      "type": "grid",
+      "columns": 3,
+      "style": {
+        "background": "surface.brand"
+      },
+      "header": {
+        "title": "Manage your vehicle",
+        "trailing": {
+          "text": "+ Add vehicle",
+          "variant": "ghost",
+          "action": {
+            "type": "openSheet",
+            "target": "add_vehicle"
+          }
+        }
+      },
+      "items": [
+        {
+          "id": "manage_vehicle_grid__pay_challan",
+          "type": "tile",
+          "title": "Pay challan",
+          "image": {
+            "url": "https://placehold.co/160x120/FFFFFF/333333?text=Challan",
+            "aspect": 1.33
+          },
+          "style": {
+            "background": "surface.default",
+            "foreground": "text.primary",
+            "cornerRadius": "md"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "pay_challan"
+          }
+        },
+        {
+          "id": "manage_vehicle_grid__recharge_fastag",
+          "type": "tile",
+          "title": "Recharge FASTag",
+          "image": {
+            "url": "https://placehold.co/160x120/FFFFFF/333333?text=FASTag",
+            "aspect": 1.33
+          },
+          "style": {
+            "background": "surface.default",
+            "foreground": "text.primary",
+            "cornerRadius": "md"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "fastag"
+          }
+        },
+        {
+          "id": "manage_vehicle_grid__get_insurance",
+          "type": "tile",
+          "title": "Get insurance",
+          "image": {
+            "url": "https://placehold.co/160x120/FFFFFF/333333?text=Insurance",
+            "aspect": 1.33
+          },
+          "style": {
+            "background": "surface.default",
+            "foreground": "text.primary",
+            "cornerRadius": "md"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "get_insurance"
+          }
+        },
+        {
+          "id": "manage_vehicle_grid__cash_against_car",
+          "type": "tile",
+          "title": "Cash against car",
+          "image": {
+            "url": "https://placehold.co/160x120/FFFFFF/333333?text=Cash",
+            "aspect": 1.33
+          },
+          "style": {
+            "background": "surface.default",
+            "foreground": "text.primary",
+            "cornerRadius": "md"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "cash_against_car"
+          }
+        },
+        {
+          "id": "manage_vehicle_grid__road_side_assistance",
+          "type": "tile",
+          "title": "Road side assistance",
+          "image": {
+            "url": "https://placehold.co/160x120/FFFFFF/333333?text=RSA",
+            "aspect": 1.33
+          },
+          "style": {
+            "background": "surface.default",
+            "foreground": "text.primary",
+            "cornerRadius": "md"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "rsa"
+          }
+        },
+        {
+          "id": "manage_vehicle_grid__get_warranty",
+          "type": "tile",
+          "title": "Get warranty",
+          "image": {
+            "url": "https://placehold.co/160x120/FFFFFF/333333?text=Warranty",
+            "aspect": 1.33
+          },
+          "style": {
+            "background": "surface.default",
+            "foreground": "text.primary",
+            "cornerRadius": "md"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "get_warranty"
+          }
+        }
+      ]
+    },
+    {
+      "id": "orbit_promo",
+      "type": "single",
+      "item": {
+        "id": "orbit_promo__add_your_car_to_orbit",
+        "type": "promoCard",
+        "title": "Add your car to Orbit",
+        "subtitle": "Enjoy 3 months of music streaming free",
+        "image": {
+          "url": "https://placehold.co/720x400/1B2B22/FFFFFF?text=Orbit",
+          "aspect": 1.8
+        },
+        "logos": [
+          {
+            "url": "https://placehold.co/160x40/1B2B22/FFFFFF?text=Brand"
+          },
+          {
+            "url": "https://placehold.co/160x40/1B2B22/1DB954?text=Partner"
+          }
+        ],
+        "button": {
+          "text": "Add car now",
+          "variant": "filled",
+          "action": {
+            "type": "openSheet",
+            "target": "add_vehicle"
+          }
+        },
+        "style": {
+          "background": "tile.dark",
+          "foreground": "text.onDark",
+          "cornerRadius": "lg"
+        }
+      }
+    },
+    {
+      "id": "showrooms_rail",
+      "type": "rail",
+      "itemWidth": "xl",
+      "header": {
+        "title": "7 showrooms in your city"
+      },
+      "items": [
+        {
+          "id": "showrooms_rail__right_parking_mlcp",
+          "type": "placeCard",
+          "images": [
+            {
+              "url": "https://placehold.co/900x600/1E3A8A/FFFFFF?text=Showroom+1",
+              "aspect": 1.5
+            },
+            {
+              "url": "https://placehold.co/900x600/1E3A8A/FFFFFF?text=Showroom+1b",
+              "aspect": 1.5
+            }
+          ],
+          "overlayBadge": {
+            "text": "90+ cars",
+            "variant": "neutral"
+          },
+          "title": "Right Parking MLCP",
+          "subtitle": "Gandhi Nagar, Bengaluru",
+          "linkRow": {
+            "text": "2.7 km from MG Road | Get directions",
+            "trailingIcon": "directions",
+            "action": {
+              "type": "openMaps",
+              "target": "showroom_101",
+              "params": {
+                "lat": "12.9767",
+                "lng": "77.5713"
+              }
+            }
+          },
+          "status": {
+            "text": "Open",
+            "detail": "Closes at 08:00 PM",
+            "variant": "success"
+          },
+          "buttons": [
+            {
+              "text": "Call us now",
+              "variant": "outline",
+              "leadingIcon": "phone",
+              "action": {
+                "type": "call",
+                "target": "+918001234567"
+              }
+            },
+            {
+              "text": "View showroom",
+              "variant": "filled",
+              "action": {
+                "type": "navigate",
+                "target": "showroom_detail",
+                "params": {
+                  "showroomId": "showroom_101"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "showrooms_rail__nexus_koramangala",
+          "type": "placeCard",
+          "images": [
+            {
+              "url": "https://placehold.co/900x600/1E3A8A/FFFFFF?text=Showroom+2",
+              "aspect": 1.5
+            }
+          ],
+          "overlayBadge": {
+            "text": "80+ cars",
+            "variant": "neutral"
+          },
+          "title": "Nexus Koramangala",
+          "subtitle": "Koramangala, Bengaluru",
+          "linkRow": {
+            "text": "4.6 km from MG Road | Get directions",
+            "trailingIcon": "directions",
+            "action": {
+              "type": "openMaps",
+              "target": "showroom_102",
+              "params": {
+                "lat": "12.9352",
+                "lng": "77.6245"
+              }
+            }
+          },
+          "status": {
+            "text": "Open",
+            "detail": "Closes at 09:00 PM",
+            "variant": "success"
+          },
+          "buttons": [
+            {
+              "text": "Call us now",
+              "variant": "outline",
+              "leadingIcon": "phone",
+              "action": {
+                "type": "call",
+                "target": "+918001234568"
+              }
+            },
+            {
+              "text": "View showroom",
+              "variant": "filled",
+              "action": {
+                "type": "navigate",
+                "target": "showroom_detail",
+                "params": {
+                  "showroomId": "showroom_102"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "showrooms_rail__whitefield_hub",
+          "type": "placeCard",
+          "images": [
+            {
+              "url": "https://placehold.co/900x600/1E3A8A/FFFFFF?text=Showroom+3",
+              "aspect": 1.5
+            }
+          ],
+          "overlayBadge": {
+            "text": "120+ cars",
+            "variant": "neutral"
+          },
+          "title": "Whitefield Hub",
+          "subtitle": "Whitefield, Bengaluru",
+          "linkRow": {
+            "text": "14.2 km from MG Road | Get directions",
+            "trailingIcon": "directions",
+            "action": {
+              "type": "openMaps",
+              "target": "showroom_103",
+              "params": {
+                "lat": "12.9698",
+                "lng": "77.7500"
+              }
+            }
+          },
+          "status": {
+            "text": "Closed",
+            "detail": "Opens at 10:00 AM",
+            "variant": "danger"
+          },
+          "buttons": [
+            {
+              "text": "Call us now",
+              "variant": "outline",
+              "leadingIcon": "phone",
+              "action": {
+                "type": "call",
+                "target": "+918001234569"
+              }
+            },
+            {
+              "text": "View showroom",
+              "variant": "filled",
+              "action": {
+                "type": "navigate",
+                "target": "showroom_detail",
+                "params": {
+                  "showroomId": "showroom_103"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trending_new_cars_rail",
+      "type": "rail",
+      "itemWidth": "md",
+      "header": {
+        "title": "Trending new cars",
+        "trailing": {
+          "text": "View all",
+          "variant": "ghost",
+          "action": {
+            "type": "navigate",
+            "target": "new_cars"
+          }
+        }
+      },
+      "items": [
+        {
+          "id": "trending_new_cars_rail__seltos",
+          "type": "modelCard",
+          "title": "Seltos",
+          "subtitle": "Kia",
+          "image": {
+            "url": "https://placehold.co/600x400/EDF0F7/333333?text=Seltos",
+            "aspect": 1.5
+          },
+          "watermark": "1",
+          "style": {
+            "background": "surface.muted",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "new_car_detail",
+            "params": {
+              "modelId": "kia_seltos"
+            }
+          }
+        },
+        {
+          "id": "trending_new_cars_rail__sonet",
+          "type": "modelCard",
+          "title": "Sonet",
+          "subtitle": "Kia",
+          "image": {
+            "url": "https://placehold.co/600x400/EDF0F7/333333?text=Sonet",
+            "aspect": 1.5
+          },
+          "watermark": "2",
+          "style": {
+            "background": "surface.muted",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "new_car_detail",
+            "params": {
+              "modelId": "kia_sonet"
+            }
+          }
+        },
+        {
+          "id": "trending_new_cars_rail__syros",
+          "type": "modelCard",
+          "title": "Syros",
+          "subtitle": "Kia",
+          "image": {
+            "url": "https://placehold.co/600x400/EDF0F7/333333?text=Syros",
+            "aspect": 1.5
+          },
+          "watermark": "3",
+          "style": {
+            "background": "surface.muted",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "new_car_detail",
+            "params": {
+              "modelId": "kia_syros"
+            }
+          }
+        },
+        {
+          "id": "trending_new_cars_rail__carens",
+          "type": "modelCard",
+          "title": "Carens",
+          "subtitle": "Kia",
+          "image": {
+            "url": "https://placehold.co/600x400/EDF0F7/333333?text=Carens",
+            "aspect": 1.5
+          },
+          "watermark": "4",
+          "style": {
+            "background": "surface.muted",
+            "cornerRadius": "lg"
+          },
+          "action": {
+            "type": "navigate",
+            "target": "new_car_detail",
+            "params": {
+              "modelId": "kia_carens"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "find_match_card",
+      "type": "single",
+      "item": {
+        "id": "find_match_card__let_us_find_your_match",
+        "type": "featureCard",
+        "badge": {
+          "text": "Recommended",
+          "variant": "accent"
+        },
+        "title": "Let us find your match",
+        "body": "Answer a few simple questions and get your perfect car match in 60 seconds.",
+        "image": {
+          "url": "https://placehold.co/400x600/4338CA/FFFFFF?text=Match",
+          "aspect": 0.67
+        },
+        "imagePosition": "leading",
+        "footer": {
+          "text": "Find my perfect match",
+          "trailingIcon": "arrowRightCircle",
+          "action": {
+            "type": "navigate",
+            "target": "match_quiz"
+          }
+        }
+      }
+    },
+    {
+      "id": "value_prop_carousel",
+      "type": "carousel",
+      "loop": true,
+      "peek": true,
+      "autoScrollMs": 4000,
+      "items": [
+        {
+          "id": "value_prop_carousel__india_s_first_a_warranty_tha",
+          "type": "promoCard",
+          "title": "India's first, a warranty that lasts as long as your car",
+          "image": {
+            "url": "https://placehold.co/720x400/3B2FCF/FFFFFF?text=Lifetime+warranty",
+            "aspect": 1.8
+          },
+          "button": {
+            "text": "Know more",
+            "variant": "filled",
+            "action": {
+              "type": "navigate",
+              "target": "lifetime_warranty"
+            }
+          },
+          "style": {
+            "background": "brand.primary",
+            "foreground": "text.onDark",
+            "cornerRadius": "lg"
+          }
+        },
+        {
+          "id": "value_prop_carousel__30_day_return_guarantee_on_e",
+          "type": "promoCard",
+          "title": "30-day return guarantee on every car",
+          "image": {
+            "url": "https://placehold.co/720x400/C2410C/FFFFFF?text=30+day+return",
+            "aspect": 1.8
+          },
+          "button": {
+            "text": "Know more",
+            "variant": "filled",
+            "action": {
+              "type": "navigate",
+              "target": "return_policy"
+            }
+          },
+          "style": {
+            "background": "tile.orange",
+            "foreground": "text.onDark",
+            "cornerRadius": "lg"
+          }
+        },
+        {
+          "id": "value_prop_carousel__3_free_services_with_every_c",
+          "type": "promoCard",
+          "title": "3 free services with every car you buy",
+          "image": {
+            "url": "https://placehold.co/720x400/15803D/FFFFFF?text=Free+services",
+            "aspect": 1.8
+          },
+          "button": {
+            "text": "Know more",
+            "variant": "filled",
+            "action": {
+              "type": "navigate",
+              "target": "free_services"
+            }
+          },
+          "style": {
+            "background": "tile.green",
+            "foreground": "text.onDark",
+            "cornerRadius": "lg"
+          }
+        }
+      ]
+    },
+    {
+      "id": "crashfree_promo",
+      "type": "single",
+      "item": {
+        "id": "crashfree_promo__control_judgment_patience",
+        "type": "promoCard",
+        "eyebrow": "SAFER ROADS",
+        "title": "Control. Judgment. Patience.",
+        "subtitle": "Small habits, safer journeys",
+        "image": {
+          "url": "https://placehold.co/600x500/5B4FE8/FFFFFF?text=Crashfree",
+          "aspect": 1.2
+        },
+        "button": {
+          "text": "Explore now",
+          "variant": "filled",
+          "action": {
+            "type": "navigate",
+            "target": "crashfree_india"
+          }
+        },
+        "style": {
+          "background": "brand.primaryLight",
+          "foreground": "text.onDark",
+          "cornerRadius": "lg"
+        }
+      }
+    },
+    {
+      "id": "brand_footer",
+      "type": "single",
+      "style": {
+        "background": "brand.primaryLight"
+      },
+      "item": {
+        "id": "brand_footer__better_drives_better_lives",
+        "type": "textBlock",
+        "title": "better drives, better lives",
+        "subtitle": "Made with ❤️ in Gurugram",
+        "style": {
+          "foreground": "text.onDark"
+        }
+      }
+    }
+  ]
+}
