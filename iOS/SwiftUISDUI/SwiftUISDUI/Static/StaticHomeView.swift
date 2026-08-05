@@ -143,7 +143,6 @@ struct StaticHomeView: View {
             )
         }
         .measuringAvailableWidth(into: $availableWidth)
-        .ignoresSafeArea(edges: .top)
     }
 
     private func updateCollapseProgress(oldValue: CGFloat, newValue: CGFloat) {
