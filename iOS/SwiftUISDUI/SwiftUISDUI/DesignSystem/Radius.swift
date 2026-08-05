@@ -7,7 +7,7 @@
 
 import CoreGraphics
 
-enum Radius {
+nonisolated enum Radius {
     static let none: CGFloat = 0
     static let sm: CGFloat = 8
     static let md: CGFloat = 12

@@ -9,7 +9,7 @@
 //  base/filled swap is applied at the carCard call site via a symbol variant.
 //
 
-enum IconToken {
+nonisolated enum IconToken {
     static let grid = "square.grid.2x2.fill"
     static let car = "car.fill"
     static let key = "key.fill"
