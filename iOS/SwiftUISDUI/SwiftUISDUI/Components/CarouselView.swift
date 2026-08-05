@@ -72,6 +72,7 @@ struct CarouselView<Item: Identifiable, ItemContent: View>: View {
                         .id(wrapped.id)
                 }
             }
+            .padding(.horizontal, Spacing.pageMargin)
             .scrollTargetLayout()
         }
         .scrollPosition(id: $scrollPosition)
