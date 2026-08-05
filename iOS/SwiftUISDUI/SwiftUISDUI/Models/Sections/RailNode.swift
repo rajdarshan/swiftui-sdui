@@ -20,6 +20,26 @@ nonisolated struct RailNode: Decodable, Equatable {
 
     private enum CodingKeys: String, CodingKey { case id, header, style, filter, items, itemWidth, snap }
 
+    /// Memberwise — reconstructs a node with a trimmed `items`/`filter`,
+    /// used by DuplicateItemIdResolution.swift. Not the Decodable path.
+    init(
+        id: String,
+        header: SectionHeader?,
+        style: Style?,
+        filter: FilterNode?,
+        items: [any ItemNode]?,
+        itemWidth: ItemWidth,
+        snap: Bool
+    ) {
+        self.id = id
+        self.header = header
+        self.style = style
+        self.filter = filter
+        self.items = items
+        self.itemWidth = itemWidth
+        self.snap = snap
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)

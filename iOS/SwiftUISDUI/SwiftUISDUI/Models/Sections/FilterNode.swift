@@ -19,6 +19,14 @@ nonisolated struct FilterNode: Decodable, Equatable {
 
     private enum CodingKeys: String, CodingKey { case defaultChipId, chips }
 
+    /// Memberwise — reconstructs with trimmed chips, used by
+    /// DuplicateItemIdResolution.swift. Not the Decodable path. Skips the
+    /// minimum-2 guard: only called with an already-valid decoded `chips`.
+    init(defaultChipId: String, chips: [ChipNode]) {
+        self.defaultChipId = defaultChipId
+        self.chips = chips
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         defaultChipId = try container.decode(String.self, forKey: .defaultChipId)
@@ -45,6 +53,14 @@ nonisolated struct ChipNode: Decodable, Identifiable {
     let items: [any ItemNode]
 
     private enum CodingKeys: String, CodingKey { case id, label, items }
+
+    /// Memberwise — reconstructs with trimmed items, used by
+    /// DuplicateItemIdResolution.swift. Not the Decodable path.
+    init(id: String, label: String, items: [any ItemNode]) {
+        self.id = id
+        self.label = label
+        self.items = items
+    }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

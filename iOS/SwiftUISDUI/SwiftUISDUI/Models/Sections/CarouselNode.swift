@@ -21,6 +21,26 @@ nonisolated struct CarouselNode: Decodable, Equatable {
 
     private enum CodingKeys: String, CodingKey { case id, header, style, items, loop, peek, autoScrollMs }
 
+    /// Memberwise — reconstructs a node with a trimmed `items`, used by
+    /// DuplicateItemIdResolution.swift. Not the Decodable path.
+    init(
+        id: String,
+        header: SectionHeader?,
+        style: Style?,
+        items: [any ItemNode],
+        loop: Bool,
+        peek: Bool,
+        autoScrollMs: Int?
+    ) {
+        self.id = id
+        self.header = header
+        self.style = style
+        self.items = items
+        self.loop = loop
+        self.peek = peek
+        self.autoScrollMs = autoScrollMs
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)

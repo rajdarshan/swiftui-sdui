@@ -18,6 +18,15 @@ struct PageEnvelope: Decodable {
 
     private enum CodingKeys: String, CodingKey { case schemaVersion, version, pageId, sections }
 
+    /// Memberwise — reconstructs with deduplicated sections, used by
+    /// PayloadDecoder.decode. Not the Decodable path.
+    init(schemaVersion: String, version: String, pageId: String, sections: [SectionNode]) {
+        self.schemaVersion = schemaVersion
+        self.version = version
+        self.pageId = pageId
+        self.sections = sections
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         schemaVersion = try container.decode(String.self, forKey: .schemaVersion)
