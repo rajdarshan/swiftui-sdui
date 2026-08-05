@@ -8,10 +8,14 @@
 //  large top radii, square bottom. Label below, 2 lines, centred.
 //  design_spec.md §2.5: iconTile image 92 square.
 //
+//  Whole-tile tap dispatches `action` through the environment-injected
+//  ActionHandler (design_spec.md §3.2 rule 4) — inert by default, matching
+//  the static screen.
+//
 
 import SwiftUI
 
-enum IconTileImageShape {
+enum IconTileImageShape: String {
     case circle, arch, square
 }
 
@@ -22,6 +26,7 @@ struct IconTileView: View {
     let action: Action
     let imageName: String
     @Environment(\.useImageAsset) private var useImageAsset
+    @Environment(\.actionHandler) private var actionHandler
 
     init(label: String, image: ImageRef, imageShape: IconTileImageShape = .square, imageName: String, action: Action) {
         self.label = label
@@ -37,8 +42,6 @@ struct IconTileView: View {
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
-//                    .frame(width: 120, height: 100)
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             } else {
                 CachedImage(imageRef: image)
                     .frame(width: 92, height: 92)
@@ -52,7 +55,7 @@ struct IconTileView: View {
                 .lineLimit(2)
                 .truncationMode(.tail)
         }
-        .onTapGesture {}
+        .onTapGesture { actionHandler.handle(action) }
     }
 
     private var shape: AnyShape {

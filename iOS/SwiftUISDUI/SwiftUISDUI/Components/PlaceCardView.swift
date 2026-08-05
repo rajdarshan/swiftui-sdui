@@ -11,6 +11,11 @@
 //  Notched overlay badge bottom-leading. Two buttons in an HStack, equal
 //  width.
 //
+//  `linkRow` dispatches its `action` through the environment-injected
+//  ActionHandler (design_spec.md §3.2 rule 4) — inert by default, matching
+//  the static screen. `buttons` already route through ButtonSpecView, which
+//  handles its own dispatch.
+//
 
 import SwiftUI
 
@@ -46,6 +51,10 @@ struct PlaceCardView: View {
     let linkRow: PlaceCardLinkRow?
     let status: PlaceCardStatus?
     let buttons: [ButtonSpec]
+    let imageNames: [String]
+    
+    @Environment(\.useImageAsset) private var useImageAsset
+    @Environment(\.actionHandler) private var actionHandler
 
     init(
         images: [ImageRef],
@@ -54,7 +63,8 @@ struct PlaceCardView: View {
         subtitle: String? = nil,
         linkRow: PlaceCardLinkRow? = nil,
         status: PlaceCardStatus? = nil,
-        buttons: [ButtonSpec] = []
+        buttons: [ButtonSpec] = [],
+        imageNames: [String]
     ) {
         self.images = images
         self.title = title
@@ -63,6 +73,7 @@ struct PlaceCardView: View {
         self.linkRow = linkRow
         self.status = status
         self.buttons = buttons
+        self.imageNames = imageNames
     }
 
     var body: some View {
@@ -92,7 +103,7 @@ struct PlaceCardView: View {
                             .foregroundStyle(Palette.textAccent)
                     }
                 }
-                .onTapGesture {}
+                .onTapGesture { actionHandler.handle(linkRow.action) }
             }
 
             if let status {
@@ -124,18 +135,21 @@ struct PlaceCardView: View {
 
     @ViewBuilder private var imageArea: some View {
         ZStack(alignment: .bottomLeading) {
-            if images.count > 1 {
+            if imageNames.count > 1 {
                 TabView {
-                    ForEach(images, id: \.url) { imageRef in
-                        CachedImage(imageRef: imageRef)
+                    ForEach(imageNames, id: \.self) { image in
+                        Image(image)
+                            .resizable()
+                            .scaledToFit()
                     }
                 }
                 .tabViewStyle(.page)
                 .frame(height: 180)
-            } else if let first = images.first {
-                CachedImage(imageRef: first)
+            } else if let first = imageNames.first {
+                Image(first)
+                    .resizable()
+                    .scaledToFit()
                     .frame(height: 180)
-                    .frame(maxWidth: .infinity)
             }
 
             if let overlayBadge {

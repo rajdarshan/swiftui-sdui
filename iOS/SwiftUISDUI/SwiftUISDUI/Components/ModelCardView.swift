@@ -7,6 +7,10 @@
 //  design_spec.md §4.4: ZStack, watermark digit behind image, text.secondary
 //  at ~0.25 opacity, large. Title/subtitle top-leading.
 //
+//  Whole-card tap dispatches `action` through the environment-injected
+//  ActionHandler (design_spec.md §3.2 rule 4) — inert by default, matching
+//  the static screen.
+//
 
 import SwiftUI
 
@@ -17,6 +21,10 @@ struct ModelCardView: View {
     let watermark: String?
     let style: Style?
     let action: Action
+    let imageName: String?
+
+    @Environment(\.actionHandler) private var actionHandler
+    @Environment(\.useImageAsset) private var useImageAsset
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -29,9 +37,15 @@ struct ModelCardView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                     .padding(.leading, Spacing.cardPadding)
             }
-
-            CachedImage(imageRef: image)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            
+            if useImageAsset, let imageName {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                CachedImage(imageRef: image)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            }
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
@@ -48,6 +62,6 @@ struct ModelCardView: View {
             .padding(Spacing.cardPadding)
         }
         .clipShape(RoundedRectangle(cornerRadius: style?.cornerRadius ?? Radius.lg))
-        .onTapGesture {}
+        .onTapGesture { actionHandler.handle(action) }
     }
 }

@@ -9,7 +9,7 @@
 //  base/filled swap is applied at the carCard call site via a symbol variant.
 //
 
-enum IconToken {
+nonisolated enum IconToken {
     static let grid = "square.grid.2x2.fill"
     static let car = "car.fill"
     static let key = "key.fill"
@@ -24,4 +24,30 @@ enum IconToken {
     static let heart = "heart"
     static let chevronDown = "chevron.down"
     static let person = "person.crop.circle.fill"
+}
+
+nonisolated extension IconToken {
+    private static let tokens: [String: String] = [
+        "grid": grid,
+        "car": car,
+        "key": key,
+        "money": money,
+        "receipt": receipt,
+        "wrench": wrench,
+        "shield": shield,
+        "phone": phone,
+        "directions": directions,
+        "check": check,
+        "arrowRightCircle": arrowRightCircle,
+        "heart": heart,
+        "chevronDown": chevronDown,
+        "person": person
+    ]
+
+    /// COMPONENTS.md §10: unknown token → nil. The caller substitutes the
+    /// client default (icon omitted, text stays); this only resolves
+    /// recognized names.
+    static func resolve(_ token: String) -> String? {
+        tokens[token]
+    }
 }

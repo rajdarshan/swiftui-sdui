@@ -35,6 +35,13 @@
 //  label, body for the collapsed strip) with a .bold() override on the
 //  expanded-selected case, rather than inventing an unlisted raw font spec.
 //
+//  location/avatar/search/each tab dispatch their own `action` through the
+//  environment-injected ActionHandler (design_spec.md §3.2 rule 4) — inert
+//  by default, matching the static screen (which never injects a handler).
+//  A tab's `action` is always `navigate` targeting a pageId (COMPONENTS.md
+//  §6.1/design_spec.md §6.1), which ActionDispatch resolves to a real page
+//  load rather than DebugActionScreen.
+//
 
 import SwiftUI
 
@@ -69,8 +76,10 @@ struct HeaderView: View {
     let selectedTabId: String
     let collapseProgress: CGFloat
 
-    private let expandedHeight: CGFloat = 280
-    private let collapsedHeight: CGFloat = 104
+    @Environment(\.actionHandler) private var actionHandler
+
+    private let expandedHeight: CGFloat = 250
+    private let collapsedHeight: CGFloat = 151
     private let expandedTabAreaHeight: CGFloat = 80
     private let collapsedTabAreaHeight: CGFloat = 36
     private let topRowHeight: CGFloat = 40
@@ -101,6 +110,7 @@ struct HeaderView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            Color(Palette.brandPrimary).frame(height: 47)
             if collapseProgress < 1 {
                 topRow
                     .opacity(1 - collapseProgress)
@@ -141,14 +151,15 @@ struct HeaderView: View {
                         .font(.system(size: 12))
                         .foregroundStyle(Palette.textOnDark)
                 }
-                .onTapGesture {}
+                .onTapGesture { actionHandler.handle(location.action) }
             }
             Spacer()
             if let avatar {
-                CachedImage(imageRef: avatar.image)
+                Image(systemName: avatar.imageName)
+                    .foregroundStyle(.white)
                     .frame(width: 40, height: 40)
                     .clipShape(Circle())
-                    .onTapGesture {}
+                    .onTapGesture { actionHandler.handle(avatar.action) }
             }
         }
     }
@@ -165,7 +176,7 @@ struct HeaderView: View {
         .padding(.horizontal, Spacing.cardPadding)
         .frame(height: 44)
         .background(Palette.brandSurfaceTranslucent, in: RoundedRectangle(cornerRadius: Radius.pill))
-        .onTapGesture {}
+        .onTapGesture { actionHandler.handle(search.action) }
     }
 
     private var expandedTabRail: some View {
@@ -187,7 +198,7 @@ struct HeaderView: View {
                             .foregroundStyle(Palette.textOnDark)
                             .lineLimit(1)
                     }
-                    .onTapGesture {}
+                    .onTapGesture { actionHandler.handle(tab.action) }
                 }
             }
         }
@@ -207,7 +218,7 @@ struct HeaderView: View {
                             .fill(selected ? Palette.textOnDark : Color.clear)
                             .frame(height: 2)
                     }
-                    .onTapGesture {}
+                    .onTapGesture { actionHandler.handle(tab.action) }
                 }
             }
         }

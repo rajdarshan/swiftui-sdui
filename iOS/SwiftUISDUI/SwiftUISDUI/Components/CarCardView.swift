@@ -12,6 +12,11 @@
 //  pill background — confirmed from reference/IMG_4362.PNG (design_spec.md
 //  never states their position).
 //
+//  Three independent tap targets dispatch through the environment-injected
+//  ActionHandler (design_spec.md §3.2 rule 4): the whole card (`action`),
+//  the favorite heart (`favorite.action`), and priceNote when it carries an
+//  action. Inert by default, matching the static screen.
+//
 
 import SwiftUI
 
@@ -42,6 +47,10 @@ struct CarCardView: View {
     let priceSuffix: String?
     let priceNote: CarCardPriceNote?
     let trustBadges: [Badge]
+    let imageName: String?
+    @Environment(\.useImageAsset) private var useImageAsset
+
+    @Environment(\.actionHandler) private var actionHandler
 
     init(
         image: ImageRef,
@@ -54,7 +63,8 @@ struct CarCardView: View {
         specs: [String] = [],
         priceSuffix: String? = nil,
         priceNote: CarCardPriceNote? = nil,
-        trustBadges: [Badge] = []
+        trustBadges: [Badge] = [],
+        imageName: String? = nil
     ) {
         self.image = image
         self.title = title
@@ -67,6 +77,7 @@ struct CarCardView: View {
         self.priceSuffix = priceSuffix
         self.priceNote = priceNote
         self.trustBadges = trustBadges
+        self.imageName = imageName
     }
 
     var body: some View {
@@ -118,7 +129,7 @@ struct CarCardView: View {
                     .font(Typography.priceNote)
                     .foregroundStyle(Palette.textSecondary)
                     .underline(priceNote.action != nil, pattern: .dot)
-                    .onTapGesture {}
+                    .onTapGesture { priceNote.action.map(actionHandler.handle) }
             }
 
             if !trustBadges.isEmpty {
@@ -139,16 +150,32 @@ struct CarCardView: View {
         }
         .padding(Spacing.cardPadding)
         .background(Palette.surfaceDefault)
-        .clipShape(RoundedRectangle(cornerRadius: Radius.lg))
-        .onTapGesture {}
+        .overlay(
+            RoundedRectangle(cornerRadius: Radius.lg)
+                .stroke(Palette.surfaceMuted, lineWidth: 2) // Draws the rounded outline
+        )
+        .onTapGesture { actionHandler.handle(action) }
     }
 
     private var imageArea: some View {
         ZStack(alignment: .topTrailing) {
-            CachedImage(imageRef: image)
-                .frame(height: 160)
-                .frame(maxWidth: .infinity)
-                .clipShape(RoundedRectangle(cornerRadius: Radius.lg))
+            if useImageAsset, let imageName {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 160)
+                    .background(
+                        Image(.usedCarBg)
+                            .resizable()
+                            .scaledToFit()
+                    )
+                    .clipped()
+            } else {
+                CachedImage(imageRef: image)
+                    .frame(height: 160)
+                    .frame(maxWidth: .infinity)
+                    .clipShape(RoundedRectangle(cornerRadius: Radius.lg))
+            }
 
             if let favorite {
                 Image(systemName: IconToken.heart)
@@ -157,7 +184,7 @@ struct CarCardView: View {
                     .padding(8)
                     .background(Palette.surfaceDefault, in: Circle())
                     .padding(Spacing.cardPadding)
-                    .onTapGesture {}
+                    .onTapGesture { actionHandler.handle(favorite.action) }
             }
 
             if let overlayBadge {

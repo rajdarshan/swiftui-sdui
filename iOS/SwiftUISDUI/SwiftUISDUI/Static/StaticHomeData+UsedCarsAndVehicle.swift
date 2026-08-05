@@ -139,7 +139,7 @@ extension StaticHomeData {
 
     static let manageVehicleHeader = SectionHeader(
         title: "Manage your vehicle",
-        trailing: ButtonSpec(text: "+ Add vehicle", action: Action(type: "openSheet", target: "add_vehicle"), variant: .ghost)
+        trailing: ButtonSpec(text: "+ Add vehicle", action: Action(type: "openSheet", target: "add_vehicle"), variant: .filled)
     )
 
     static let manageVehicleStyle = Style(background: Palette.surfaceBrand)

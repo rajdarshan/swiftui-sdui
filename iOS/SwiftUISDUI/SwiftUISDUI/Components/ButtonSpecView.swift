@@ -11,11 +11,17 @@
 //  promoCard/orbit/crashfree leave it compact, matching the reference
 //  screenshots.
 //
+//  Tap dispatches `spec.action` through the environment-injected
+//  ActionHandler (design_spec.md §3.2 rule 4) — inert by default, matching
+//  the static screen.
+//
 
 import SwiftUI
 
 struct ButtonSpecView: View {
     let spec: ButtonSpec
+
+    @Environment(\.actionHandler) private var actionHandler
 
     var body: some View {
         Group {
@@ -32,7 +38,7 @@ struct ButtonSpecView: View {
                     )
             }
         }
-        .onTapGesture {}
+        .onTapGesture { actionHandler.handle(spec.action) }
     }
 
     private var label: some View {

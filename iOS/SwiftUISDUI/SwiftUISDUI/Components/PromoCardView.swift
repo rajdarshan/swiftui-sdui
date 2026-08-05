@@ -19,6 +19,9 @@ struct PromoCardView: View {
     let logos: [ImageRef]
     let button: ButtonSpec?
     let style: Style?
+    let imageName: String?
+    
+    @Environment(\.useImageAsset) private var useImageAsset
 
     init(
         title: String,
@@ -27,7 +30,8 @@ struct PromoCardView: View {
         subtitle: String? = nil,
         logos: [ImageRef] = [],
         button: ButtonSpec? = nil,
-        style: Style? = nil
+        style: Style? = nil,
+        imageName: String?
     ) {
         self.title = title
         self.image = image
@@ -36,6 +40,7 @@ struct PromoCardView: View {
         self.logos = logos
         self.button = button
         self.style = style
+        self.imageName = imageName
     }
 
     private var foreground: Color { style?.foreground ?? Palette.textOnDark }
@@ -43,8 +48,12 @@ struct PromoCardView: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             style?.background ?? Palette.brandPrimary
-
-            if let image {
+            if useImageAsset, let imageName {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 200)
+            } else if let image {
                 CachedImage(imageRef: image)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
             }
