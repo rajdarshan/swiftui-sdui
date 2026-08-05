@@ -47,6 +47,8 @@ struct CarCardView: View {
     let priceSuffix: String?
     let priceNote: CarCardPriceNote?
     let trustBadges: [Badge]
+    let imageName: String?
+    @Environment(\.useImageAsset) private var useImageAsset
 
     @Environment(\.actionHandler) private var actionHandler
 
@@ -61,7 +63,8 @@ struct CarCardView: View {
         specs: [String] = [],
         priceSuffix: String? = nil,
         priceNote: CarCardPriceNote? = nil,
-        trustBadges: [Badge] = []
+        trustBadges: [Badge] = [],
+        imageName: String? = nil
     ) {
         self.image = image
         self.title = title
@@ -74,6 +77,7 @@ struct CarCardView: View {
         self.priceSuffix = priceSuffix
         self.priceNote = priceNote
         self.trustBadges = trustBadges
+        self.imageName = imageName
     }
 
     var body: some View {
@@ -146,16 +150,32 @@ struct CarCardView: View {
         }
         .padding(Spacing.cardPadding)
         .background(Palette.surfaceDefault)
-        .clipShape(RoundedRectangle(cornerRadius: Radius.lg))
+        .overlay(
+            RoundedRectangle(cornerRadius: Radius.lg)
+                .stroke(Palette.surfaceMuted, lineWidth: 2) // Draws the rounded outline
+        )
         .onTapGesture { actionHandler.handle(action) }
     }
 
     private var imageArea: some View {
         ZStack(alignment: .topTrailing) {
-            CachedImage(imageRef: image)
-                .frame(height: 160)
-                .frame(maxWidth: .infinity)
-                .clipShape(RoundedRectangle(cornerRadius: Radius.lg))
+            if useImageAsset, let imageName {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 160)
+                    .background(
+                        Image(.usedCarBg)
+                            .resizable()
+                            .scaledToFit()
+                    )
+                    .clipped()
+            } else {
+                CachedImage(imageRef: image)
+                    .frame(height: 160)
+                    .frame(maxWidth: .infinity)
+                    .clipShape(RoundedRectangle(cornerRadius: Radius.lg))
+            }
 
             if let favorite {
                 Image(systemName: IconToken.heart)

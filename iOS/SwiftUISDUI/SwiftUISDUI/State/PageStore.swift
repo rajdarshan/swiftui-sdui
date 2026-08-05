@@ -49,6 +49,7 @@ final class PageStore {
             sections = envelope.sections
             loadState = .loaded
         } catch {
+            print("PageStore Laod error: \(error)")
             loadState = .failed
         }
     }

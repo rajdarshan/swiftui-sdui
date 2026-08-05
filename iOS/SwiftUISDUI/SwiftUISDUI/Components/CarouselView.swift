@@ -68,7 +68,6 @@ struct CarouselView<Item: Identifiable, ItemContent: View>: View {
             LazyHStack(spacing: Spacing.railGap) {
                 ForEach(displayItems, id: \.id) { wrapped in
                     content(wrapped.item)
-                        .frame(width: cardWidth)
                         .id(wrapped.id)
                 }
             }

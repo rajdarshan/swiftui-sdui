@@ -50,8 +50,10 @@ struct FeatureCardView: View {
     let imagePosition: FeatureCardImagePosition
     let badge: Badge?
     let footer: FeatureCardFooter?
+    let imageName: String?
 
     @Environment(\.actionHandler) private var actionHandler
+    @Environment(\.useImageAsset) private var useImageAsset
 
     init(
         title: String,
@@ -59,7 +61,8 @@ struct FeatureCardView: View {
         image: ImageRef? = nil,
         imagePosition: FeatureCardImagePosition = .leading,
         badge: Badge? = nil,
-        footer: FeatureCardFooter? = nil
+        footer: FeatureCardFooter? = nil,
+        imageName: String?
     ) {
         self.title = title
         self.bodyText = bodyText
@@ -67,19 +70,36 @@ struct FeatureCardView: View {
         self.imagePosition = imagePosition
         self.badge = badge
         self.footer = footer
+        self.imageName = imageName
     }
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
-            if imagePosition == .leading, let image {
-                CachedImage(imageRef: image)
-                    .frame(width: 120)
+            if imagePosition == .leading {
+                if useImageAsset, let imageName {
+                    Image(imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 120)
+                } else if let image {
+                        CachedImage(imageRef: image)
+                            .frame(width: 120)
+                }
             }
 
             VStack(alignment: .leading, spacing: Spacing.sectionHeaderToContent) {
-                if imagePosition == .top, let image {
-                    CachedImage(imageRef: image)
+                if imagePosition == .top {
+                    if useImageAsset, let imageName {
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 120)
+                    } else if let image {
+                            CachedImage(imageRef: image)
+                            .frame(width: 120)
+                    }
                 }
+                
                 if let badge {
                     BadgeView(badge: badge)
                 }
@@ -115,6 +135,9 @@ struct FeatureCardView: View {
             .padding(Spacing.cardPadding)
         }
         .background(Palette.surfaceDefault)
-        .clipShape(RoundedRectangle(cornerRadius: Radius.lg))
+        .overlay(
+            RoundedRectangle(cornerRadius: Radius.lg)
+                .stroke(Palette.surfaceMuted, lineWidth: 2) // Draws the rounded outline
+        )
     }
 }

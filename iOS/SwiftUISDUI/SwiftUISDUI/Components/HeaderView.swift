@@ -78,8 +78,8 @@ struct HeaderView: View {
 
     @Environment(\.actionHandler) private var actionHandler
 
-    private let expandedHeight: CGFloat = 280
-    private let collapsedHeight: CGFloat = 104
+    private let expandedHeight: CGFloat = 250
+    private let collapsedHeight: CGFloat = 151
     private let expandedTabAreaHeight: CGFloat = 80
     private let collapsedTabAreaHeight: CGFloat = 36
     private let topRowHeight: CGFloat = 40
@@ -110,6 +110,7 @@ struct HeaderView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            Color(Palette.brandPrimary).frame(height: 47)
             if collapseProgress < 1 {
                 topRow
                     .opacity(1 - collapseProgress)
@@ -154,7 +155,8 @@ struct HeaderView: View {
             }
             Spacer()
             if let avatar {
-                CachedImage(imageRef: avatar.image)
+                Image(systemName: avatar.imageName)
+                    .foregroundStyle(.white)
                     .frame(width: 40, height: 40)
                     .clipShape(Circle())
                     .onTapGesture { actionHandler.handle(avatar.action) }

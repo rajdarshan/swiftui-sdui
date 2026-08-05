@@ -42,8 +42,6 @@ struct IconTileView: View {
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
-//                    .frame(width: 120, height: 100)
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             } else {
                 CachedImage(imageRef: image)
                     .frame(width: 92, height: 92)

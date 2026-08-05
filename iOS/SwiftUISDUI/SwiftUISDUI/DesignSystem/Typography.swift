@@ -12,7 +12,7 @@ import SwiftUI
 enum Typography {
     static let display: Font = .system(size: 34, weight: .bold)
     static let sectionTitle: Font = .system(size: 22, weight: .bold)
-    static let cardTitle: Font = .system(size: 17, weight: .semibold)
+    static let cardTitle: Font = .system(size: 16, weight: .semibold)
     static let cardSubtitle: Font = .system(size: 15, weight: .regular)
     static let body: Font = .system(size: 15, weight: .regular)
     static let caption: Font = .system(size: 13, weight: .regular)

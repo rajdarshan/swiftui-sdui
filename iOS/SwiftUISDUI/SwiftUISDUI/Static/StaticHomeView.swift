@@ -23,13 +23,13 @@ struct StaticHomeView: View {
     @State private var availableWidth: CGFloat = 0
     @State private var usedCarsSelectedChipId = "wishlisted"
 
-    private let collapseScrollRange: CGFloat = 280 - 104
+    private let collapseScrollRange: CGFloat = 250 - 151
 
     var body: some View {
         ZStack(alignment: .top) {
             ScrollView {
-                LazyVStack(spacing: Spacing.sectionGap) {
-                    Color.clear.frame(height: 280)
+                LazyVStack {
+                    Color(Palette.brandPrimary).frame(height: 250)
 
                     SectionContainer(header: StaticHomeData.buyCarHeader) {
                         RailView(items: StaticHomeData.buyCarItems, itemWidth: .sm) { item in
@@ -71,25 +71,26 @@ struct StaticHomeView: View {
                             title: StaticHomeData.orbitPromo.title, image: StaticHomeData.orbitPromo.image,
                             eyebrow: StaticHomeData.orbitPromo.eyebrow, subtitle: StaticHomeData.orbitPromo.subtitle,
                             logos: StaticHomeData.orbitPromo.logos, button: StaticHomeData.orbitPromo.button,
-                            style: StaticHomeData.orbitPromo.style
+                            style: StaticHomeData.orbitPromo.style, imageName: StaticHomeData.orbitPromo.imageName
                         )
                         .padding(.horizontal, Spacing.pageMargin)
                     }
 
                     SectionContainer(header: StaticHomeData.showroomsHeader) {
-                        RailView(items: StaticHomeData.showroomsItems, itemWidth: .xl) { item in
+                        RailView(items: StaticHomeData.showroomsItems, itemWidth: .xl, itemHeight: 360) { item in
                             PlaceCardView(
                                 images: item.images, title: item.title, overlayBadge: item.overlayBadge,
-                                subtitle: item.subtitle, linkRow: item.linkRow, status: item.status, buttons: item.buttons
+                                // swiftlint:disable:next line_length
+                                subtitle: item.subtitle, linkRow: item.linkRow, status: item.status, buttons: item.buttons, imageNames: item.imageNames
                             )
                         }
                     }
 
                     SectionContainer(header: StaticHomeData.trendingHeader) {
-                        RailView(items: StaticHomeData.trendingItems, itemWidth: .md) { item in
+                        RailView(items: StaticHomeData.trendingItems, itemWidth: .md, itemHeight: 250) { item in
                             ModelCardView(
                                 title: item.title, image: item.image, subtitle: item.subtitle,
-                                watermark: item.watermark, style: item.style, action: item.action
+                                watermark: item.watermark, style: item.style, action: item.action, imageName: item.imageName
                             )
                         }
                     }
@@ -98,7 +99,8 @@ struct StaticHomeView: View {
                         FeatureCardView(
                             title: StaticHomeData.findMatch.title, bodyText: StaticHomeData.findMatch.bodyText,
                             image: StaticHomeData.findMatch.image, imagePosition: StaticHomeData.findMatch.imagePosition,
-                            badge: StaticHomeData.findMatch.badge, footer: StaticHomeData.findMatch.footer
+                            // swiftlint:disable:next line_length
+                            badge: StaticHomeData.findMatch.badge, footer: StaticHomeData.findMatch.footer, imageName: StaticHomeData.findMatch.imageName
                         )
                         .padding(.horizontal, Spacing.pageMargin)
                     }
@@ -107,7 +109,7 @@ struct StaticHomeView: View {
                         CarouselView(items: StaticHomeData.valuePropItems, loop: true, peek: true) { item in
                             PromoCardView(
                                 title: item.title, image: item.image, eyebrow: item.eyebrow,
-                                subtitle: item.subtitle, logos: item.logos, button: item.button, style: item.style
+                                subtitle: item.subtitle, logos: item.logos, button: item.button, style: item.style, imageName: item.imageName
                             )
                         }
                     }
@@ -117,7 +119,7 @@ struct StaticHomeView: View {
                             title: StaticHomeData.crashfreePromo.title, image: StaticHomeData.crashfreePromo.image,
                             eyebrow: StaticHomeData.crashfreePromo.eyebrow, subtitle: StaticHomeData.crashfreePromo.subtitle,
                             logos: StaticHomeData.crashfreePromo.logos, button: StaticHomeData.crashfreePromo.button,
-                            style: StaticHomeData.crashfreePromo.style
+                            style: StaticHomeData.crashfreePromo.style, imageName: StaticHomeData.crashfreePromo.imageName
                         )
                         .padding(.horizontal, Spacing.pageMargin)
                     }
@@ -142,7 +144,10 @@ struct StaticHomeView: View {
                 selectedTabId: StaticHomeData.selectedTabId,
                 collapseProgress: collapseProgress
             )
+            .ignoresSafeArea(edges: .top)
         }
+        .navigationBarHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
         .measuringAvailableWidth(into: $availableWidth)
     }
 
@@ -153,12 +158,12 @@ struct StaticHomeView: View {
     private var usedCarsSection: some View {
         VStack(alignment: .leading, spacing: Spacing.sectionHeaderToContent) {
             usedCarsChips
-            RailView(items: usedCarsSelectedItems, itemWidth: .lg) { item in
+            RailView(items: usedCarsSelectedItems, itemWidth: .lg, itemHeight: 400) { item in
                 CarCardView(
                     image: item.image, title: item.title, price: item.price, action: item.action,
                     overlayBadge: item.overlayBadge, favorite: item.favorite, subtitle: item.subtitle,
                     specs: item.specs, priceSuffix: item.priceSuffix, priceNote: item.priceNote,
-                    trustBadges: item.trustBadges
+                    trustBadges: item.trustBadges, imageName: item.imageName
                 )
             }
         }

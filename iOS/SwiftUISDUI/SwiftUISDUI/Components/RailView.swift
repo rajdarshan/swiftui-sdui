@@ -14,6 +14,7 @@ struct RailView<Item: Identifiable, ItemContent: View>: View {
     let items: [Item]
     let itemWidth: ItemWidth
     let snap: Bool
+    let itemHeight: CGFloat
     let content: (Item) -> ItemContent
 
     @Environment(\.availableWidth) private var availableWidth
@@ -22,30 +23,29 @@ struct RailView<Item: Identifiable, ItemContent: View>: View {
         items: [Item],
         itemWidth: ItemWidth,
         snap: Bool = true,
+        itemHeight: CGFloat = 120,
         @ViewBuilder content: @escaping (Item) -> ItemContent
     ) {
         self.items = items
         self.itemWidth = itemWidth
         self.snap = snap
         self.content = content
+        self.itemHeight = itemHeight
     }
 
     var body: some View {
         
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: Spacing.railGap) {
                 ForEach(items, id: \.id) { item in
                     content(item)
-                        .containerRelativeFrame(.horizontal, count: items.count, span: 2, spacing: Spacing.railGap)
-                        .frame(height: 120)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .frame(height: itemHeight)
                 }
             }
-            .scrollTargetLayout()
             .padding(.horizontal, Spacing.pageMargin)
+            .scrollTargetLayout()
         }
         .viewAligned(if: snap)
-        .scrollIndicators(.hidden)
     }
 }
 

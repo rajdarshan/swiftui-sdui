@@ -34,21 +34,19 @@ struct TileView: View {
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
-//                    .frame(width: 120, height: 100)
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             } else if let image {
                 CachedImage(imageRef: image)
                     .frame(width: 120, height: 100)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
             
             Text(title)
                 .font(Typography.cardTitle)
                 .foregroundStyle(style?.foreground ?? Palette.textPrimary)
-                .lineLimit(2)
+                .lineLimit(2, reservesSpace: true)
                 .truncationMode(.tail)
                 .padding(Spacing.tilePadding)
         }
+        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
         .onTapGesture { actionHandler.handle(action) }
     }
 }

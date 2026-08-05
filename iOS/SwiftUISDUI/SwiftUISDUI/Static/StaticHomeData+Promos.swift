@@ -11,15 +11,12 @@ extension StaticHomeData {
 
     static let orbitPromo = PromoCardItemData(
         id: "orbit_promo__add_your_car_to_orbit",
-        title: "Add your car to Orbit",
+        title: "-",
         image: ImageRef(url: "https://placehold.co/720x400/1B2B22/FFFFFF?text=Orbit", aspect: 1.8),
         eyebrow: nil,
-        subtitle: "Enjoy 3 months of music streaming free",
-        logos: [
-            ImageRef(url: "https://placehold.co/160x40/1B2B22/FFFFFF?text=Brand"),
-            ImageRef(url: "https://placehold.co/160x40/1B2B22/1DB954?text=Partner")
-        ],
-        button: ButtonSpec(text: "Add car now", action: Action(type: "openSheet", target: "add_vehicle"), variant: .filled),
+        subtitle: nil,
+        logos: [ ],
+        button: nil,
         style: Style(background: Palette.tileDark, foreground: Palette.textOnDark, cornerRadius: Radius.lg),
         imageName: "banner_spot"
     )
@@ -148,7 +145,7 @@ extension StaticHomeData {
             text: "Find my perfect match", trailingIcon: IconToken.arrowRightCircle,
             action: Action(type: "navigate", target: "match_quiz")
         ),
-        imageName: "Carousel_4"
+        imageName: "banner_hero"
     )
 
     // MARK: - Value prop carousel
@@ -156,28 +153,28 @@ extension StaticHomeData {
     static let valuePropItems: [PromoCardItemData] = [
         PromoCardItemData(
             id: "value_prop_carousel__india_s_first_a_warranty_tha",
-            title: "India's first, a warranty that lasts as long as your car",
+            title: "-",
             image: ImageRef(url: "https://placehold.co/720x400/3B2FCF/FFFFFF?text=Lifetime+warranty", aspect: 1.8),
             eyebrow: nil, subtitle: nil, logos: [],
-            button: ButtonSpec(text: "Know more", action: Action(type: "navigate", target: "lifetime_warranty"), variant: .filled),
+            button: nil,
             style: Style(background: Palette.brandPrimary, foreground: Palette.textOnDark, cornerRadius: Radius.lg),
             imageName: "Carousel_1"
         ),
         PromoCardItemData(
             id: "value_prop_carousel__30_day_return_guarantee_on_e",
-            title: "30-day return guarantee on every car",
+            title: "-",
             image: ImageRef(url: "https://placehold.co/720x400/C2410C/FFFFFF?text=30+day+return", aspect: 1.8),
             eyebrow: nil, subtitle: nil, logos: [],
-            button: ButtonSpec(text: "Know more", action: Action(type: "navigate", target: "return_policy"), variant: .filled),
+            button: nil,
             style: Style(background: Palette.tileOrange, foreground: Palette.textOnDark, cornerRadius: Radius.lg),
             imageName: "Carousel_2"
         ),
         PromoCardItemData(
             id: "value_prop_carousel__3_free_services_with_every_c",
-            title: "3 free services with every car you buy",
+            title: "-",
             image: ImageRef(url: "https://placehold.co/720x400/15803D/FFFFFF?text=Free+services", aspect: 1.8),
             eyebrow: nil, subtitle: nil, logos: [],
-            button: ButtonSpec(text: "Know more", action: Action(type: "navigate", target: "free_services"), variant: .filled),
+            button: nil,
             style: Style(background: Palette.tileGreen, foreground: Palette.textOnDark, cornerRadius: Radius.lg),
             imageName: "Carousel_3"
         )
@@ -187,12 +184,12 @@ extension StaticHomeData {
 
     static let crashfreePromo = PromoCardItemData(
         id: "crashfree_promo__control_judgment_patience",
-        title: "Control. Judgment. Patience.",
+        title: ".",
         image: ImageRef(url: "https://placehold.co/600x500/5B4FE8/FFFFFF?text=Crashfree", aspect: 1.2),
-        eyebrow: "SAFER ROADS",
-        subtitle: "Small habits, safer journeys",
+        eyebrow: nil,
+        subtitle: nil,
         logos: [],
-        button: ButtonSpec(text: "Explore now", action: Action(type: "navigate", target: "crashfree_india"), variant: .filled),
+        button: nil,
         style: Style(background: Palette.brandPrimaryLight, foreground: Palette.textOnDark, cornerRadius: Radius.lg),
         imageName: "Banner_Dhoni"
     )

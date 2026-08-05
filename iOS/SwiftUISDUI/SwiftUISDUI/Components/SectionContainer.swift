@@ -26,7 +26,7 @@ struct SectionContainer<Content: View>: View {
                 HStack(alignment: .firstTextBaseline, spacing: Spacing.sectionHeaderToContent) {
                     Text(header.title)
                         .font(Typography.sectionTitle)
-                        .foregroundStyle(Palette.textPrimary)
+                        .foregroundStyle(style?.background == nil ? Palette.textPrimary : Palette.textOnDark)
                     if let badge = header.badge {
                         BadgeView(badge: badge)
                     }

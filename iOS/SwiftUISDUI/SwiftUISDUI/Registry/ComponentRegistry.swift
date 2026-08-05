@@ -75,7 +75,7 @@ nonisolated struct ComponentRegistry {
                 guard let card = node as? ModelCardNode else { return AnyView(EmptyView()) }
                 return AnyView(ModelCardView(
                     title: card.title, image: card.image, subtitle: card.subtitle,
-                    watermark: card.watermark, style: card.style, action: card.action
+                    watermark: card.watermark, style: card.style, action: card.action, imageName: nil
                 ))
             },
             "iconTile": { node, _ in
@@ -102,21 +102,21 @@ nonisolated struct ComponentRegistry {
                 guard let card = node as? PlaceCardNode else { return AnyView(EmptyView()) }
                 return AnyView(PlaceCardView(
                     images: card.images, title: card.title, overlayBadge: card.overlayBadge,
-                    subtitle: card.subtitle, linkRow: card.linkRow, status: card.status, buttons: card.buttons
+                    subtitle: card.subtitle, linkRow: card.linkRow, status: card.status, buttons: card.buttons, imageNames: []
                 ))
             },
             "promoCard": { node, _ in
                 guard let card = node as? PromoCardNode else { return AnyView(EmptyView()) }
                 return AnyView(PromoCardView(
                     title: card.title, image: card.image, eyebrow: card.eyebrow, subtitle: card.subtitle,
-                    logos: card.logos, button: card.button, style: card.style
+                    logos: card.logos, button: card.button, style: card.style, imageName: nil
                 ))
             },
             "featureCard": { node, _ in
                 guard let card = node as? FeatureCardNode else { return AnyView(EmptyView()) }
                 return AnyView(FeatureCardView(
                     title: card.title, bodyText: card.bodyText, image: card.image,
-                    imagePosition: card.imagePosition, badge: card.badge, footer: card.footer
+                    imagePosition: card.imagePosition, badge: card.badge, footer: card.footer, imageName: nil
                 ))
             },
             "textBlock": { node, _ in

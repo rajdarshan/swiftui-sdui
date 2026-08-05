@@ -61,7 +61,7 @@ struct SDUIPageView: View {
     @State private var availableWidth: CGFloat = 0
     @State private var debugPresentation: DebugActionPresentation?
 
-    private let collapseScrollRange: CGFloat = 280 - 104
+    private let collapseScrollRange: CGFloat = 250 - 151
 
     private var headerSection: HeaderSectionNode? {
         for section in store.sections {
@@ -82,7 +82,7 @@ struct SDUIPageView: View {
             ScrollView {
                 LazyVStack(spacing: Spacing.sectionGap) {
                     if headerSection != nil {
-                        Color.clear.frame(height: 280)
+                        Color(Palette.brandPrimary).frame(height: 250)
                     }
                     ForEach(contentSections, id: \.id) { section in
                         sectionView(for: section)
@@ -96,7 +96,7 @@ struct SDUIPageView: View {
             if let headerSection {
                 HeaderView(
                     location: headerSection.location.map { HeaderLocationData(text: $0.text, action: $0.action) },
-                    avatar: headerSection.avatar.map { HeaderAvatarData(image: $0.image, action: $0.action, imageName: "") },
+                    avatar: headerSection.avatar.map { HeaderAvatarData(image: $0.image, action: $0.action, imageName: "person") },
                     search: HeaderSearchData(placeholders: headerSection.search.placeholders, action: headerSection.search.action),
                     tabs: headerSection.tabs.items.map {
                         // COMPONENTS.md §10: unknown/absent icon token -> client default.
@@ -105,6 +105,7 @@ struct SDUIPageView: View {
                     selectedTabId: headerSection.tabs.selectedId,
                     collapseProgress: collapseProgress
                 )
+                .ignoresSafeArea(edges: .top)
             }
         }
         .measuringAvailableWidth(into: $availableWidth)
