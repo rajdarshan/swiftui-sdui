@@ -9,7 +9,7 @@
 
 import CoreGraphics
 
-enum ItemWidth: String {
+nonisolated enum ItemWidth: String {
     case sm, md, lg, xl, full
 
     var ratio: Double {
