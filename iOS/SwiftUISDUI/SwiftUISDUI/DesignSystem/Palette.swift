@@ -4,6 +4,12 @@
 //
 //  Colour tokens. design_spec.md §2.1, token names fixed by COMPONENTS.md §5.
 //
+//  `nonisolated`: the project defaults every declaration to @MainActor, but
+//  Decodable's `init(from:)` requirement is nonisolated, and decoding must
+//  stay callable off the main actor (design_spec.md §3.3: unit testable
+//  with no running app). These are pure value lookups with no UI
+//  dependency, so opting the whole enum out is correct, not a workaround.
+//
 
 import SwiftUI
 
@@ -18,7 +24,7 @@ private func hexColor(_ hex: String) -> Color {
                  opacity: 1)
 }
 
-enum Palette {
+nonisolated enum Palette {
     static let brandPrimary = hexColor("#382BC3")
     static let brandPrimaryLight = hexColor("#5C4FF4")
     static let brandSurfaceTranslucent = hexColor("#4B41C8")

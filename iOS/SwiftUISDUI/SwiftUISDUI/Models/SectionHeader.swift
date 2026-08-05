@@ -17,3 +17,7 @@ struct SectionHeader {
         self.trailing = trailing
     }
 }
+
+// No token resolution or absent-key defaults needed — synthesized
+// Decodable already calls decodeIfPresent for the two Optional fields.
+extension SectionHeader: Decodable, Equatable {}

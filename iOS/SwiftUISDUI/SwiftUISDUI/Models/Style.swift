@@ -21,3 +21,20 @@ struct Style {
         self.cornerRadius = cornerRadius
     }
 }
+
+extension Style: Decodable, Equatable {
+    private enum CodingKeys: String, CodingKey { case background, foreground, border, cornerRadius }
+
+    // All four fields stay optional on an unknown token — COMPONENTS.md
+    // §10's "client default substituted" is already each leaf view's own
+    // `style?.x ?? Palette.y` call-site fallback (design_spec.md §4.4).
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            background: try container.decodeIfPresent(String.self, forKey: .background).flatMap(Palette.resolve),
+            foreground: try container.decodeIfPresent(String.self, forKey: .foreground).flatMap(Palette.resolve),
+            border: try container.decodeIfPresent(String.self, forKey: .border).flatMap(Palette.resolve),
+            cornerRadius: try container.decodeIfPresent(String.self, forKey: .cornerRadius).flatMap(Radius.resolve)
+        )
+    }
+}
