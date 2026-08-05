@@ -58,6 +58,7 @@ struct HeaderLocationData {
 struct HeaderAvatarData {
     let image: ImageRef
     let action: Action
+    let imageName: String
 }
 
 struct HeaderView: View {

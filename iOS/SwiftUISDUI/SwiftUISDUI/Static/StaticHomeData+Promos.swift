@@ -20,7 +20,8 @@ extension StaticHomeData {
             ImageRef(url: "https://placehold.co/160x40/1B2B22/1DB954?text=Partner")
         ],
         button: ButtonSpec(text: "Add car now", action: Action(type: "openSheet", target: "add_vehicle"), variant: .filled),
-        style: Style(background: Palette.tileDark, foreground: Palette.textOnDark, cornerRadius: Radius.lg)
+        style: Style(background: Palette.tileDark, foreground: Palette.textOnDark, cornerRadius: Radius.lg),
+        imageName: "banner_spot"
     )
 
     // MARK: - Showrooms rail
@@ -48,7 +49,8 @@ extension StaticHomeData {
                 ButtonSpec(text: "View showroom",
                            action: Action(type: "navigate", target: "showroom_detail", params: ["showroomId": "showroom_101"]),
                            variant: .filled)
-            ]
+            ],
+            imageNames: ["showroom_1", "showroom_2"]
         ),
         PlaceCardItemData(
             id: "showrooms_rail__nexus_koramangala",
@@ -67,7 +69,8 @@ extension StaticHomeData {
                 ButtonSpec(text: "View showroom",
                            action: Action(type: "navigate", target: "showroom_detail", params: ["showroomId": "showroom_102"]),
                            variant: .filled)
-            ]
+            ],
+            imageNames: ["showroom_3", "showroom_4"]
         ),
         PlaceCardItemData(
             id: "showrooms_rail__whitefield_hub",
@@ -86,7 +89,8 @@ extension StaticHomeData {
                 ButtonSpec(text: "View showroom",
                            action: Action(type: "navigate", target: "showroom_detail", params: ["showroomId": "showroom_103"]),
                            variant: .filled)
-            ]
+            ],
+            imageNames: ["showroom_5", "showroom_6"]
         )
     ]
 
@@ -103,28 +107,32 @@ extension StaticHomeData {
             image: ImageRef(url: "https://placehold.co/600x400/EDF0F7/333333?text=Seltos", aspect: 1.5),
             subtitle: "Kia", watermark: "1",
             style: Style(background: Palette.surfaceMuted, cornerRadius: Radius.lg),
-            action: Action(type: "navigate", target: "new_car_detail", params: ["modelId": "kia_seltos"])
+            action: Action(type: "navigate", target: "new_car_detail", params: ["modelId": "kia_seltos"]),
+            imageName: "trending_1"
         ),
         ModelCardItemData(
             id: "trending_new_cars_rail__sonet", title: "Sonet",
             image: ImageRef(url: "https://placehold.co/600x400/EDF0F7/333333?text=Sonet", aspect: 1.5),
             subtitle: "Kia", watermark: "2",
             style: Style(background: Palette.surfaceMuted, cornerRadius: Radius.lg),
-            action: Action(type: "navigate", target: "new_car_detail", params: ["modelId": "kia_sonet"])
+            action: Action(type: "navigate", target: "new_car_detail", params: ["modelId": "kia_sonet"]),
+            imageName: "trending_2"
         ),
         ModelCardItemData(
             id: "trending_new_cars_rail__syros", title: "Syros",
             image: ImageRef(url: "https://placehold.co/600x400/EDF0F7/333333?text=Syros", aspect: 1.5),
             subtitle: "Kia", watermark: "3",
             style: Style(background: Palette.surfaceMuted, cornerRadius: Radius.lg),
-            action: Action(type: "navigate", target: "new_car_detail", params: ["modelId": "kia_syros"])
+            action: Action(type: "navigate", target: "new_car_detail", params: ["modelId": "kia_syros"]),
+            imageName: "trending_3"
         ),
         ModelCardItemData(
             id: "trending_new_cars_rail__carens", title: "Carens",
             image: ImageRef(url: "https://placehold.co/600x400/EDF0F7/333333?text=Carens", aspect: 1.5),
             subtitle: "Kia", watermark: "4",
             style: Style(background: Palette.surfaceMuted, cornerRadius: Radius.lg),
-            action: Action(type: "navigate", target: "new_car_detail", params: ["modelId": "kia_carens"])
+            action: Action(type: "navigate", target: "new_car_detail", params: ["modelId": "kia_carens"]),
+            imageName: "trending_4"
         )
     ]
 
@@ -139,7 +147,8 @@ extension StaticHomeData {
         footer: FeatureCardFooter(
             text: "Find my perfect match", trailingIcon: IconToken.arrowRightCircle,
             action: Action(type: "navigate", target: "match_quiz")
-        )
+        ),
+        imageName: "Carousel_4"
     )
 
     // MARK: - Value prop carousel
@@ -151,7 +160,8 @@ extension StaticHomeData {
             image: ImageRef(url: "https://placehold.co/720x400/3B2FCF/FFFFFF?text=Lifetime+warranty", aspect: 1.8),
             eyebrow: nil, subtitle: nil, logos: [],
             button: ButtonSpec(text: "Know more", action: Action(type: "navigate", target: "lifetime_warranty"), variant: .filled),
-            style: Style(background: Palette.brandPrimary, foreground: Palette.textOnDark, cornerRadius: Radius.lg)
+            style: Style(background: Palette.brandPrimary, foreground: Palette.textOnDark, cornerRadius: Radius.lg),
+            imageName: "Carousel_1"
         ),
         PromoCardItemData(
             id: "value_prop_carousel__30_day_return_guarantee_on_e",
@@ -159,7 +169,8 @@ extension StaticHomeData {
             image: ImageRef(url: "https://placehold.co/720x400/C2410C/FFFFFF?text=30+day+return", aspect: 1.8),
             eyebrow: nil, subtitle: nil, logos: [],
             button: ButtonSpec(text: "Know more", action: Action(type: "navigate", target: "return_policy"), variant: .filled),
-            style: Style(background: Palette.tileOrange, foreground: Palette.textOnDark, cornerRadius: Radius.lg)
+            style: Style(background: Palette.tileOrange, foreground: Palette.textOnDark, cornerRadius: Radius.lg),
+            imageName: "Carousel_2"
         ),
         PromoCardItemData(
             id: "value_prop_carousel__3_free_services_with_every_c",
@@ -167,7 +178,8 @@ extension StaticHomeData {
             image: ImageRef(url: "https://placehold.co/720x400/15803D/FFFFFF?text=Free+services", aspect: 1.8),
             eyebrow: nil, subtitle: nil, logos: [],
             button: ButtonSpec(text: "Know more", action: Action(type: "navigate", target: "free_services"), variant: .filled),
-            style: Style(background: Palette.tileGreen, foreground: Palette.textOnDark, cornerRadius: Radius.lg)
+            style: Style(background: Palette.tileGreen, foreground: Palette.textOnDark, cornerRadius: Radius.lg),
+            imageName: "Carousel_3"
         )
     ]
 
@@ -181,7 +193,8 @@ extension StaticHomeData {
         subtitle: "Small habits, safer journeys",
         logos: [],
         button: ButtonSpec(text: "Explore now", action: Action(type: "navigate", target: "crashfree_india"), variant: .filled),
-        style: Style(background: Palette.brandPrimaryLight, foreground: Palette.textOnDark, cornerRadius: Radius.lg)
+        style: Style(background: Palette.brandPrimaryLight, foreground: Palette.textOnDark, cornerRadius: Radius.lg),
+        imageName: "Banner_Dhoni"
     )
 
     // MARK: - Brand footer (single)

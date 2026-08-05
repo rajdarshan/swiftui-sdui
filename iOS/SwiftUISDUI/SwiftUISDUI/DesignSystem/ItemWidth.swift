@@ -30,5 +30,7 @@ func resolveItemWidth(
     margin: CGFloat = Spacing.pageMargin
 ) -> CGFloat {
     let ratio = CGFloat(token.ratio)
-    return (availableWidth - 2 * margin - gap * ratio.rounded(.down)) / ratio
+    let width = (availableWidth - (2 * margin) - (gap * ratio.rounded(.down))) / ratio
+    print("availableWidth: \(availableWidth), width: \(width)")
+    return width
 }

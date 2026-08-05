@@ -14,6 +14,7 @@ struct TileItemData: Identifiable {
     let image: ImageRef?
     let style: Style?
     let action: Action
+    let imageName: String
 }
 
 struct IconTileItemData: Identifiable {
@@ -22,6 +23,7 @@ struct IconTileItemData: Identifiable {
     let image: ImageRef
     let imageShape: IconTileImageShape
     let action: Action
+    let imageName: String
 }
 
 struct CarCardItemData: Identifiable {
@@ -37,6 +39,7 @@ struct CarCardItemData: Identifiable {
     let priceSuffix: String?
     let priceNote: CarCardPriceNote?
     let trustBadges: [Badge]
+    let imageName: String
 }
 
 struct PlaceCardItemData: Identifiable {
@@ -48,6 +51,7 @@ struct PlaceCardItemData: Identifiable {
     let linkRow: PlaceCardLinkRow?
     let status: PlaceCardStatus?
     let buttons: [ButtonSpec]
+    let imageNames: [String]
 }
 
 struct ModelCardItemData: Identifiable {
@@ -58,6 +62,7 @@ struct ModelCardItemData: Identifiable {
     let watermark: String?
     let style: Style?
     let action: Action
+    let imageName: String
 }
 
 struct PromoCardItemData: Identifiable {
@@ -69,6 +74,7 @@ struct PromoCardItemData: Identifiable {
     let logos: [ImageRef]
     let button: ButtonSpec?
     let style: Style?
+    let imageName: String?
 }
 
 /// `single`-section items (find_match_card) aren't rendered via a ForEach,
@@ -81,4 +87,5 @@ struct FeatureCardData {
     let imagePosition: FeatureCardImagePosition
     let badge: Badge?
     let footer: FeatureCardFooter?
+    let imageName: String
 }

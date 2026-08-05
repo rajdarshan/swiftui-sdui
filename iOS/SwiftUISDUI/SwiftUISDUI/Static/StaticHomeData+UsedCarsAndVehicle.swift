@@ -32,7 +32,8 @@ extension StaticHomeData {
             trustBadges: [
                 Badge(text: "Zero Worry Max", icon: IconToken.shield, variant: .accent),
                 Badge(text: "Lifetime warranty", icon: IconToken.check, variant: .neutral)
-            ]
+            ],
+            imageName: "car_1"
         ),
         CarCardItemData(
             id: "used_cars_rail_wishlisted__2012_volkswagen_vento",
@@ -47,7 +48,8 @@ extension StaticHomeData {
             priceNote: CarCardPriceNote(text: "Price negotiable"),
             trustBadges: [
                 Badge(text: "Zero Worry", icon: IconToken.check, variant: .accent)
-            ]
+            ],
+            imageName: "car_2"
         ),
         CarCardItemData(
             id: "used_cars_rail_wishlisted__2015_maruti_baleno",
@@ -66,7 +68,8 @@ extension StaticHomeData {
             trustBadges: [
                 Badge(text: "Zero Worry Max", icon: IconToken.shield, variant: .accent),
                 Badge(text: "Lifetime warranty", icon: IconToken.check, variant: .neutral)
-            ]
+            ],
+            imageName: "car_3"
         )
     ]
 
@@ -88,7 +91,8 @@ extension StaticHomeData {
             trustBadges: [
                 Badge(text: "Zero Worry Max", icon: IconToken.shield, variant: .accent),
                 Badge(text: "Lifetime warranty", icon: IconToken.check, variant: .neutral)
-            ]
+            ],
+            imageName: "car_4"
         ),
         CarCardItemData(
             id: "used_cars_rail_hot_deals__2021_hyundai_i20",
@@ -106,7 +110,8 @@ extension StaticHomeData {
             ),
             trustBadges: [
                 Badge(text: "Zero Worry", icon: IconToken.check, variant: .accent)
-            ]
+            ],
+            imageName: "car_5"
         ),
         CarCardItemData(
             id: "used_cars_rail_hot_deals__2020_tata_nexon",
@@ -125,7 +130,8 @@ extension StaticHomeData {
             trustBadges: [
                 Badge(text: "Zero Worry Max", icon: IconToken.shield, variant: .accent),
                 Badge(text: "Lifetime warranty", icon: IconToken.check, variant: .neutral)
-            ]
+            ],
+            imageName: "car_6"
         )
     ]
 
@@ -143,37 +149,43 @@ extension StaticHomeData {
             id: "manage_vehicle_grid__pay_challan", title: "Pay challan",
             image: ImageRef(url: "https://placehold.co/160x120/FFFFFF/333333?text=Challan", aspect: 1.33),
             style: Style(background: Palette.surfaceDefault, foreground: Palette.textPrimary, cornerRadius: Radius.md),
-            action: Action(type: "navigate", target: "pay_challan")
+            action: Action(type: "navigate", target: "pay_challan"),
+            imageName: "manage_challan"
         ),
         TileItemData(
             id: "manage_vehicle_grid__recharge_fastag", title: "Recharge FASTag",
             image: ImageRef(url: "https://placehold.co/160x120/FFFFFF/333333?text=FASTag", aspect: 1.33),
             style: Style(background: Palette.surfaceDefault, foreground: Palette.textPrimary, cornerRadius: Radius.md),
-            action: Action(type: "navigate", target: "fastag")
+            action: Action(type: "navigate", target: "fastag"),
+            imageName: "manage_recharge"
         ),
         TileItemData(
             id: "manage_vehicle_grid__get_insurance", title: "Get insurance",
             image: ImageRef(url: "https://placehold.co/160x120/FFFFFF/333333?text=Insurance", aspect: 1.33),
             style: Style(background: Palette.surfaceDefault, foreground: Palette.textPrimary, cornerRadius: Radius.md),
-            action: Action(type: "navigate", target: "get_insurance")
+            action: Action(type: "navigate", target: "get_insurance"),
+            imageName: "manage_insurance"
         ),
         TileItemData(
             id: "manage_vehicle_grid__cash_against_car", title: "Cash against car",
             image: ImageRef(url: "https://placehold.co/160x120/FFFFFF/333333?text=Cash", aspect: 1.33),
             style: Style(background: Palette.surfaceDefault, foreground: Palette.textPrimary, cornerRadius: Radius.md),
-            action: Action(type: "navigate", target: "cash_against_car")
+            action: Action(type: "navigate", target: "cash_against_car"),
+            imageName: "manage_cash"
         ),
         TileItemData(
             id: "manage_vehicle_grid__road_side_assistance", title: "Road side assistance",
             image: ImageRef(url: "https://placehold.co/160x120/FFFFFF/333333?text=RSA", aspect: 1.33),
             style: Style(background: Palette.surfaceDefault, foreground: Palette.textPrimary, cornerRadius: Radius.md),
-            action: Action(type: "navigate", target: "rsa")
+            action: Action(type: "navigate", target: "rsa"),
+            imageName: "manange_rsa"
         ),
         TileItemData(
             id: "manage_vehicle_grid__get_warranty", title: "Get warranty",
             image: ImageRef(url: "https://placehold.co/160x120/FFFFFF/333333?text=Warranty", aspect: 1.33),
             style: Style(background: Palette.surfaceDefault, foreground: Palette.textPrimary, cornerRadius: Radius.md),
-            action: Action(type: "navigate", target: "get_warranty")
+            action: Action(type: "navigate", target: "get_warranty"),
+            imageName: "manage_warranty"
         )
     ]
 }

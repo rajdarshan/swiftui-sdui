@@ -20,19 +20,30 @@ struct IconTileView: View {
     let image: ImageRef
     let imageShape: IconTileImageShape
     let action: Action
+    let imageName: String
+    @Environment(\.useImageAsset) private var useImageAsset
 
-    init(label: String, image: ImageRef, imageShape: IconTileImageShape = .square, action: Action) {
+    init(label: String, image: ImageRef, imageShape: IconTileImageShape = .square, imageName: String, action: Action) {
         self.label = label
         self.image = image
         self.imageShape = imageShape
         self.action = action
+        self.imageName = imageName
     }
 
     var body: some View {
         VStack(spacing: Spacing.sectionHeaderToContent) {
-            CachedImage(imageRef: image)
-                .frame(width: 92, height: 92)
-                .clipShape(shape)
+            if useImageAsset {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+//                    .frame(width: 120, height: 100)
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+            } else {
+                CachedImage(imageRef: image)
+                    .frame(width: 92, height: 92)
+                    .clipShape(shape)
+            }
 
             Text(label)
                 .font(Typography.cardSubtitle)

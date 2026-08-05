@@ -12,6 +12,7 @@ struct SwiftUISDUIApp: App {
     var body: some Scene {
         WindowGroup {
             StaticHomeView()
+                .environment(\.useImageAsset, true) 
         }
     }
 }

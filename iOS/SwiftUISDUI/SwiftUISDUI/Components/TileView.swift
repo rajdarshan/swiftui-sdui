@@ -15,19 +15,27 @@ struct TileView: View {
     let image: ImageRef?
     let style: Style?
     let action: Action
+    let imageName: String?
 
     private var cornerRadius: CGFloat { style?.cornerRadius ?? Radius.lg }
+    @Environment(\.useImageAsset) private var useImageAsset
 
     var body: some View {
         ZStack(alignment: .topLeading) {
             style?.background ?? Palette.surfaceMuted
-
-            if let image {
+            
+            if useImageAsset, let imageName {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+//                    .frame(width: 120, height: 100)
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+            } else if let image {
                 CachedImage(imageRef: image)
                     .frame(width: 120, height: 100)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
-
+            
             Text(title)
                 .font(Typography.cardTitle)
                 .foregroundStyle(style?.foreground ?? Palette.textPrimary)
@@ -35,12 +43,6 @@ struct TileView: View {
                 .truncationMode(.tail)
                 .padding(Spacing.tilePadding)
         }
-        .frame(height: 84)
-        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-        .overlay(
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .strokeBorder(style?.border ?? .clear)
-        )
         .onTapGesture {}
     }
 }

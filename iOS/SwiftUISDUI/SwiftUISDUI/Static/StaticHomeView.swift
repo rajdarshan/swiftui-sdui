@@ -33,25 +33,26 @@ struct StaticHomeView: View {
 
                     SectionContainer(header: StaticHomeData.buyCarHeader) {
                         RailView(items: StaticHomeData.buyCarItems, itemWidth: .sm) { item in
-                            TileView(title: item.title, image: item.image, style: item.style, action: item.action)
+                            TileView(title: item.title, image: item.image, style: item.style, action: item.action, imageName: item.imageName)
                         }
                     }
 
                     SectionContainer(header: StaticHomeData.sellCarHeader) {
                         RailView(items: StaticHomeData.sellCarItems, itemWidth: .sm) { item in
-                            TileView(title: item.title, image: item.image, style: item.style, action: item.action)
+                            TileView(title: item.title, image: item.image, style: item.style, action: item.action, imageName: item.imageName)
                         }
                     }
 
                     SectionContainer(header: StaticHomeData.loansHeader) {
                         RailView(items: StaticHomeData.loansItems, itemWidth: .sm) { item in
-                            IconTileView(label: item.label, image: item.image, imageShape: item.imageShape, action: item.action)
+                            // swiftlint:disable:next line_length
+                            IconTileView(label: item.label, image: item.image, imageShape: item.imageShape, imageName: item.imageName, action: item.action)
                         }
                     }
 
                     SectionContainer(header: StaticHomeData.carCheckHeader) {
                         GridView(items: StaticHomeData.carCheckItems, columns: 3) { item in
-                            TileView(title: item.title, image: item.image, style: item.style, action: item.action)
+                            TileView(title: item.title, image: item.image, style: item.style, action: item.action, imageName: item.imageName)
                         }
                     }
 
@@ -61,7 +62,7 @@ struct StaticHomeView: View {
 
                     SectionContainer(header: StaticHomeData.manageVehicleHeader, style: StaticHomeData.manageVehicleStyle) {
                         GridView(items: StaticHomeData.manageVehicleItems, columns: 3) { item in
-                            TileView(title: item.title, image: item.image, style: item.style, action: item.action)
+                            TileView(title: item.title, image: item.image, style: item.style, action: item.action, imageName: item.imageName)
                         }
                     }
 

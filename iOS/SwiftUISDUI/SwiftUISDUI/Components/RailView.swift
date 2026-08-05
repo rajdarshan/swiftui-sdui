@@ -31,18 +31,21 @@ struct RailView<Item: Identifiable, ItemContent: View>: View {
     }
 
     var body: some View {
+        
         ScrollView(.horizontal) {
             LazyHStack(spacing: Spacing.railGap) {
                 ForEach(items, id: \.id) { item in
                     content(item)
-                        .frame(width: resolveItemWidth(itemWidth, availableWidth: availableWidth))
+                        .containerRelativeFrame(.horizontal, count: items.count, span: 2, spacing: Spacing.railGap)
+                        .frame(height: 120)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
                 }
             }
-            .padding(.horizontal, Spacing.pageMargin)
             .scrollTargetLayout()
+            .padding(.horizontal, Spacing.pageMargin)
         }
-        .scrollIndicators(.hidden)
         .viewAligned(if: snap)
+        .scrollIndicators(.hidden)
     }
 }
 
