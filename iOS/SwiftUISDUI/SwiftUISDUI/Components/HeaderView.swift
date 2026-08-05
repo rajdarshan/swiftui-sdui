@@ -11,12 +11,29 @@
 //  preference-key offset-tracking pattern CLAUDE.md prohibits.
 //
 //  Same tab data drives both states: selected = white fill + bold label
-//  (expanded), underline (collapsed). Non-`all` tab taps are inert in
-//  Stage 2 (design_spec.md §5) — no PageStore to load another page yet.
+//  (expanded), underline only, no bold, (collapsed) — design_spec.md §4.2's
+//  "white fill + bold label (expanded), underline (collapsed)" scopes "bold"
+//  to the expanded clause only. Non-`all` tab taps are inert in Stage 2
+//  (design_spec.md §5) — no PageStore to load another page yet.
 //
 //  location/avatar have no icon prop in COMPONENTS.md §9 — their pin/avatar
 //  chrome is fixed client decoration, not server-token-driven, so it's
 //  hardcoded here rather than routed through IconToken.
+//
+//  Content only receives normal safe-area top inset (not a manual padding
+//  guess) — only the background ignores the safe area, so the status bar is
+//  covered without the content itself needing a magic-number offset.
+//
+//  Height budget, deliberately kept inside both frames rather than clipped:
+//  collapsed (104) = 12 top + 44 search + 12 gap + 36 tab area = 104 exactly.
+//  expanded (280) = 12 top + 40 topRow + 12 gap + 44 search + 12 gap + 80 tab
+//  area = 200, with the remaining 80pt absorbed by a trailing Spacer rather
+//  than forcing an exact fit — slack is fine, overflow is not.
+//
+//  No token in design_spec.md §2.2's text-style table covers tab labels —
+//  reusing the closest existing tokens (caption for the expanded icon-chip
+//  label, body for the collapsed strip) with a .bold() override on the
+//  expanded-selected case, rather than inventing an unlisted raw font spec.
 //
 
 import SwiftUI
@@ -53,6 +70,9 @@ struct HeaderView: View {
 
     private let expandedHeight: CGFloat = 280
     private let collapsedHeight: CGFloat = 104
+    private let expandedTabAreaHeight: CGFloat = 80
+    private let collapsedTabAreaHeight: CGFloat = 36
+    private let topRowHeight: CGFloat = 40
 
     init(
         location: HeaderLocationData? = nil,
@@ -74,24 +94,33 @@ struct HeaderView: View {
         expandedHeight - (expandedHeight - collapsedHeight) * collapseProgress
     }
 
+    private var tabAreaHeight: CGFloat {
+        expandedTabAreaHeight - (expandedTabAreaHeight - collapsedTabAreaHeight) * collapseProgress
+    }
+
     var body: some View {
-        VStack(spacing: Spacing.sectionHeaderToContent) {
-            topRow
-                .opacity(1 - collapseProgress)
-                .frame(height: 40 * (1 - collapseProgress))
-                .clipped()
+        VStack(spacing: 0) {
+            if collapseProgress < 1 {
+                topRow
+                    .opacity(1 - collapseProgress)
+                    .frame(height: topRowHeight * (1 - collapseProgress))
+                    .padding(.bottom, Spacing.sectionHeaderToContent * (1 - collapseProgress))
+                    .clipped()
+            }
 
             searchField
+                .padding(.bottom, Spacing.sectionHeaderToContent)
 
             ZStack {
                 expandedTabRail.opacity(1 - collapseProgress)
                 collapsedTabStrip.opacity(collapseProgress)
             }
-            .frame(height: 44)
+            .frame(height: tabAreaHeight)
+
+            Spacer(minLength: 0)
         }
         .padding(.horizontal, Spacing.pageMargin)
-        .padding(.top, 50)
-        .padding(.bottom, Spacing.sectionHeaderToContent)
+        .padding(.top, Spacing.sectionHeaderToContent)
         .frame(maxWidth: .infinity)
         .frame(height: height, alignment: .top)
         .background(Palette.brandPrimary.ignoresSafeArea(edges: .top))
@@ -152,7 +181,8 @@ struct HeaderView: View {
                                 .foregroundStyle(selected ? Palette.brandPrimary : Palette.textOnDark)
                         }
                         Text(tab.label)
-                            .font(.system(size: 12, weight: selected ? .bold : .regular))
+                            .font(Typography.caption)
+                            .fontWeight(selected ? .bold : .regular)
                             .foregroundStyle(Palette.textOnDark)
                             .lineLimit(1)
                     }
@@ -170,7 +200,7 @@ struct HeaderView: View {
                     let selected = tab.id == selectedTabId
                     VStack(spacing: 4) {
                         Text(tab.label)
-                            .font(.system(size: 15, weight: selected ? .bold : .regular))
+                            .font(Typography.body)
                             .foregroundStyle(Palette.textOnDark)
                         Rectangle()
                             .fill(selected ? Palette.textOnDark : Color.clear)
