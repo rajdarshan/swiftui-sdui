@@ -12,9 +12,15 @@
 //  missing a type entirely).
 //
 
+//
+//  `nonisolated`: called from BundlePayloadSource's nonisolated async
+//  `loadPage(pageId:)` (design_spec.md §3.1), while the module otherwise
+//  defaults every declaration to @MainActor.
+//
+
 import Foundation
 
-enum PayloadDecoder {
+nonisolated enum PayloadDecoder {
     static func decode(_ data: Data, registry: ComponentRegistry = .shared) throws -> PageEnvelope {
         let decoder = JSONDecoder()
         decoder.userInfo[.componentRegistry] = registry
