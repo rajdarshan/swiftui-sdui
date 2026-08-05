@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "1.0",
+  "version": "1.0.0",
+  "pageId": "home_loans",
+  "sections": [
+    {
+      "id": "app_header",
+      "type": "header",
+      "location": {
+        "text": "Bangalore",
+        "action": {
+          "type": "openSheet",
+          "target": "city_picker"
+        }
+      },
+      "avatar": {
+        "image": {
+          "url": "https://placehold.co/96x96/FFFFFF/382BC3?text=P"
+        },
+        "action": {
+          "type": "navigate",
+          "target": "profile"
+        }
+      },
+      "search": {
+        "placeholders": [
+          "Search Creta",
+          "Search Tata cars",
+          "Search Ertiga",
+          "Search Swift",
+          "Search Maruti cars",
+          "Search Thar",
+          "Search Baleno"
+        ],
+        "rotateMs": 3000,
+        "action": {
+          "type": "search",
+          "target": "search"
+        }
+      },
+      "tabs": {
+        "selectedId": "loans",
+        "items": [
+          {
+            "id": "all",
+            "label": "All",
+            "icon": "grid",
+            "action": {
+              "type": "navigate",
+              "target": "home_all"
+            }
+          },
+          {
+            "id": "buy_used_car",
+            "label": "Buy used car",
+            "icon": "car",
+            "action": {
+              "type": "navigate",
+              "target": "home_buy_used_car"
+            }
+          },
+          {
+            "id": "sell_car",
+            "label": "Sell car",
+            "icon": "key",
+            "action": {
+              "type": "navigate",
+              "target": "home_sell_car"
+            }
+          },
+          {
+            "id": "loans",
+            "label": "Loans",
+            "icon": "money",
+            "action": {
+              "type": "navigate",
+              "target": "home_loans"
+            }
+          },
+          {
+            "id": "challan",
+            "label": "Challan",
+            "icon": "receipt",
+            "action": {
+              "type": "navigate",
+              "target": "home_challan"
+            }
+          },
+          {
+            "id": "car_check",
+            "label": "Car check",
+            "icon": "wrench",
+            "action": {
+              "type": "navigate",
+              "target": "home_car_check"
+            }
+          },
+          {
+            "id": "insurance",
+            "label": "Insurance",
+            "icon": "shield",
+            "action": {
+              "type": "navigate",
+              "target": "home_insurance"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "home_loans_placeholder",
+      "type": "single",
+      "item": {
+        "id": "home_loans_placeholder__home_loans",
+        "type": "textBlock",
+        "title": "Loans",
+        "subtitle": "Coming soon"
+      }
+    }
+  ]
+}
