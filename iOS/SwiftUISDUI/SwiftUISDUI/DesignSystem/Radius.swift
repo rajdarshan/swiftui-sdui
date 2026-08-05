@@ -14,3 +14,19 @@ enum Radius {
     static let lg: CGFloat = 16
     static let pill: CGFloat = 999
 }
+
+extension Radius {
+    private static let tokens: [String: CGFloat] = [
+        "none": Radius.none,
+        "sm": sm,
+        "md": md,
+        "lg": lg,
+        "pill": pill
+    ]
+
+    /// COMPONENTS.md §10: unknown token → nil. The caller substitutes the
+    /// client default; this only resolves recognized names.
+    static func resolve(_ token: String) -> CGFloat? {
+        tokens[token]
+    }
+}

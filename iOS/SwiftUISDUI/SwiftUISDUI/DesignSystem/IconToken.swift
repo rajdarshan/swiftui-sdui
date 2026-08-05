@@ -25,3 +25,29 @@ enum IconToken {
     static let chevronDown = "chevron.down"
     static let person = "person.crop.circle.fill"
 }
+
+extension IconToken {
+    private static let tokens: [String: String] = [
+        "grid": grid,
+        "car": car,
+        "key": key,
+        "money": money,
+        "receipt": receipt,
+        "wrench": wrench,
+        "shield": shield,
+        "phone": phone,
+        "directions": directions,
+        "check": check,
+        "arrowRightCircle": arrowRightCircle,
+        "heart": heart,
+        "chevronDown": chevronDown,
+        "person": person
+    ]
+
+    /// COMPONENTS.md §10: unknown token → nil. The caller substitutes the
+    /// client default (icon omitted, text stays); this only resolves
+    /// recognized names.
+    static func resolve(_ token: String) -> String? {
+        tokens[token]
+    }
+}

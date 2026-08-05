@@ -45,3 +45,35 @@ enum Palette {
 
     static let badgeDanger = hexColor("#B31F1D")
 }
+
+extension Palette {
+    private static let tokens: [String: Color] = [
+        "brand.primary": brandPrimary,
+        "brand.primaryLight": brandPrimaryLight,
+        "brand.surfaceTranslucent": brandSurfaceTranslucent,
+        "surface.default": surfaceDefault,
+        "surface.muted": surfaceMuted,
+        "surface.brand": surfaceBrand,
+        "surface.chip": surfaceChip,
+        "tile.blue": tileBlue,
+        "tile.green": tileGreen,
+        "tile.cream": tileCream,
+        "tile.arch": tileArch,
+        "tile.creamBorder": tileCreamBorder,
+        "tile.dark": tileDark,
+        "tile.orange": tileOrange,
+        "text.primary": textPrimary,
+        "text.secondary": textSecondary,
+        "text.onDark": textOnDark,
+        "text.accent": textAccent,
+        "text.success": textSuccess,
+        "text.danger": textDanger,
+        "badge.danger": badgeDanger
+    ]
+
+    /// COMPONENTS.md §10: unknown token → nil. The caller substitutes the
+    /// client default; this only resolves recognized names.
+    static func resolve(_ token: String) -> Color? {
+        tokens[token]
+    }
+}
