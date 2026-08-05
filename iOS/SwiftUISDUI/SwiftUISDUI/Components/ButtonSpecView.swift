@@ -36,7 +36,7 @@ struct ButtonSpecView: View {
     }
 
     private var label: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: 8) {
             if let icon = spec.leadingIcon {
                 Image(systemName: icon)
             }

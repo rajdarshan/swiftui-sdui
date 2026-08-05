@@ -87,7 +87,7 @@ struct CarCardView: View {
             }
 
             if !specs.isEmpty {
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     ForEach(specs, id: \.self) { spec in
                         Text(spec)
                             .font(Typography.caption)
@@ -102,7 +102,7 @@ struct CarCardView: View {
                 .clipped()
             }
 
-            HStack(alignment: .firstTextBaseline, spacing: 6) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text(price)
                     .font(Typography.price)
                     .foregroundStyle(Palette.textPrimary)

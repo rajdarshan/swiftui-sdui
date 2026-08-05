@@ -33,7 +33,7 @@ struct ModelCardView: View {
             CachedImage(imageRef: image)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
 
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(Typography.cardTitle)
                     .foregroundStyle(Palette.textPrimary)

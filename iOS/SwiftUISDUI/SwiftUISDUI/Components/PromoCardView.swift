@@ -79,6 +79,5 @@ struct PromoCardView: View {
             .padding(Spacing.cardPadding)
         }
         .clipShape(RoundedRectangle(cornerRadius: style?.cornerRadius ?? Radius.lg))
-        .onTapGesture {}
     }
 }
