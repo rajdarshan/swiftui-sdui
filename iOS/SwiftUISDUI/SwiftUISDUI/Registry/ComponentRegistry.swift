@@ -27,13 +27,27 @@ import SwiftUI
 
 /// Per-render context an item view closure may need beyond the node itself.
 /// `toggledIds` is Stage 4's local wishlist-heart state (PageStore owns the
-/// set; `carCard`'s effective `favorite.selected` is `favorite.selected !=
-/// toggledIds.contains(id)`, computed here rather than stored on the node).
+/// set, keyed by `favorite.action.target` — COMPONENTS.md §4.1: toggle's
+/// `target` is the "Entity id" — never by the item's own page-scoped `id`,
+/// COMPONENTS.md §8, which is a different string in every bundled payload).
 nonisolated struct ItemRenderContext {
     let toggledIds: Set<String>
 
     init(toggledIds: Set<String> = []) {
         self.toggledIds = toggledIds
+    }
+}
+
+/// Extracted from the `carCard` view closure so the toggle-key logic is
+/// unit-testable independent of AnyView/SwiftUI construction — this is
+/// exactly the seam a prior bug (checking `card.id` instead of
+/// `fav.action.target`) slipped through untested. Not `nonisolated`:
+/// `CarCardFavorite`'s own memberwise init (Components/CarCardView.swift)
+/// isn't nonisolated, so this stays on the module's default @MainActor
+/// isolation, same as every `itemViews` closure that calls it.
+func effectiveCarCardFavorite(for card: CarCardNode, context: ItemRenderContext) -> CarCardFavorite? {
+    card.favorite.map { fav in
+        CarCardFavorite(selected: fav.selected != context.toggledIds.contains(fav.action.target), action: fav.action)
     }
 }
 
@@ -76,9 +90,7 @@ nonisolated struct ComponentRegistry {
             },
             "carCard": { node, context in
                 guard let card = node as? CarCardNode else { return AnyView(EmptyView()) }
-                let favorite = card.favorite.map { fav in
-                    CarCardFavorite(selected: fav.selected != context.toggledIds.contains(card.id), action: fav.action)
-                }
+                let favorite = effectiveCarCardFavorite(for: card, context: context)
                 let priceNote = card.priceNote.map { CarCardPriceNote(text: $0.text, action: $0.action) }
                 return AnyView(CarCardView(
                     image: card.image, title: card.title, price: card.price, action: card.action,

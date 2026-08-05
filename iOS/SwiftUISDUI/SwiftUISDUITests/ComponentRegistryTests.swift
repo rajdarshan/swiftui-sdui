@@ -66,4 +66,41 @@ struct ComponentRegistryTests {
             try decode(decoder)
         }
     }
+
+    // Regression: effectiveCarCardFavorite must key off favorite.action.target
+    // (COMPONENTS.md §4.1's toggle "Entity id"), not the item's own page-scoped
+    // id (COMPONENTS.md §8) — a prior bug checked the wrong one, so the
+    // wishlist heart never visually toggled. This is the exact mismatch
+    // confirmed in sdui-config/payloads/home_all.json: item id
+    // "used_cars_rail_wishlisted__2023_mahindra_xuv300" vs. its favorite's
+    // action.target "car_10021".
+    @MainActor
+    @Test
+    func effectiveFavoriteTogglesOnTheActionTargetNotTheItemId() throws {
+        let decoder = try rawDecoder("""
+        {
+          "id": "used_cars_rail_wishlisted__2023_mahindra_xuv300", "type": "carCard",
+          "image": { "url": "https://placehold.co/1x1" }, "title": "t", "price": "p",
+          "action": { "type": "navigate", "target": "car_detail" },
+          "favorite": { "selected": false, "action": { "type": "toggle", "target": "car_10021" } }
+        }
+        """)
+        let decode = try #require(ComponentRegistry.shared.itemDecoders["carCard"])
+        let card = try #require(try decode(decoder) as? CarCardNode)
+
+        let untouched = effectiveCarCardFavorite(for: card, context: ItemRenderContext())
+        #expect(untouched?.selected == false)
+
+        let toggledByItemId = effectiveCarCardFavorite(
+            for: card,
+            context: ItemRenderContext(toggledIds: [card.id])
+        )
+        #expect(toggledByItemId?.selected == false, "the item's own id must not flip the heart")
+
+        let toggledByActionTarget = effectiveCarCardFavorite(
+            for: card,
+            context: ItemRenderContext(toggledIds: ["car_10021"])
+        )
+        #expect(toggledByActionTarget?.selected == true)
+    }
 }
