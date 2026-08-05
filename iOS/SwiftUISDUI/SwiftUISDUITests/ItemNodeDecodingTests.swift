@@ -309,3 +309,93 @@ struct PromoCardNodeDecodingTests {
         #expect(node.button == nil)
     }
 }
+
+struct FeatureCardNodeDecodingTests {
+
+    // sdui-config/payloads/home_all.json: find_match_card__let_us_find_your_match
+    @Test
+    func decodesHappyPathWithBodyKeyMappedToBodyText() throws {
+        let node = try decode(FeatureCardNode.self, """
+        {
+          "id": "find_match_card__let_us_find_your_match",
+          "type": "featureCard",
+          "badge": { "text": "Recommended", "variant": "accent" },
+          "title": "Let us find your match",
+          "body": "Answer a few simple questions and get your perfect car match in 60 seconds.",
+          "image": { "url": "https://placehold.co/400x600", "aspect": 0.67 },
+          "imagePosition": "leading",
+          "footer": {
+            "text": "Find my perfect match",
+            "trailingIcon": "arrowRightCircle",
+            "action": { "type": "navigate", "target": "match_quiz" }
+          }
+        }
+        """)
+        #expect(node.title == "Let us find your match")
+        #expect(node.bodyText == "Answer a few simple questions and get your perfect car match in 60 seconds.")
+        #expect(node.imagePosition == .leading)
+        #expect(node.footer?.trailingIcon == IconToken.arrowRightCircle)
+        #expect(node.badge?.variant == .accent)
+    }
+
+    @Test
+    func absentImagePositionDefaultsToLeading() throws {
+        let node = try decode(FeatureCardNode.self, """
+        { "id": "x", "type": "featureCard", "title": "t" }
+        """)
+        #expect(node.imagePosition == .leading)
+        #expect(node.bodyText == nil)
+        #expect(node.footer == nil)
+    }
+
+    @Test
+    func unknownImagePositionDefaultsToLeading() throws {
+        let node = try decode(FeatureCardNode.self, """
+        { "id": "x", "type": "featureCard", "title": "t", "imagePosition": "diagonal" }
+        """)
+        #expect(node.imagePosition == .leading)
+    }
+
+    @Test
+    func missingMandatoryTitleThrows() {
+        #expect(throws: (any Error).self) {
+            try decode(FeatureCardNode.self, "{ \"id\": \"x\", \"type\": \"featureCard\" }")
+        }
+    }
+}
+
+struct TextBlockNodeDecodingTests {
+
+    // sdui-config/payloads/home_all.json: brand_footer__better_drives_better_lives
+    @Test
+    func decodesHappyPath() throws {
+        let node = try decode(TextBlockNode.self, """
+        {
+          "id": "brand_footer__better_drives_better_lives",
+          "type": "textBlock",
+          "title": "better drives, better lives",
+          "subtitle": "Made with love in Gurugram",
+          "style": { "foreground": "text.onDark" }
+        }
+        """)
+        #expect(node.title == "better drives, better lives")
+        #expect(node.subtitle == "Made with love in Gurugram")
+        #expect(node.style?.foreground == Palette.textOnDark)
+    }
+
+    @Test
+    func absentSubtitleAndStyleAreNil() throws {
+        let node = try decode(TextBlockNode.self, """
+        { "id": "x", "type": "textBlock", "title": "t" }
+        """)
+        #expect(node.subtitle == nil)
+        #expect(node.style == nil)
+    }
+
+    @Test
+    func missingMandatoryTitleThrows() {
+        #expect(throws: (any Error).self) {
+            try decode(TextBlockNode.self, "{ \"id\": \"x\", \"type\": \"textBlock\" }")
+        }
+    }
+}
