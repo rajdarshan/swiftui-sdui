@@ -7,7 +7,7 @@
 //
 
 struct Badge {
-    enum Variant {
+    enum Variant: String {
         case neutral, accent, success, warning, danger
     }
 

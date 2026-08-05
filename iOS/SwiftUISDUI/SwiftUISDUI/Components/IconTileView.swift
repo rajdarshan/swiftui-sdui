@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-enum IconTileImageShape {
+enum IconTileImageShape: String {
     case circle, arch, square
 }
 

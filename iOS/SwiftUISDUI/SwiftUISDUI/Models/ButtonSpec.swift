@@ -7,7 +7,7 @@
 //
 
 struct ButtonSpec {
-    enum Variant {
+    enum Variant: String {
         case filled, outline, ghost
     }
 

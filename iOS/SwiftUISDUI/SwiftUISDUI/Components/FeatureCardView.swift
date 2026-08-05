@@ -14,7 +14,7 @@
 
 import SwiftUI
 
-enum FeatureCardImagePosition {
+enum FeatureCardImagePosition: String {
     case leading, top
 }
 
