@@ -40,6 +40,6 @@ struct SectionContainer<Content: View>: View {
             content
         }
         .padding(.vertical, Spacing.sectionHeaderToContent)
-        .background(style?.background)
+        .background(style?.background ?? .clear)
     }
 }

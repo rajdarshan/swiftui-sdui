@@ -23,7 +23,7 @@ struct GridView<Item: Identifiable, ItemContent: View>: View {
 
     var body: some View {
         VStack(spacing: Spacing.gridGutter) {
-            ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
+            ForEach(rows, id: \.first?.id) { row in
                 HStack(spacing: Spacing.gridGutter) {
                     ForEach(row, id: \.id) { item in
                         content(item)
