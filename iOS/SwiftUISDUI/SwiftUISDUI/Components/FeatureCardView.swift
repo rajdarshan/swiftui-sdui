@@ -11,6 +11,10 @@
 //  Swift parameter is `bodyText`, not `body` — that name is reserved by the
 //  View protocol's own `body` property.
 //
+//  `footer` dispatches its `action` through the environment-injected
+//  ActionHandler (design_spec.md §3.2 rule 4) — inert by default, matching
+//  the static screen.
+//
 
 import SwiftUI
 
@@ -46,6 +50,8 @@ struct FeatureCardView: View {
     let imagePosition: FeatureCardImagePosition
     let badge: Badge?
     let footer: FeatureCardFooter?
+
+    @Environment(\.actionHandler) private var actionHandler
 
     init(
         title: String,
@@ -103,7 +109,7 @@ struct FeatureCardView: View {
                                 .foregroundStyle(Palette.brandPrimary)
                         }
                     }
-                    .onTapGesture {}
+                    .onTapGesture { actionHandler.handle(footer.action) }
                 }
             }
             .padding(Spacing.cardPadding)

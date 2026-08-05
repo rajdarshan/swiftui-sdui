@@ -7,6 +7,11 @@
 //  clipShape(RoundedRectangle). Image may overflow the tile edge — clip.
 //  design_spec.md §2.5: tile height 84.
 //
+//  Whole-card tap dispatches `action` through the environment-injected
+//  ActionHandler (design_spec.md §3.2 rule 4). Default handler is a no-op,
+//  so the static screen (which never injects one) stays inert with no
+//  special-casing here.
+//
 
 import SwiftUI
 
@@ -19,6 +24,7 @@ struct TileView: View {
 
     private var cornerRadius: CGFloat { style?.cornerRadius ?? Radius.lg }
     @Environment(\.useImageAsset) private var useImageAsset
+    @Environment(\.actionHandler) private var actionHandler
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -43,6 +49,6 @@ struct TileView: View {
                 .truncationMode(.tail)
                 .padding(Spacing.tilePadding)
         }
-        .onTapGesture {}
+        .onTapGesture { actionHandler.handle(action) }
     }
 }

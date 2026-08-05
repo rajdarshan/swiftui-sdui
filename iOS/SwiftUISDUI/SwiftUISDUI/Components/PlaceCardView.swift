@@ -11,6 +11,11 @@
 //  Notched overlay badge bottom-leading. Two buttons in an HStack, equal
 //  width.
 //
+//  `linkRow` dispatches its `action` through the environment-injected
+//  ActionHandler (design_spec.md §3.2 rule 4) — inert by default, matching
+//  the static screen. `buttons` already route through ButtonSpecView, which
+//  handles its own dispatch.
+//
 
 import SwiftUI
 
@@ -46,6 +51,8 @@ struct PlaceCardView: View {
     let linkRow: PlaceCardLinkRow?
     let status: PlaceCardStatus?
     let buttons: [ButtonSpec]
+
+    @Environment(\.actionHandler) private var actionHandler
 
     init(
         images: [ImageRef],
@@ -92,7 +99,7 @@ struct PlaceCardView: View {
                             .foregroundStyle(Palette.textAccent)
                     }
                 }
-                .onTapGesture {}
+                .onTapGesture { actionHandler.handle(linkRow.action) }
             }
 
             if let status {

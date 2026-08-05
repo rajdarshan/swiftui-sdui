@@ -12,6 +12,11 @@
 //  pill background — confirmed from reference/IMG_4362.PNG (design_spec.md
 //  never states their position).
 //
+//  Three independent tap targets dispatch through the environment-injected
+//  ActionHandler (design_spec.md §3.2 rule 4): the whole card (`action`),
+//  the favorite heart (`favorite.action`), and priceNote when it carries an
+//  action. Inert by default, matching the static screen.
+//
 
 import SwiftUI
 
@@ -42,6 +47,8 @@ struct CarCardView: View {
     let priceSuffix: String?
     let priceNote: CarCardPriceNote?
     let trustBadges: [Badge]
+
+    @Environment(\.actionHandler) private var actionHandler
 
     init(
         image: ImageRef,
@@ -118,7 +125,7 @@ struct CarCardView: View {
                     .font(Typography.priceNote)
                     .foregroundStyle(Palette.textSecondary)
                     .underline(priceNote.action != nil, pattern: .dot)
-                    .onTapGesture {}
+                    .onTapGesture { priceNote.action.map(actionHandler.handle) }
             }
 
             if !trustBadges.isEmpty {
@@ -140,7 +147,7 @@ struct CarCardView: View {
         .padding(Spacing.cardPadding)
         .background(Palette.surfaceDefault)
         .clipShape(RoundedRectangle(cornerRadius: Radius.lg))
-        .onTapGesture {}
+        .onTapGesture { actionHandler.handle(action) }
     }
 
     private var imageArea: some View {
@@ -157,7 +164,7 @@ struct CarCardView: View {
                     .padding(8)
                     .background(Palette.surfaceDefault, in: Circle())
                     .padding(Spacing.cardPadding)
-                    .onTapGesture {}
+                    .onTapGesture { actionHandler.handle(favorite.action) }
             }
 
             if let overlayBadge {
