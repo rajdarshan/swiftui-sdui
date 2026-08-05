@@ -10,7 +10,7 @@
 //  degrade via `decodeSection`'s `try?`.
 //
 
-struct PageEnvelope: Decodable {
+nonisolated struct PageEnvelope: Decodable {
     let schemaVersion: String
     let version: String
     let pageId: String

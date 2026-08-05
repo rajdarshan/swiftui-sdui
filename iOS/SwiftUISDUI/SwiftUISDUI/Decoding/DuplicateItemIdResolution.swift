@@ -16,14 +16,14 @@
 //  total (i.e. this occurrence is the last one).
 //
 
-private func itemIds(items: [any ItemNode]?, filter: FilterNode?) -> [String] {
+private nonisolated func itemIds(items: [any ItemNode]?, filter: FilterNode?) -> [String] {
     if let filter {
         return filter.chips.flatMap { $0.items.map(\.id) }
     }
     return items?.map(\.id) ?? []
 }
 
-private func itemIds(in section: SectionNode) -> [String] {
+private nonisolated func itemIds(in section: SectionNode) -> [String] {
     switch section {
     case .header:
         return []
@@ -40,7 +40,7 @@ private func itemIds(in section: SectionNode) -> [String] {
     }
 }
 
-private func isLastOccurrence(_ id: String, totalCounts: [String: Int], runningCounts: inout [String: Int]) -> Bool {
+private nonisolated func isLastOccurrence(_ id: String, totalCounts: [String: Int], runningCounts: inout [String: Int]) -> Bool {
     runningCounts[id, default: 0] += 1
     let isLast = runningCounts[id] == totalCounts[id]
     if !isLast {
@@ -49,7 +49,7 @@ private func isLastOccurrence(_ id: String, totalCounts: [String: Int], runningC
     return isLast
 }
 
-private func dedupFilter(_ filter: FilterNode?, totalCounts: [String: Int], runningCounts: inout [String: Int]) -> FilterNode? {
+private nonisolated func dedupFilter(_ filter: FilterNode?, totalCounts: [String: Int], runningCounts: inout [String: Int]) -> FilterNode? {
     guard let filter else { return nil }
     let dedupedChips = filter.chips.map { chip -> ChipNode in
         let items = chip.items.filter { isLastOccurrence($0.id, totalCounts: totalCounts, runningCounts: &runningCounts) }
@@ -58,7 +58,7 @@ private func dedupFilter(_ filter: FilterNode?, totalCounts: [String: Int], runn
     return FilterNode(defaultChipId: filter.defaultChipId, chips: dedupedChips)
 }
 
-private func dedupSection(_ section: SectionNode, totalCounts: [String: Int], runningCounts: inout [String: Int]) -> SectionNode {
+private nonisolated func dedupSection(_ section: SectionNode, totalCounts: [String: Int], runningCounts: inout [String: Int]) -> SectionNode {
     func keep(_ id: String) -> Bool {
         isLastOccurrence(id, totalCounts: totalCounts, runningCounts: &runningCounts)
     }

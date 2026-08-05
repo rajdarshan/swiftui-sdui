@@ -10,7 +10,7 @@
 //  prop fails the same way, via the same `try?`.
 //
 
-private struct RawSectionEnvelope: Decodable {
+private nonisolated struct RawSectionEnvelope: Decodable {
     let type: String
 }
 

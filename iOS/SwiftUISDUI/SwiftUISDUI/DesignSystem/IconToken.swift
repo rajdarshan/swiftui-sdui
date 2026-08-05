@@ -26,7 +26,7 @@ nonisolated enum IconToken {
     static let person = "person.crop.circle.fill"
 }
 
-extension IconToken {
+nonisolated extension IconToken {
     private static let tokens: [String: String] = [
         "grid": grid,
         "car": car,

@@ -10,7 +10,7 @@
 //  `superDecoder(forKey:)` is what makes that safe to do twice.
 //
 
-struct RawItemEnvelope: Decodable {
+nonisolated struct RawItemEnvelope: Decodable {
     let id: String
     let type: String
     let fallbackDecoder: Decoder?

@@ -73,13 +73,14 @@ nonisolated extension PlaceCardLinkRow: Decodable, Equatable {
         lhs.text == rhs.text && lhs.trailingIcon == rhs.trailingIcon && lhs.action == rhs.action
     }
 
+    // Direct field assignment, not `self.init(...)` — PlaceCardLinkRow's own
+    // memberwise init (declared in Components/PlaceCardView.swift) isn't
+    // nonisolated, and that isolation can't be changed from this extension.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(
-            text: try container.decode(String.self, forKey: .text),
-            trailingIcon: try container.decodeIfPresent(String.self, forKey: .trailingIcon).flatMap(IconToken.resolve),
-            action: try container.decode(Action.self, forKey: .action)
-        )
+        text = try container.decode(String.self, forKey: .text)
+        trailingIcon = try container.decodeIfPresent(String.self, forKey: .trailingIcon).flatMap(IconToken.resolve)
+        action = try container.decode(Action.self, forKey: .action)
     }
 }
 
@@ -92,13 +93,12 @@ nonisolated extension PlaceCardStatus: Decodable, Equatable {
         lhs.text == rhs.text && lhs.detail == rhs.detail && lhs.variant == rhs.variant
     }
 
+    // Direct field assignment, not `self.init(...)` — see PlaceCardLinkRow above.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let variantRaw = try container.decodeIfPresent(String.self, forKey: .variant)
-        self.init(
-            text: try container.decode(String.self, forKey: .text),
-            detail: try container.decodeIfPresent(String.self, forKey: .detail),
-            variant: variantRaw.flatMap(Badge.Variant.init(rawValue:)) ?? .neutral
-        )
+        text = try container.decode(String.self, forKey: .text)
+        detail = try container.decodeIfPresent(String.self, forKey: .detail)
+        variant = variantRaw.flatMap(Badge.Variant.init(rawValue:)) ?? .neutral
     }
 }

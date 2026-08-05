@@ -50,12 +50,13 @@ nonisolated extension FeatureCardFooter: Decodable, Equatable {
         lhs.text == rhs.text && lhs.trailingIcon == rhs.trailingIcon && lhs.action == rhs.action
     }
 
+    // Direct field assignment, not `self.init(...)` — FeatureCardFooter's own
+    // memberwise init (declared in Components/FeatureCardView.swift) isn't
+    // nonisolated, and that isolation can't be changed from this extension.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(
-            text: try container.decode(String.self, forKey: .text),
-            trailingIcon: try container.decodeIfPresent(String.self, forKey: .trailingIcon).flatMap(IconToken.resolve),
-            action: try container.decode(Action.self, forKey: .action)
-        )
+        text = try container.decode(String.self, forKey: .text)
+        trailingIcon = try container.decodeIfPresent(String.self, forKey: .trailingIcon).flatMap(IconToken.resolve)
+        action = try container.decode(Action.self, forKey: .action)
     }
 }

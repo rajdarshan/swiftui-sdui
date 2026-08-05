@@ -13,7 +13,7 @@
 
 import SwiftUI
 
-private func hexColor(_ hex: String) -> Color {
+private nonisolated func hexColor(_ hex: String) -> Color {
     var value: UInt64 = 0
     let digits = hex.hasPrefix("#") ? String(hex.dropFirst()) : hex
     Scanner(string: digits).scanHexInt64(&value)
@@ -52,7 +52,7 @@ nonisolated enum Palette {
     static let badgeDanger = hexColor("#B31F1D")
 }
 
-extension Palette {
+nonisolated extension Palette {
     private static let tokens: [String: Color] = [
         "brand.primary": brandPrimary,
         "brand.primaryLight": brandPrimaryLight,

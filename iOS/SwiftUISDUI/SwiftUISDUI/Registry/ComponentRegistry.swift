@@ -30,7 +30,7 @@ nonisolated struct ComponentRegistry {
     ])
 }
 
-extension CodingUserInfoKey {
+nonisolated extension CodingUserInfoKey {
     static let componentRegistry: CodingUserInfoKey = {
         // CodingUserInfoKey.init(rawValue:) only fails for an empty string —
         // never the case for this literal.

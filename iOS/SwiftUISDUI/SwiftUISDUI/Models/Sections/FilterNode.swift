@@ -71,7 +71,7 @@ nonisolated struct ChipNode: Decodable, Identifiable {
     }
 }
 
-extension ChipNode: Equatable {
+nonisolated extension ChipNode: Equatable {
     // `[any ItemNode]` isn't Equatable — id/label equality is sufficient
     // for tests (mirrors item ids being page-scoped-unique, COMPONENTS.md §8).
     static func == (lhs: ChipNode, rhs: ChipNode) -> Bool {

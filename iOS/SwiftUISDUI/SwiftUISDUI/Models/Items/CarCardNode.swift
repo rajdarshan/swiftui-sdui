@@ -63,12 +63,13 @@ nonisolated extension CarCardFavorite: Decodable, Equatable {
         lhs.selected == rhs.selected && lhs.action == rhs.action
     }
 
+    // Direct field assignment, not `self.init(...)` — CarCardFavorite's own
+    // memberwise init (declared in Components/CarCardView.swift) isn't
+    // nonisolated, and that isolation can't be changed from this extension.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(
-            selected: try container.decode(Bool.self, forKey: .selected),
-            action: try container.decode(Action.self, forKey: .action)
-        )
+        selected = try container.decode(Bool.self, forKey: .selected)
+        action = try container.decode(Action.self, forKey: .action)
     }
 }
 
@@ -79,11 +80,12 @@ nonisolated extension CarCardPriceNote: Decodable, Equatable {
         lhs.text == rhs.text && lhs.action == rhs.action
     }
 
+    // Direct field assignment, not `self.init(...)` — CarCardPriceNote's own
+    // memberwise init (declared in Components/CarCardView.swift) isn't
+    // nonisolated, and that isolation can't be changed from this extension.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(
-            text: try container.decode(String.self, forKey: .text),
-            action: try container.decodeIfPresent(Action.self, forKey: .action)
-        )
+        text = try container.decode(String.self, forKey: .text)
+        action = try container.decodeIfPresent(Action.self, forKey: .action)
     }
 }

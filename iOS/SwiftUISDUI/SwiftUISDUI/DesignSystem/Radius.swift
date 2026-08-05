@@ -15,7 +15,7 @@ nonisolated enum Radius {
     static let pill: CGFloat = 999
 }
 
-extension Radius {
+nonisolated extension Radius {
     private static let tokens: [String: CGFloat] = [
         "none": Radius.none,
         "sm": sm,
