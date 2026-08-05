@@ -112,6 +112,7 @@ struct PlaceCardView: View {
                 HStack(spacing: Spacing.cardPadding) {
                     ForEach(buttons, id: \.text) { spec in
                         ButtonSpecView(spec: spec)
+                            .frame(maxWidth: .infinity)
                     }
                 }
             }

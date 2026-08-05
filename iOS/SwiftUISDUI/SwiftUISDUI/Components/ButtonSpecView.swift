@@ -5,7 +5,11 @@
 //  Shared rendering for the ButtonSpec value object (COMPONENTS.md §4.4).
 //  `.ghost` renders as a bare text link (section header trailing actions like
 //  "View all"); `.filled`/`.outline` get the full button chrome at the
-//  design_spec.md §2.5 button height (44).
+//  design_spec.md §2.5 button height (44). Content-sized, not full-width —
+//  width is the call site's decision: placeCard applies
+//  .frame(maxWidth: .infinity) per button for its equal-width pair,
+//  promoCard/orbit/crashfree leave it compact, matching the reference
+//  screenshots.
 //
 
 import SwiftUI
@@ -19,8 +23,8 @@ struct ButtonSpecView: View {
                 label
             } else {
                 label
+                    .padding(.horizontal, Spacing.cardPadding)
                     .frame(height: 44)
-                    .frame(maxWidth: .infinity)
                     .background(background, in: RoundedRectangle(cornerRadius: Radius.md))
                     .overlay(
                         RoundedRectangle(cornerRadius: Radius.md)
