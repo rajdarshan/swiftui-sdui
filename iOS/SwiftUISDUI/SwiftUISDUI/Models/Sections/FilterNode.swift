@@ -13,7 +13,7 @@
 //  container's own `items[]`).
 //
 
-struct FilterNode: Decodable, Equatable {
+nonisolated struct FilterNode: Decodable, Equatable {
     let defaultChipId: String
     let chips: [ChipNode]
 
@@ -39,7 +39,7 @@ struct FilterNode: Decodable, Equatable {
     }
 }
 
-struct ChipNode: Decodable, Identifiable {
+nonisolated struct ChipNode: Decodable, Identifiable {
     let id: String
     let label: String
     let items: [any ItemNode]

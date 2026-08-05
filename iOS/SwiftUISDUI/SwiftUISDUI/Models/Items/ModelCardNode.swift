@@ -8,7 +8,7 @@
 //  unknown type.
 //
 
-struct ModelCardNode: ItemNode, Decodable, Equatable {
+nonisolated struct ModelCardNode: ItemNode, Decodable, Equatable {
     let id: String
     let type: String
     let title: String

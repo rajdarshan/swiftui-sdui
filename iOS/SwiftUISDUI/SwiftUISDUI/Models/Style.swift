@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct Style {
+nonisolated struct Style {
     let background: Color?
     let foreground: Color?
     let border: Color?
@@ -22,7 +22,7 @@ struct Style {
     }
 }
 
-extension Style: Decodable, Equatable {
+nonisolated extension Style: Decodable, Equatable {
     private enum CodingKeys: String, CodingKey { case background, foreground, border, cornerRadius }
 
     // All four fields stay optional on an unknown token — COMPONENTS.md

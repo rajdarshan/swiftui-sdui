@@ -7,7 +7,7 @@
 //  decode/throws) — no custom init needed.
 //
 
-struct TileNode: ItemNode, Decodable, Equatable {
+nonisolated struct TileNode: ItemNode, Decodable, Equatable {
     let id: String
     let type: String
     let title: String

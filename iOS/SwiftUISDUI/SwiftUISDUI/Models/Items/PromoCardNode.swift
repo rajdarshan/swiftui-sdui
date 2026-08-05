@@ -8,7 +8,7 @@
 //  key for a non-Optional array).
 //
 
-struct PromoCardNode: ItemNode, Decodable, Equatable {
+nonisolated struct PromoCardNode: ItemNode, Decodable, Equatable {
     let id: String
     let type: String
     let title: String

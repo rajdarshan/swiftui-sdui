@@ -6,7 +6,7 @@
 //  onto Decodable synthesis — no custom init needed.
 //
 
-struct TextBlockNode: ItemNode, Decodable, Equatable {
+nonisolated struct TextBlockNode: ItemNode, Decodable, Equatable {
     let id: String
     let type: String
     let title: String

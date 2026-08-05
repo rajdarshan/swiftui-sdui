@@ -14,7 +14,7 @@
 //  from outside the declaring file, so both are hand-written.
 //
 
-struct FeatureCardNode: ItemNode, Decodable, Equatable {
+nonisolated struct FeatureCardNode: ItemNode, Decodable, Equatable {
     let id: String
     let type: String
     let title: String
@@ -43,7 +43,7 @@ struct FeatureCardNode: ItemNode, Decodable, Equatable {
     }
 }
 
-extension FeatureCardFooter: Decodable, Equatable {
+nonisolated extension FeatureCardFooter: Decodable, Equatable {
     private enum CodingKeys: String, CodingKey { case text, trailingIcon, action }
 
     static func == (lhs: FeatureCardFooter, rhs: FeatureCardFooter) -> Bool {

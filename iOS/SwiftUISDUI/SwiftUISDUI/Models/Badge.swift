@@ -6,7 +6,7 @@
 //  name (via IconToken), not a token string.
 //
 
-struct Badge {
+nonisolated struct Badge {
     enum Variant: String {
         case neutral, accent, success, warning, danger
     }
@@ -22,7 +22,7 @@ struct Badge {
     }
 }
 
-extension Badge: Decodable, Equatable {
+nonisolated extension Badge: Decodable, Equatable {
     private enum CodingKeys: String, CodingKey { case text, icon, variant }
 
     // COMPONENTS.md §10: unknown icon token → icon omitted, text stays.

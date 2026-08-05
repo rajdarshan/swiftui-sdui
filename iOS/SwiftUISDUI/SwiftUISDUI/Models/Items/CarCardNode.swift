@@ -14,7 +14,7 @@
 //  extension rather than editing that file.
 //
 
-struct CarCardNode: ItemNode, Decodable, Equatable {
+nonisolated struct CarCardNode: ItemNode, Decodable, Equatable {
     let id: String
     let type: String
     let image: ImageRef
@@ -56,7 +56,7 @@ struct CarCardNode: ItemNode, Decodable, Equatable {
 // the file declaring these structs (Components/CarCardView.swift) — both
 // hand-written.
 
-extension CarCardFavorite: Decodable, Equatable {
+nonisolated extension CarCardFavorite: Decodable, Equatable {
     private enum CodingKeys: String, CodingKey { case selected, action }
 
     static func == (lhs: CarCardFavorite, rhs: CarCardFavorite) -> Bool {
@@ -72,7 +72,7 @@ extension CarCardFavorite: Decodable, Equatable {
     }
 }
 
-extension CarCardPriceNote: Decodable, Equatable {
+nonisolated extension CarCardPriceNote: Decodable, Equatable {
     private enum CodingKeys: String, CodingKey { case text, action }
 
     static func == (lhs: CarCardPriceNote, rhs: CarCardPriceNote) -> Bool {

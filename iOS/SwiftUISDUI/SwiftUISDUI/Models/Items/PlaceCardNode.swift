@@ -16,7 +16,7 @@
 //  via extension rather than editing that file.
 //
 
-struct PlaceCardNode: ItemNode, Decodable, Equatable {
+nonisolated struct PlaceCardNode: ItemNode, Decodable, Equatable {
     let id: String
     let type: String
     let images: [ImageRef]
@@ -64,7 +64,7 @@ struct PlaceCardNode: ItemNode, Decodable, Equatable {
     }
 }
 
-extension PlaceCardLinkRow: Decodable, Equatable {
+nonisolated extension PlaceCardLinkRow: Decodable, Equatable {
     private enum CodingKeys: String, CodingKey { case text, trailingIcon, action }
 
     // Equatable can't synthesize `==` from an extension outside the file
@@ -83,7 +83,7 @@ extension PlaceCardLinkRow: Decodable, Equatable {
     }
 }
 
-extension PlaceCardStatus: Decodable, Equatable {
+nonisolated extension PlaceCardStatus: Decodable, Equatable {
     private enum CodingKeys: String, CodingKey { case text, detail, variant }
 
     // Equatable can't synthesize `==` from an extension outside the file

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ImageRef {
+nonisolated struct ImageRef {
     let url: String
     let placeholder: Color
     let aspect: Double?
@@ -20,7 +20,7 @@ struct ImageRef {
     }
 }
 
-extension ImageRef: Decodable, Equatable {
+nonisolated extension ImageRef: Decodable, Equatable {
     private enum CodingKeys: String, CodingKey { case url, placeholder, aspect }
 
     // COMPONENTS.md §4.2: placeholder default is surface.muted, applied

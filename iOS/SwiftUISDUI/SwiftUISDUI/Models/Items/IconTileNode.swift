@@ -9,7 +9,7 @@
 //  back to that default rather than throwing the whole item away.
 //
 
-struct IconTileNode: ItemNode, Decodable, Equatable {
+nonisolated struct IconTileNode: ItemNode, Decodable, Equatable {
     let id: String
     let type: String
     let label: String

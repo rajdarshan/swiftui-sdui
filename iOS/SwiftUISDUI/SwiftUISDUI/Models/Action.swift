@@ -7,7 +7,7 @@
 //  tap (COMPONENTS.md §10), which a closed enum would fight.
 //
 
-struct Action {
+nonisolated struct Action {
     let type: String
     let target: String
     let params: [String: String]
@@ -19,7 +19,7 @@ struct Action {
     }
 }
 
-extension Action: Decodable, Equatable {
+nonisolated extension Action: Decodable, Equatable {
     private enum CodingKeys: String, CodingKey { case type, target, params }
 
     // `type` is never validated against a known set here — COMPONENTS.md

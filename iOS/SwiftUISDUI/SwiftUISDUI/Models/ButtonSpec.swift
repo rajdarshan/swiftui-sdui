@@ -6,7 +6,7 @@
 //  avoid colliding with SwiftUI.Button.
 //
 
-struct ButtonSpec {
+nonisolated struct ButtonSpec {
     enum Variant: String {
         case filled, outline, ghost
     }
@@ -24,7 +24,7 @@ struct ButtonSpec {
     }
 }
 
-extension ButtonSpec: Decodable, Equatable {
+nonisolated extension ButtonSpec: Decodable, Equatable {
     private enum CodingKeys: String, CodingKey { case text, action, variant, leadingIcon }
 
     init(from decoder: Decoder) throws {
