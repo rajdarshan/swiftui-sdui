@@ -145,3 +145,167 @@ struct IconTileNodeDecodingTests {
         }
     }
 }
+
+struct CarCardNodeDecodingTests {
+
+    // sdui-config/payloads/home_all.json: used_cars_rail_wishlisted__2023_mahindra_xuv300
+    @Test
+    func decodesHappyPath() throws {
+        let node = try decode(CarCardNode.self, """
+        {
+          "id": "used_cars_rail_wishlisted__2023_mahindra_xuv300",
+          "type": "carCard",
+          "image": { "url": "https://placehold.co/600x400", "aspect": 1.5 },
+          "overlayBadge": { "text": "Owned stock", "variant": "accent" },
+          "favorite": { "selected": true, "action": { "type": "toggle", "target": "car_10021" } },
+          "title": "2023 Mahindra XUV300",
+          "subtitle": "W6 1.2 PETROL",
+          "specs": ["25,335 km", "Petrol", "Manual", "MH28"],
+          "price": "\\u20b96.60 lakh",
+          "priceSuffix": "EMI \\u20b911,651/m*",
+          "priceNote": { "text": "+other charges", "action": { "type": "openSheet", "target": "price_breakup" } },
+          "trustBadges": [{ "text": "Zero Worry Max", "icon": "shield", "variant": "accent" }],
+          "action": { "type": "navigate", "target": "car_detail", "params": { "carId": "car_10021" } }
+        }
+        """)
+        #expect(node.title == "2023 Mahindra XUV300")
+        #expect(node.specs == ["25,335 km", "Petrol", "Manual", "MH28"])
+        #expect(node.favorite?.selected == true)
+        #expect(node.trustBadges.count == 1)
+    }
+
+    @Test
+    func absentSpecsAndTrustBadgesDefaultToEmpty() throws {
+        let node = try decode(CarCardNode.self, """
+        {
+          "id": "x", "type": "carCard",
+          "image": { "url": "https://placehold.co/1x1" },
+          "title": "t", "price": "p",
+          "action": { "type": "navigate", "target": "y" }
+        }
+        """)
+        #expect(node.specs.isEmpty)
+        #expect(node.trustBadges.isEmpty)
+    }
+
+    // mirrors sdui-config/payloads/home_all_fallback_demo.json: demo_carcard_missing_price
+    @Test
+    func missingMandatoryPriceThrows() {
+        #expect(throws: (any Error).self) {
+            try decode(CarCardNode.self, """
+            {
+              "id": "demo_carcard_missing_price", "type": "carCard",
+              "image": { "url": "https://placehold.co/1x1" },
+              "title": "t",
+              "action": { "type": "navigate", "target": "y" }
+            }
+            """)
+        }
+    }
+}
+
+struct PlaceCardNodeDecodingTests {
+
+    // sdui-config/payloads/home_all.json: showrooms_rail__right_parking_mlcp
+    @Test
+    func decodesHappyPathWithMultipleImagesAndTwoButtons() throws {
+        let node = try decode(PlaceCardNode.self, """
+        {
+          "id": "showrooms_rail__right_parking_mlcp",
+          "type": "placeCard",
+          "images": [
+            { "url": "https://placehold.co/900x600a" },
+            { "url": "https://placehold.co/900x600b" }
+          ],
+          "overlayBadge": { "text": "90+ cars" },
+          "title": "Right Parking MLCP",
+          "subtitle": "Gandhi Nagar, Bengaluru",
+          "linkRow": {
+            "text": "2.7 km from MG Road | Get directions",
+            "trailingIcon": "directions",
+            "action": { "type": "openMaps", "target": "showroom_101" }
+          },
+          "status": { "text": "Open", "detail": "Closes at 08:00 PM", "variant": "success" },
+          "buttons": [
+            { "text": "Call us now", "variant": "outline", "leadingIcon": "phone", "action": { "type": "call", "target": "x" } },
+            { "text": "View showroom", "action": { "type": "navigate", "target": "showroom_detail" } }
+          ]
+        }
+        """)
+        #expect(node.images.count == 2)
+        #expect(node.buttons.count == 2)
+        #expect(node.linkRow?.trailingIcon == IconToken.directions)
+        #expect(node.status?.variant == .success)
+    }
+
+    @Test
+    func singleImageDecodesFine() throws {
+        let node = try decode(PlaceCardNode.self, """
+        { "id": "x", "type": "placeCard", "images": [{ "url": "https://placehold.co/1x1" }], "title": "t" }
+        """)
+        #expect(node.images.count == 1)
+        #expect(node.buttons.isEmpty)
+    }
+
+    @Test
+    func emptyImagesArrayThrows() {
+        // COMPONENTS.md §8: images min 1 — resolved as malformed, not just "absent."
+        #expect(throws: (any Error).self) {
+            try decode(PlaceCardNode.self, """
+            { "id": "x", "type": "placeCard", "images": [], "title": "t" }
+            """)
+        }
+    }
+
+    @Test
+    func moreThanTwoButtonsThrows() {
+        #expect(throws: (any Error).self) {
+            try decode(PlaceCardNode.self, """
+            {
+              "id": "x", "type": "placeCard",
+              "images": [{ "url": "https://placehold.co/1x1" }],
+              "title": "t",
+              "buttons": [
+                { "text": "a", "action": { "type": "navigate", "target": "x" } },
+                { "text": "b", "action": { "type": "navigate", "target": "x" } },
+                { "text": "c", "action": { "type": "navigate", "target": "x" } }
+              ]
+            }
+            """)
+        }
+    }
+}
+
+struct PromoCardNodeDecodingTests {
+
+    // sdui-config/payloads/home_all.json: orbit_promo__add_your_car_to_orbit
+    @Test
+    func decodesHappyPath() throws {
+        let node = try decode(PromoCardNode.self, """
+        {
+          "id": "orbit_promo__add_your_car_to_orbit",
+          "type": "promoCard",
+          "title": "Add your car to Orbit",
+          "subtitle": "Enjoy 3 months of music streaming free",
+          "image": { "url": "https://placehold.co/720x400", "aspect": 1.8 },
+          "logos": [{ "url": "https://placehold.co/160x40a" }, { "url": "https://placehold.co/160x40b" }],
+          "button": { "text": "Add car now", "action": { "type": "openSheet", "target": "add_vehicle" } },
+          "style": { "background": "tile.dark", "foreground": "text.onDark", "cornerRadius": "lg" }
+        }
+        """)
+        #expect(node.title == "Add your car to Orbit")
+        #expect(node.logos.count == 2)
+        #expect(node.button?.text == "Add car now")
+        #expect(node.style?.background == Palette.tileDark)
+    }
+
+    @Test
+    func absentLogosDefaultsToEmptyAndOnlyTitleIsMandatory() throws {
+        let node = try decode(PromoCardNode.self, """
+        { "id": "x", "type": "promoCard", "title": "t" }
+        """)
+        #expect(node.logos.isEmpty)
+        #expect(node.image == nil)
+        #expect(node.button == nil)
+    }
+}
