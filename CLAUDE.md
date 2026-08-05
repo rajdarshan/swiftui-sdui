@@ -132,13 +132,19 @@ approved before any SDUI work begins.
 
 ---
 
-## Commits
+## Git Commit Guidelines
 
-Conventional commits. `commitlint` enforced via husky.
-
-Types: `feat` `fix` `refactor` `test` `docs` `chore` `perf` `build` `ci`
-
-Scopes: standard, plus `ios` · `sdui-config` · `perf` · `docs`
+- **Format:** Follow strict Conventional Commits specification.
+- **Structure:** Use `<type>(<scope>): <short summary>` in lowercase. No
+  period at the end.
+- **Allowed Types:** feat, fix, docs, style, refactor, perf, test, build, ci,
+  chore, revert.
+- **Allowed Scopes:** standard, plus `ios` · `sdui-config` · `perf` · `docs`
+- **Length:** The header must be minimal, concise, and under 70 characters.
+- **Body/Footer:** Omit the body and footer unless explicitly asked. Never
+  include AI co-author or attribution trailers.
+- **Tone:** Use imperative, present tense (e.g., "fix typo", not "fixed
+  typo" or "fixes typo").
 
 ```
 feat(ios): add carCard leaf view with spec chip row
@@ -185,6 +191,7 @@ Repository hygiene:
   into the repo, the README, or an asset catalogue. It is local-only.
 - Never add a real company name, product name, or named individual to payload
   sample data, documentation, or code.
+- Never include AI attribution, co-author trailers, or emoji in commits.
 
 Payloads:
 - No `null` values. Omit absent keys.
