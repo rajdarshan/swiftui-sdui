@@ -11,11 +11,9 @@
 //  dispatch is a plain `switch` on the decoded type string
 //  (Decoding/SectionDecoding.swift), functionally a lookup either way.
 //
-//  The `.header` case is added in a later commit once HeaderSectionNode
-//  exists — additive, not a redesign.
-//
 
 nonisolated enum SectionNode: Identifiable {
+    case header(HeaderSectionNode)
     case rail(RailNode)
     case grid(GridNode)
     case carousel(CarouselNode)
@@ -24,6 +22,7 @@ nonisolated enum SectionNode: Identifiable {
 
     var id: String {
         switch self {
+        case .header(let node): node.id
         case .rail(let node): node.id
         case .grid(let node): node.id
         case .carousel(let node): node.id

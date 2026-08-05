@@ -9,9 +9,6 @@
 //  level with no fallback field. A known type with a missing mandatory
 //  prop fails the same way, via the same `try?`.
 //
-//  The `"header"` case is added in a later commit once HeaderSectionNode
-//  exists — additive, not a redesign.
-//
 
 private struct RawSectionEnvelope: Decodable {
     let type: String
@@ -20,6 +17,7 @@ private struct RawSectionEnvelope: Decodable {
 nonisolated func decodeSection(from decoder: Decoder) -> SectionNode? {
     guard let raw = try? RawSectionEnvelope(from: decoder) else { return nil }
     switch raw.type {
+    case "header": return (try? HeaderSectionNode(from: decoder)).map(SectionNode.header)
     case "rail": return (try? RailNode(from: decoder)).map(SectionNode.rail)
     case "grid": return (try? GridNode(from: decoder)).map(SectionNode.grid)
     case "carousel": return (try? CarouselNode(from: decoder)).map(SectionNode.carousel)

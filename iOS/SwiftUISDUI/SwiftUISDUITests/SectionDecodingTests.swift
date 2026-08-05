@@ -164,4 +164,68 @@ struct DecodeSectionTests {
         """)
         #expect(decodeSection(from: decoder) == nil)
     }
+
+    // sdui-config/payloads/home_all.json: app_header, trimmed to 2 tabs
+    @Test
+    func headerDecodesMandatoryAndOptionalFields() throws {
+        let decoder = try rawDecoder("""
+        {
+          "id": "app_header", "type": "header",
+          "location": { "text": "Bangalore", "action": { "type": "openSheet", "target": "city_picker" } },
+          "avatar": { "image": { "url": "https://placehold.co/96x96" }, "action": { "type": "navigate", "target": "profile" } },
+          "search": {
+            "placeholders": ["Search Creta", "Search Swift"],
+            "rotateMs": 3000,
+            "action": { "type": "search", "target": "search" }
+          },
+          "tabs": {
+            "selectedId": "all",
+            "items": [
+              { "id": "all", "label": "All", "icon": "grid", "action": { "type": "navigate", "target": "home_all" } },
+              { "id": "loans", "label": "Loans", "icon": "money", "action": { "type": "navigate", "target": "home_loans" } }
+            ]
+          }
+        }
+        """)
+        guard case .header(let node) = decodeSection(from: decoder) else {
+            Issue.record("expected .header")
+            return
+        }
+        #expect(node.search.placeholders == ["Search Creta", "Search Swift"])
+        #expect(node.search.rotateMs == 3000)
+        #expect(node.tabs.items.count == 2)
+        #expect(node.tabs.items.first?.icon == IconToken.grid)
+        #expect(node.tabs.selectedId == "all")
+        #expect(node.location?.text == "Bangalore")
+        #expect(node.avatar?.action.target == "profile")
+    }
+
+    @Test
+    func headerAbsentLocationAndAvatarAreNil() throws {
+        let decoder = try rawDecoder("""
+        {
+          "id": "x", "type": "header",
+          "search": { "placeholders": [], "action": { "type": "search", "target": "search" } },
+          "tabs": { "selectedId": "all", "items": [] }
+        }
+        """)
+        guard case .header(let node) = decodeSection(from: decoder) else {
+            Issue.record("expected .header")
+            return
+        }
+        #expect(node.location == nil)
+        #expect(node.avatar == nil)
+        #expect(node.search.rotateMs == nil)
+    }
+
+    @Test
+    func headerMissingMandatoryTabsReturnsNil() throws {
+        let decoder = try rawDecoder("""
+        {
+          "id": "x", "type": "header",
+          "search": { "placeholders": [], "action": { "type": "search", "target": "search" } }
+        }
+        """)
+        #expect(decodeSection(from: decoder) == nil)
+    }
 }
