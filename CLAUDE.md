@@ -124,7 +124,7 @@ Each stage ends with a spec-compliance run and a human review gate.
 | 2 | Leaf components + static screen, full 14-section parity | **Launches in simulator and is visually reviewed** |
 | 3 | Node models, decoder, fallback resolution | Decoder + fallback unit tests pass |
 | 4 | Registry, `PageStore`, `SDUIPageView`, `ActionHandler`, `DebugActionScreen` | SDUI screen renders `home_all.json`; fallback demo payload behaves per spec |
-| 5 | `ScreenPerformanceTracker`, XCUITest harness, `PERF.md` | Harness produces a metrics JSON |
+| 5 | `ScreenPerformanceTracker`, XCUITest harness, `PerformanceMetric.md` | Harness produces a metrics JSON |
 | 6 | Supabase `PayloadSource`, GitHub Actions | Payload change reaches the app after relaunch |
 
 **Stage 2 is a hard gate.** The static screen must launch and be visually

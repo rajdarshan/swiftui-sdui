@@ -34,6 +34,7 @@ xcodebuild test \
   -scheme SwiftUISDUI \
   -configuration "$CONFIGURATION" \
   -destination "$DESTINATION" \
+  -allowProvisioningUpdates \
   -only-testing:SwiftUISDUIUITests/ScreenPerformanceHarnessTests \
   -resultBundlePath "$RESULT_BUNDLE" \
   | xcbeautify
