@@ -13,19 +13,28 @@ import SwiftUI
 
 struct AppRootView: View {
     private let launchFlow: LaunchFlow?
-    private let performanceMarks: PerformanceMarks
+    // @State, not `let`: init can run more than once as SwiftUI reconstructs
+    // this struct value (observed under XCUITest's launch/scene lifecycle
+    // churn even when body doesn't). @State's initialValue is only honored
+    // the first time for a given persistent view identity, so this survives
+    // reconstruction the same way SDUIRootView's `_store = State(initialValue:
+    // PageStore(...))` does — a plain `let` here silently orphaned marks
+    // recorded by an earlier PerformanceMarks instance.
+    @State private var performanceMarks: PerformanceMarks
 
     init(environment: [String: String] = ProcessInfo.processInfo.environment) {
         let launchFlow = LaunchFlow.resolve(from: environment)
         self.launchFlow = launchFlow
+        let marks: PerformanceMarks
         switch launchFlow {
         case .staticHome:
-            performanceMarks = .make(from: environment, variant: "static", pageId: nil)
+            marks = .make(from: environment, variant: "static", pageId: nil)
         case .sdui(let pageId):
-            performanceMarks = .make(from: environment, variant: "sdui", pageId: pageId)
+            marks = .make(from: environment, variant: "sdui", pageId: pageId)
         case nil:
-            performanceMarks = .inactive
+            marks = .inactive
         }
+        _performanceMarks = State(initialValue: marks)
     }
 
     var body: some View {
