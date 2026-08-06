@@ -26,7 +26,7 @@ before adding any component, prop, container, token, or action.
 
 **walkthrough Demo:** `demo/demo.mp4` — a walkthrough of the main view, action handling,
 a JSON payload change reflected live in the UI, and fallback handling. Download from git to check it.
-## Demo Gif
+## App Quick Demo
 **Simulator Recorder Preview**
 
 <img width="295" height="640" alt="SwiftUI-SDUI_app_demo" src="https://github.com/user-attachments/assets/70d23865-87e1-4fc3-b28e-191426e0e52a" />
