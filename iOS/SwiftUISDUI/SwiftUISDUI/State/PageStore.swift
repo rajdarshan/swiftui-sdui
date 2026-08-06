@@ -37,15 +37,26 @@ final class PageStore {
     var filterSelections: [String: String] = [:]
     private(set) var toggledIds: Set<String> = []
 
-    init(pageId: String, source: PayloadSource) {
+    /// T0 (design_spec.md §3.4, "page container init") — captured by the
+    /// caller before this instance exists, since PageStore's construction
+    /// itself is the container-init moment. Only present when the perf
+    /// harness is active (PerformanceMarks.enabled).
+    let t0: ContinuousClock.Instant?
+    /// T1 ("decoder returns") — stamped as the first statement after
+    /// `load()`'s `await` resumes, before any other work.
+    private(set) var t1: ContinuousClock.Instant?
+
+    init(pageId: String, source: PayloadSource, t0: ContinuousClock.Instant? = nil) {
         self.pageId = pageId
         self.source = source
+        self.t0 = t0
     }
 
     func load() async {
         loadState = .loading
         do {
             let envelope = try await source.loadPage(pageId: pageId)
+            if t0 != nil { t1 = ContinuousClock.now }
             sections = envelope.sections
             loadState = .loaded
         } catch {
