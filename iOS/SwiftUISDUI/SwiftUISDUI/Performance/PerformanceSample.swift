@@ -9,6 +9,17 @@
 //  build-config fields below are wall-clock metadata for tagging and
 //  comparing runs, not part of that measurement.
 //
+//  T3 is followed by a single harness-driven scroll pass to the bottom of
+//  the page, which produces four more marks, all optional because they can
+//  only be known once that pass completes: TTI (first processed scroll),
+//  per-section build durations, the last section's first commit (closes
+//  fullPageWallMs), and scroll-perf totals over that same pass
+//  (Performance/ScrollJankProbe.swift). `isComplete` is true once all of
+//  them have landed. fullPageWallMs necessarily includes scroll duration —
+//  it is not a pure render metric — and the scroll-perf numbers describe
+//  the harness's own swipe cadence, not a human's; both are comparable only
+//  across runs driven identically.
+//
 
 import Foundation
 import UIKit
@@ -27,6 +38,16 @@ struct PerformanceSample: Codable, Equatable, Sendable {
     let decodeMs: Double
     let buildMs: Double
     let ttfrMs: Double
+    let ttiMs: Double?
+    let fullPageWallMs: Double?
+    let sectionBuildMs: [Double]
+    let fullPageBuildMs: Double?
+    let scrollFrameCount: Int?
+    let scrollDroppedFrames: Int?
+    let scrollDroppedPct: Double?
+    let scrollWorstFrameMs: Double?
+    let scrollHitchMs: Double?
+    let isComplete: Bool
 
     @MainActor
     init(
@@ -36,6 +57,25 @@ struct PerformanceSample: Codable, Equatable, Sendable {
         t1: ContinuousClock.Instant,
         t2: ContinuousClock.Instant,
         t3: ContinuousClock.Instant
+    ) {
+        self.init(
+            variant: variant, pageId: pageId, t0: t0, t1: t1, t2: t2, t3: t3,
+            tti: nil, lastSectionCommit: nil, sectionBuildMs: [], scrollStats: nil
+        )
+    }
+
+    @MainActor
+    init(
+        variant: String,
+        pageId: String?,
+        t0: ContinuousClock.Instant,
+        t1: ContinuousClock.Instant,
+        t2: ContinuousClock.Instant,
+        t3: ContinuousClock.Instant,
+        tti: ContinuousClock.Instant?,
+        lastSectionCommit: ContinuousClock.Instant?,
+        sectionBuildMs: [Double],
+        scrollStats: ScrollFrameStats?
     ) {
         self.variant = variant
         self.pageId = pageId
@@ -51,6 +91,18 @@ struct PerformanceSample: Codable, Equatable, Sendable {
         decodeMs = (t1 - t0).milliseconds
         buildMs = (t2 - t1).milliseconds
         ttfrMs = (t3 - t0).milliseconds
+        ttiMs = tti.map { ($0 - t0).milliseconds }
+        fullPageWallMs = lastSectionCommit.map { ($0 - t0).milliseconds }
+        self.sectionBuildMs = sectionBuildMs
+        fullPageBuildMs = sectionBuildMs.isEmpty ? nil : sectionBuildMs.reduce(0, +)
+        scrollFrameCount = scrollStats?.frameCount
+        scrollDroppedFrames = scrollStats?.droppedFrames
+        scrollDroppedPct = scrollStats.flatMap { stats in
+            stats.frameCount > 0 ? (Double(stats.droppedFrames) / Double(stats.frameCount)) * 100 : nil
+        }
+        scrollWorstFrameMs = scrollStats?.worstFrameMs
+        scrollHitchMs = scrollStats?.hitchMs
+        isComplete = tti != nil && lastSectionCommit != nil && scrollStats != nil
     }
 }
 
