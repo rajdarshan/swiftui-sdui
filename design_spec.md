@@ -236,6 +236,47 @@ testable with no running app.
 - Output: local JSON in the XCUITest bundle output directory. Supabase upload is
   optional dashboarding, not part of measurement.
 
+#### Post-T3 marks
+
+A single harness-driven scroll pass to the bottom of the page — not a second
+launch, not a second scroll — produces four more marks, all optional until
+that pass completes:
+
+- **TTI** — first scroll gesture actually processed (`onScrollGeometryChange`
+  firing with a changed offset), reported as `ttiMs` (TTI − T0). Includes
+  event-injection latency from whatever drives the gesture (XCUITest in the
+  harness); not a pure app-side number.
+- **Per-section build** — every `SectionContainer` times its own `content()`
+  build and reports it by position, giving `sectionBuildMs` (ordered array)
+  and `fullPageBuildMs` (their sum). Both variants report 13 entries for
+  `home_all.json` (rows 2–14 of §6's table; the header section is excluded,
+  rendered separately as the pinned overlay).
+- **Full-page wall time** — the last section's first commit, reported as
+  `fullPageWallMs` (that instant − T0). Necessarily includes scroll duration
+  — both screens use `LazyVStack`, so sections past the fold don't build
+  until scrolled into view — and is therefore comparable only across runs
+  driven with the same scroll cadence, not as an absolute render number.
+- **Scroll perf** — a `CADisplayLink`-driven frame monitor running for the
+  same window (TTI → last-section commit), reporting `scrollFrameCount`,
+  `scrollDroppedFrames`, `scrollDroppedPct`, `scrollWorstFrameMs`,
+  `scrollHitchMs`. A frame counts as dropped when its actual duration
+  exceeds *its own* `targetTimestamp − timestamp` budget by more than 50% —
+  read per-frame from `CADisplayLink`, never a fixed 60Hz constant, since
+  these are ProMotion, variable-refresh-rate displays. The display link
+  itself costs main-thread time and so slightly perturbs the frames it
+  samples; this is a harness-run cost only (gated behind
+  `SDUI_PERF_TRACKING`).
+
+`isComplete` is `true` once all four are present. `completedSampleJSON` is
+republished each time any mark lands, from T3 onward — the harness waits on
+`isComplete`, not merely on the JSON existing.
+
+**Not built:** a JSON-fetch-vs-parse-vs-view-build split finer than
+`decodeMs`/`buildMs`. `BundlePayloadSource.loadPage` runs one `JSONDecoder`
+pass and node mapping happens inside each node's own `init(from:)`
+(`SectionDecoding.swift`) — parse and map are interleaved with no seam to
+split on. `decodeMs` vs `buildMs` is the split this architecture supports.
+
 ---
 
 ## 4. SwiftUI implementation notes
