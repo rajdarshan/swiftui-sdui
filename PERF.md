@@ -84,17 +84,21 @@ processes aren't sandboxed the way on-device apps are.
 | `t1OffsetMs`…`t3OffsetMs` | each mark's offset from T0, in ms |
 | `decodeMs`, `buildMs`, `ttfrMs` | derived metrics, in ms |
 
-## Known issues
+## Debugging a failed run
 
-`ScreenPerformanceHarnessTests` currently fails: the perf sample never
-lands within the harness's wait window when the app is launched via
-`XCUIApplication`, even though the exact same launch-environment flags,
-launched directly via `xcrun simctl launch`, complete the full T0–T3
-pipeline in well under a second. The `SDUI_PERF_TRACKING` flag has been
-confirmed to reach the app process correctly in both cases. Root cause is
-still under investigation — the difference appears specific to something
-about XCUITest's launch/accessibility-observation path rather than the
-marks-capture logic itself. Not yet resolved.
+UI tests run on a *cloned* simulator that is destroyed when the run ends,
+so `NSLog`/`os_log` output from the app cannot be read back afterwards.
+The probe's own label is the diagnostic channel instead: until T3 lands it
+publishes `PERF_PENDING enabled=… variant=… t0=… t1=… t2=…`, and the
+harness's failure message quotes it. `enabled=false` means
+`SDUI_PERF_TRACKING` never reached `PerformanceMarks.make`; a specific
+`t*=false` names the mark that was not captured.
+
+Do not apply `.accessibilityElement(children: .ignore)` to the probe
+`Text`. It substitutes a fresh accessibility element and discards the
+`Text`'s own accessibility content, publishing an empty label — the
+harness then finds the element but never sees a payload. The label and
+value are set explicitly for this reason.
 
 ## Scope note
 

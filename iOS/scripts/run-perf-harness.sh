@@ -41,8 +41,10 @@ xcodebuild test \
 xcrun xcresulttool export attachments --path "$RESULT_BUNDLE" --output-path "$ATTACHMENTS_DIR"
 
 for name in static-home-perf.json sdui-home_all-perf.json; do
-  exported_path=$(jq -r --arg name "$name" \
-    '.[] | .attachments[] | select(.suggestedHumanReadableName == $name) | .exportedFileName' \
+  # xcresulttool suffixes the attachment's name with an index and a UUID
+  # (static-home-perf_0_<UUID>.json), so match on the stem, not equality.
+  exported_path=$(jq -r --arg stem "${name%.json}" \
+    '.[] | .attachments[] | select(.suggestedHumanReadableName | startswith($stem)) | .exportedFileName' \
     "$ATTACHMENTS_DIR/manifest.json" | head -n 1)
   if [ -z "$exported_path" ] || [ "$exported_path" = "null" ]; then
     echo "warning: no attachment named $name found in result bundle" >&2
