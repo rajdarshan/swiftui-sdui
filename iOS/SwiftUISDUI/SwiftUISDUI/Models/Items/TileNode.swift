@@ -14,4 +14,5 @@ nonisolated struct TileNode: ItemNode, Decodable, Equatable {
     let image: ImageRef?
     let style: Style?
     let action: Action
+    let imageName: String?
 }

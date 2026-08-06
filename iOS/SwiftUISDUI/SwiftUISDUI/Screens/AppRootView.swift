@@ -45,6 +45,7 @@ struct AppRootView: View {
                     .environment(\.useImageAsset, true)
             case .sdui(let pageId):
                 SDUIRootView(pageId: pageId)
+                    .environment(\.useImageAsset, true)
             case nil:
                 DebugFlowPicker()
             }

@@ -134,7 +134,8 @@ struct SDUIPageView: View {
         case .rail(let rail):
             SectionContainer(header: rail.header, style: rail.style, perfIndex: index, perfSectionCount: count) {
                 filterableContent(filter: rail.filter, plainItems: rail.items, sectionId: rail.id) { items in
-                    RailView(items: wrap(items), itemWidth: rail.itemWidth, snap: rail.snap) { wrapped in itemView(for: wrapped.node) }
+                // swiftlint:disable:next line_length
+                    RailView(items: wrap(items), itemWidth: rail.itemWidth, snap: rail.snap, itemHeight: rail.itemWidth.itemHeight) { wrapped in itemView(for: wrapped.node) }
                 }
             }
         case .grid(let grid):

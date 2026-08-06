@@ -138,7 +138,8 @@
             "params": {
               "filter": "all"
             }
-          }
+          },
+          "imageName": "buy_used"
         },
         {
           "id": "buy_car_rail__budget_used_cars",
@@ -159,7 +160,8 @@
             "params": {
               "filter": "budget"
             }
-          }
+          },
+          "imageName": "buy_budget"
         },
         {
           "id": "buy_car_rail__premium_used_cars",
@@ -180,7 +182,8 @@
             "params": {
               "filter": "premium"
             }
-          }
+          },
+          "imageName": "buy_premium"
         },
         {
           "id": "buy_car_rail__new_cars",
@@ -198,7 +201,8 @@
           "action": {
             "type": "navigate",
             "target": "new_cars"
-          }
+          },
+          "imageName": "buy_new"
         },
         {
           "id": "buy_car_rail__cars_under_5_lakh",
@@ -219,7 +223,8 @@
             "params": {
               "maxPrice": "500000"
             }
-          }
+          },
+          "imageName": "buy_newbike"
         }
       ]
     },
@@ -247,7 +252,8 @@
           "action": {
             "type": "navigate",
             "target": "sell_flow"
-          }
+          },
+          "imageName": "sell_car"
         },
         {
           "id": "sell_car_rail__check_car_valuation",
@@ -265,7 +271,8 @@
           "action": {
             "type": "navigate",
             "target": "valuation"
-          }
+          },
+          "imageName": "sell_valuation"
         },
         {
           "id": "sell_car_rail__scrap_your_car",
@@ -283,7 +290,8 @@
           "action": {
             "type": "navigate",
             "target": "scrap"
-          }
+          },
+          "imageName": "sellcar_scrap"
         },
         {
           "id": "sell_car_rail__exchange_car",
@@ -301,7 +309,8 @@
           "action": {
             "type": "navigate",
             "target": "exchange"
-          }
+          },
+          "imageName": "sell_exchange"
         }
       ]
     },
@@ -328,7 +337,8 @@
             "params": {
               "product": "used_car"
             }
-          }
+          },
+          "imageName": "getloan_usedcar"
         },
         {
           "id": "loans_rail__loan_against_car",
@@ -345,7 +355,8 @@
             "params": {
               "product": "against_car"
             }
-          }
+          },
+          "imageName": "getloan_carLoan"
         },
         {
           "id": "loans_rail__personal_loan",
@@ -362,7 +373,8 @@
             "params": {
               "product": "personal"
             }
-          }
+          },
+          "imageName": "getloan_loan"
         },
         {
           "id": "loans_rail__credit_score",
@@ -376,7 +388,8 @@
           "action": {
             "type": "navigate",
             "target": "credit_score"
-          }
+          },
+          "imageName": "getloan_creditScore"
         }
       ]
     },
@@ -405,7 +418,8 @@
           "action": {
             "type": "navigate",
             "target": "pdi"
-          }
+          },
+          "imageName": "carcheck_new"
         },
         {
           "id": "car_check_grid__used_car_check",
@@ -424,7 +438,8 @@
           "action": {
             "type": "navigate",
             "target": "used_car_check"
-          }
+          },
+          "imageName": "carcheck_used"
         },
         {
           "id": "car_check_grid__vehicle_history",
@@ -443,7 +458,8 @@
           "action": {
             "type": "navigate",
             "target": "vehicle_history"
-          }
+          },
+          "imageName": "carcheck_history"
         },
         {
           "id": "car_check_grid__check_challan",
@@ -462,7 +478,8 @@
           "action": {
             "type": "navigate",
             "target": "check_challan"
-          }
+          },
+          "imageName": "carcheck_challan"
         },
         {
           "id": "car_check_grid__check_car_insurance",
@@ -481,7 +498,8 @@
           "action": {
             "type": "navigate",
             "target": "check_insurance"
-          }
+          },
+          "imageName": "carcheck_insurance"
         },
         {
           "id": "car_check_grid__odometer_tampering",
@@ -500,7 +518,8 @@
           "action": {
             "type": "navigate",
             "target": "odometer_check"
-          }
+          },
+          "imageName": "carcheck_odometer"
         }
       ]
     },
@@ -582,7 +601,8 @@
                   "params": {
                     "carId": "car_10021"
                   }
-                }
+                },
+                "imageName": "car_1"
               },
               {
                 "id": "used_cars_rail_wishlisted__2012_volkswagen_vento",
@@ -627,7 +647,8 @@
                   "params": {
                     "carId": "car_10022"
                   }
-                }
+                },
+                "imageName": "car_2"
               },
               {
                 "id": "used_cars_rail_wishlisted__2015_maruti_baleno",
@@ -685,7 +706,8 @@
                   "params": {
                     "carId": "car_10023"
                   }
-                }
+                },
+                "imageName": "car_3"
               }
             ]
           },
@@ -749,7 +771,8 @@
                   "params": {
                     "carId": "car_10031"
                   }
-                }
+                },
+                "imageName": "car_4"
               },
               {
                 "id": "used_cars_rail_hot_deals__2021_hyundai_i20",
@@ -802,7 +825,8 @@
                   "params": {
                     "carId": "car_10032"
                   }
-                }
+                },
+                "imageName": "car_5"
               },
               {
                 "id": "used_cars_rail_hot_deals__2020_tata_nexon",
@@ -860,7 +884,8 @@
                   "params": {
                     "carId": "car_10033"
                   }
-                }
+                },
+                "imageName": "car_6"
               }
             ]
           }
@@ -902,7 +927,8 @@
           "action": {
             "type": "navigate",
             "target": "pay_challan"
-          }
+          },
+          "imageName": "manage_challan"
         },
         {
           "id": "manage_vehicle_grid__recharge_fastag",
@@ -920,7 +946,8 @@
           "action": {
             "type": "navigate",
             "target": "fastag"
-          }
+          },
+          "imageName": "manage_recharge"
         },
         {
           "id": "manage_vehicle_grid__get_insurance",
@@ -938,7 +965,8 @@
           "action": {
             "type": "navigate",
             "target": "get_insurance"
-          }
+          },
+          "imageName": "manage_insurance"
         },
         {
           "id": "manage_vehicle_grid__cash_against_car",
@@ -956,7 +984,8 @@
           "action": {
             "type": "navigate",
             "target": "cash_against_car"
-          }
+          },
+          "imageName": "manage_cash"
         },
         {
           "id": "manage_vehicle_grid__road_side_assistance",
@@ -974,7 +1003,8 @@
           "action": {
             "type": "navigate",
             "target": "rsa"
-          }
+          },
+          "imageName": "manange_rsa"
         },
         {
           "id": "manage_vehicle_grid__get_warranty",
@@ -992,7 +1022,8 @@
           "action": {
             "type": "navigate",
             "target": "get_warranty"
-          }
+          },
+          "imageName": "manage_warranty"
         }
       ]
     },
@@ -1002,33 +1033,19 @@
       "item": {
         "id": "orbit_promo__add_your_car_to_orbit",
         "type": "promoCard",
-        "title": "Add your car to Orbit",
-        "subtitle": "Enjoy 3 months of music streaming free",
+        "title": ".",
+        "subtitle": "-",
         "image": {
           "url": "https://placehold.co/720x400/1B2B22/FFFFFF?text=Orbit",
           "aspect": 1.8
         },
-        "logos": [
-          {
-            "url": "https://placehold.co/160x40/1B2B22/FFFFFF?text=Brand"
-          },
-          {
-            "url": "https://placehold.co/160x40/1B2B22/1DB954?text=Partner"
-          }
-        ],
-        "button": {
-          "text": "Add car now",
-          "variant": "filled",
-          "action": {
-            "type": "openSheet",
-            "target": "add_vehicle"
-          }
-        },
+        "logos": [ ],
         "style": {
           "background": "tile.dark",
           "foreground": "text.onDark",
           "cornerRadius": "lg"
-        }
+        },
+        "imageName": "banner_spot"
       }
     },
     {
@@ -1096,7 +1113,8 @@
                 }
               }
             }
-          ]
+          ],
+          "imageNames": ["showroom_1", "showroom_2"]
         },
         {
           "id": "showrooms_rail__nexus_koramangala",
@@ -1151,7 +1169,8 @@
                 }
               }
             }
-          ]
+          ],
+          "imageNames": ["showroom_3", "showroom_4"]
         },
         {
           "id": "showrooms_rail__whitefield_hub",
@@ -1206,7 +1225,8 @@
                 }
               }
             }
-          ]
+          ],
+          "imageNames": ["showroom_5", "showroom_6"]
         }
       ]
     },
@@ -1246,7 +1266,8 @@
             "params": {
               "modelId": "kia_seltos"
             }
-          }
+          },
+          "imageName": "trending_1"
         },
         {
           "id": "trending_new_cars_rail__sonet",
@@ -1268,7 +1289,8 @@
             "params": {
               "modelId": "kia_sonet"
             }
-          }
+          },
+          "imageName": "trending_2"
         },
         {
           "id": "trending_new_cars_rail__syros",
@@ -1290,7 +1312,8 @@
             "params": {
               "modelId": "kia_syros"
             }
-          }
+          },
+          "imageName": "trending_3"
         },
         {
           "id": "trending_new_cars_rail__carens",
@@ -1312,7 +1335,8 @@
             "params": {
               "modelId": "kia_carens"
             }
-          }
+          },
+          "imageName": "trending_4"
         }
       ]
     },
@@ -1340,7 +1364,8 @@
             "type": "navigate",
             "target": "match_quiz"
           }
-        }
+        },
+        "imageName": "banner_hero"
       }
     },
     {
@@ -1353,68 +1378,47 @@
         {
           "id": "value_prop_carousel__india_s_first_a_warranty_tha",
           "type": "promoCard",
-          "title": "India's first, a warranty that lasts as long as your car",
+          "title": "-",
           "image": {
             "url": "https://placehold.co/720x400/3B2FCF/FFFFFF?text=Lifetime+warranty",
             "aspect": 1.8
-          },
-          "button": {
-            "text": "Know more",
-            "variant": "filled",
-            "action": {
-              "type": "navigate",
-              "target": "lifetime_warranty"
-            }
           },
           "style": {
             "background": "brand.primary",
             "foreground": "text.onDark",
             "cornerRadius": "lg"
-          }
+          },
+          "imageName": "Carousel_1"
         },
         {
           "id": "value_prop_carousel__30_day_return_guarantee_on_e",
           "type": "promoCard",
-          "title": "30-day return guarantee on every car",
+          "title": "-",
           "image": {
             "url": "https://placehold.co/720x400/C2410C/FFFFFF?text=30+day+return",
             "aspect": 1.8
-          },
-          "button": {
-            "text": "Know more",
-            "variant": "filled",
-            "action": {
-              "type": "navigate",
-              "target": "return_policy"
-            }
           },
           "style": {
             "background": "tile.orange",
             "foreground": "text.onDark",
             "cornerRadius": "lg"
-          }
+          },
+          "imageName": "Carousel_2"
         },
         {
           "id": "value_prop_carousel__3_free_services_with_every_c",
           "type": "promoCard",
-          "title": "3 free services with every car you buy",
+          "title": "3",
           "image": {
             "url": "https://placehold.co/720x400/15803D/FFFFFF?text=Free+services",
             "aspect": 1.8
-          },
-          "button": {
-            "text": "Know more",
-            "variant": "filled",
-            "action": {
-              "type": "navigate",
-              "target": "free_services"
-            }
           },
           "style": {
             "background": "tile.green",
             "foreground": "text.onDark",
             "cornerRadius": "lg"
-          }
+          },
+          "imageName": "Carousel_3"
         }
       ]
     },
@@ -1425,25 +1429,18 @@
         "id": "crashfree_promo__control_judgment_patience",
         "type": "promoCard",
         "eyebrow": "SAFER ROADS",
-        "title": "Control. Judgment. Patience.",
+        "title": ".",
         "subtitle": "Small habits, safer journeys",
         "image": {
           "url": "https://placehold.co/600x500/5B4FE8/FFFFFF?text=Crashfree",
           "aspect": 1.2
         },
-        "button": {
-          "text": "Explore now",
-          "variant": "filled",
-          "action": {
-            "type": "navigate",
-            "target": "crashfree_india"
-          }
-        },
         "style": {
           "background": "brand.primaryLight",
           "foreground": "text.onDark",
           "cornerRadius": "lg"
-        }
+        },
+        "imageName": "Banner_Dhoni"
       }
     },
     {

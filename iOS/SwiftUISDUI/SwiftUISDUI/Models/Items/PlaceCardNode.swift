@@ -26,9 +26,10 @@ nonisolated struct PlaceCardNode: ItemNode, Decodable, Equatable {
     let linkRow: PlaceCardLinkRow?
     let status: PlaceCardStatus?
     let buttons: [ButtonSpec]
+    let imageNames: [String]
 
     private enum CodingKeys: String, CodingKey {
-        case id, type, images, title, overlayBadge, subtitle, linkRow, status, buttons
+        case id, type, images, title, overlayBadge, subtitle, linkRow, status, buttons, imageNames
     }
 
     init(from decoder: Decoder) throws {
@@ -45,7 +46,7 @@ nonisolated struct PlaceCardNode: ItemNode, Decodable, Equatable {
             )
         }
         images = decodedImages
-
+        imageNames = try container.decode([String].self, forKey: .imageNames)
         title = try container.decode(String.self, forKey: .title)
         overlayBadge = try container.decodeIfPresent(Badge.self, forKey: .overlayBadge)
         subtitle = try container.decodeIfPresent(String.self, forKey: .subtitle)

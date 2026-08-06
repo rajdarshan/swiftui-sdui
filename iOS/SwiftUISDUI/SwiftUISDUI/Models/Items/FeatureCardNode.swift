@@ -23,9 +23,10 @@ nonisolated struct FeatureCardNode: ItemNode, Decodable, Equatable {
     let imagePosition: FeatureCardImagePosition
     let badge: Badge?
     let footer: FeatureCardFooter?
+    let imageName: String?
 
     private enum CodingKeys: String, CodingKey {
-        case id, type, title, image, imagePosition, badge, footer
+        case id, type, title, image, imagePosition, badge, footer, imageName
         case bodyText = "body"
     }
 
@@ -40,6 +41,7 @@ nonisolated struct FeatureCardNode: ItemNode, Decodable, Equatable {
         imagePosition = positionRaw.flatMap(FeatureCardImagePosition.init(rawValue:)) ?? .leading
         badge = try container.decodeIfPresent(Badge.self, forKey: .badge)
         footer = try container.decodeIfPresent(FeatureCardFooter.self, forKey: .footer)
+        imageName = try container.decodeIfPresent(String.self, forKey: .imageName)
     }
 }
 

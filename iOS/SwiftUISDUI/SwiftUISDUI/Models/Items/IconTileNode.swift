@@ -16,8 +16,9 @@ nonisolated struct IconTileNode: ItemNode, Decodable, Equatable {
     let image: ImageRef
     let imageShape: IconTileImageShape
     let action: Action
+    let imageName: String
 
-    private enum CodingKeys: String, CodingKey { case id, type, label, image, imageShape, action }
+    private enum CodingKeys: String, CodingKey { case id, type, label, image, imageShape, action, imageName }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -28,5 +29,6 @@ nonisolated struct IconTileNode: ItemNode, Decodable, Equatable {
         let shapeRaw = try container.decodeIfPresent(String.self, forKey: .imageShape)
         imageShape = shapeRaw.flatMap(IconTileImageShape.init(rawValue:)) ?? .square
         action = try container.decode(Action.self, forKey: .action)
+        imageName = try container.decode(String.self, forKey: .imageName)
     }
 }

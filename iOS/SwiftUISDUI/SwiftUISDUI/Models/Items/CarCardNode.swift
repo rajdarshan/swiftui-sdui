@@ -28,9 +28,10 @@ nonisolated struct CarCardNode: ItemNode, Decodable, Equatable {
     let priceSuffix: String?
     let priceNote: CarCardPriceNote?
     let trustBadges: [Badge]
+    let imageName: String
 
     private enum CodingKeys: String, CodingKey {
-        case id, type, image, title, price, action, overlayBadge, favorite, subtitle
+        case id, type, image, title, price, action, overlayBadge, favorite, subtitle, imageName
         case specs, priceSuffix, priceNote, trustBadges
     }
 
@@ -42,6 +43,7 @@ nonisolated struct CarCardNode: ItemNode, Decodable, Equatable {
         title = try container.decode(String.self, forKey: .title)
         price = try container.decode(String.self, forKey: .price)
         action = try container.decode(Action.self, forKey: .action)
+        imageName = try container.decode(String.self, forKey: .imageName)
         overlayBadge = try container.decodeIfPresent(Badge.self, forKey: .overlayBadge)
         favorite = try container.decodeIfPresent(CarCardFavorite.self, forKey: .favorite)
         subtitle = try container.decodeIfPresent(String.self, forKey: .subtitle)

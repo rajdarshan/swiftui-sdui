@@ -21,6 +21,15 @@ nonisolated enum ItemWidth: String {
         case .full: 1.0
         }
     }
+    
+    var itemHeight: CGFloat {
+        switch self {
+        case .md: 250
+        case .lg: 400
+        case .xl: 360
+        default: 120
+        }
+    }
 }
 
 func resolveItemWidth(
