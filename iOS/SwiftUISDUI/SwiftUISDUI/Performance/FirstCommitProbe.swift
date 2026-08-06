@@ -16,7 +16,7 @@ import SwiftUI
 import UIKit
 
 private final class ProbeViewController: UIViewController {
-    var onCommit: (@Sendable (ContinuousClock.Instant) -> Void)?
+    var onCommit: (@MainActor @Sendable (ContinuousClock.Instant) -> Void)?
     private var hasFiredCommit = false
 
     override func viewDidLayoutSubviews() {
@@ -32,7 +32,7 @@ private final class ProbeViewController: UIViewController {
 }
 
 private struct FirstCommitProbe: UIViewControllerRepresentable {
-    let onCommit: @Sendable (ContinuousClock.Instant) -> Void
+    let onCommit: @MainActor @Sendable (ContinuousClock.Instant) -> Void
 
     func makeUIViewController(context: Context) -> ProbeViewController {
         let controller = ProbeViewController()
@@ -44,7 +44,7 @@ private struct FirstCommitProbe: UIViewControllerRepresentable {
 }
 
 extension View {
-    func measuredFirstCommit(onCommit: @escaping @Sendable (ContinuousClock.Instant) -> Void) -> some View {
+    func measuredFirstCommit(onCommit: @escaping @MainActor @Sendable (ContinuousClock.Instant) -> Void) -> some View {
         background(FirstCommitProbe(onCommit: onCommit))
     }
 }
