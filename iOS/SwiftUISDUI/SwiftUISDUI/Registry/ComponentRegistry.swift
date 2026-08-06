@@ -69,13 +69,13 @@ nonisolated struct ComponentRegistry {
         itemViews: [
             "tile": { node, _ in
                 guard let tile = node as? TileNode else { return AnyView(EmptyView()) }
-                return AnyView(TileView(title: tile.title, image: tile.image, style: tile.style, action: tile.action, imageName: nil))
+                return AnyView(TileView(title: tile.title, image: tile.image, style: tile.style, action: tile.action, imageName: tile.imageName))
             },
             "modelCard": { node, _ in
                 guard let card = node as? ModelCardNode else { return AnyView(EmptyView()) }
                 return AnyView(ModelCardView(
                     title: card.title, image: card.image, subtitle: card.subtitle,
-                    watermark: card.watermark, style: card.style, action: card.action, imageName: nil
+                    watermark: card.watermark, style: card.style, action: card.action, imageName: card.imageName
                 ))
             },
             "iconTile": { node, _ in
@@ -85,7 +85,7 @@ nonisolated struct ComponentRegistry {
                 // payloads only ever carry a remote ImageRef, never a local
                 // asset name.
                 return AnyView(IconTileView(
-                    label: tile.label, image: tile.image, imageShape: tile.imageShape, imageName: "", action: tile.action
+                    label: tile.label, image: tile.image, imageShape: tile.imageShape, imageName: tile.imageName, action: tile.action
                 ))
             },
             "carCard": { node, context in
@@ -95,28 +95,28 @@ nonisolated struct ComponentRegistry {
                 return AnyView(CarCardView(
                     image: card.image, title: card.title, price: card.price, action: card.action,
                     overlayBadge: card.overlayBadge, favorite: favorite, subtitle: card.subtitle,
-                    specs: card.specs, priceSuffix: card.priceSuffix, priceNote: priceNote, trustBadges: card.trustBadges
+                    specs: card.specs, priceSuffix: card.priceSuffix, priceNote: priceNote, trustBadges: card.trustBadges, imageName: card.imageName
                 ))
             },
             "placeCard": { node, _ in
                 guard let card = node as? PlaceCardNode else { return AnyView(EmptyView()) }
                 return AnyView(PlaceCardView(
                     images: card.images, title: card.title, overlayBadge: card.overlayBadge,
-                    subtitle: card.subtitle, linkRow: card.linkRow, status: card.status, buttons: card.buttons, imageNames: []
+                    subtitle: card.subtitle, linkRow: card.linkRow, status: card.status, buttons: card.buttons, imageNames: card.imageNames
                 ))
             },
             "promoCard": { node, _ in
                 guard let card = node as? PromoCardNode else { return AnyView(EmptyView()) }
                 return AnyView(PromoCardView(
                     title: card.title, image: card.image, eyebrow: card.eyebrow, subtitle: card.subtitle,
-                    logos: card.logos, button: card.button, style: card.style, imageName: nil
+                    logos: card.logos, button: card.button, style: card.style, imageName: card.imageName
                 ))
             },
             "featureCard": { node, _ in
                 guard let card = node as? FeatureCardNode else { return AnyView(EmptyView()) }
                 return AnyView(FeatureCardView(
                     title: card.title, bodyText: card.bodyText, image: card.image,
-                    imagePosition: card.imagePosition, badge: card.badge, footer: card.footer, imageName: nil
+                    imagePosition: card.imagePosition, badge: card.badge, footer: card.footer, imageName: card.imageName
                 ))
             },
             "textBlock": { node, _ in

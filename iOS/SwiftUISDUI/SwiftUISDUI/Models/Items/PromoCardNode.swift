@@ -18,9 +18,10 @@ nonisolated struct PromoCardNode: ItemNode, Decodable, Equatable {
     let logos: [ImageRef]
     let button: ButtonSpec?
     let style: Style?
+    let imageName: String?
 
     private enum CodingKeys: String, CodingKey {
-        case id, type, title, image, eyebrow, subtitle, logos, button, style
+        case id, type, title, image, eyebrow, subtitle, logos, button, style, imageName
     }
 
     init(from decoder: Decoder) throws {
@@ -34,5 +35,6 @@ nonisolated struct PromoCardNode: ItemNode, Decodable, Equatable {
         logos = try container.decodeIfPresent([ImageRef].self, forKey: .logos) ?? []
         button = try container.decodeIfPresent(ButtonSpec.self, forKey: .button)
         style = try container.decodeIfPresent(Style.self, forKey: .style)
+        imageName = try container.decodeIfPresent(String.self, forKey: .imageName)
     }
 }

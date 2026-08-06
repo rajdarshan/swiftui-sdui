@@ -22,51 +22,65 @@ struct StaticHomeView: View {
     @State private var collapseProgress: CGFloat = 0
     @State private var availableWidth: CGFloat = 0
     @State private var usedCarsSelectedChipId = "wishlisted"
+    @Environment(\.performanceMarks) private var marks
 
     private let collapseScrollRange: CGFloat = 250 - 151
+    /// Content sections after the header (design_spec.md §6 table, rows 2-14);
+    /// matches SDUIPageView's `contentSections.count` for `home_all.json` so
+    /// the two variants' per-section breakdowns are directly comparable.
+    private let staticSectionCount = 13
 
     var body: some View {
-        ZStack(alignment: .top) {
+        // design_spec.md §5: no decoder on this path, so T0 and T1 are
+        // reported as coincident — decode duration is 0 by design.
+        let t0t1 = ContinuousClock.now
+        marks.recordLoad(t0: t0t1, t1: t0t1)
+        let content = ZStack(alignment: .top) {
             ScrollView {
                 LazyVStack {
                     Color(Palette.brandPrimary).frame(height: 250)
 
-                    SectionContainer(header: StaticHomeData.buyCarHeader) {
+                    SectionContainer(header: StaticHomeData.buyCarHeader, perfIndex: 0, perfSectionCount: staticSectionCount) {
                         RailView(items: StaticHomeData.buyCarItems, itemWidth: .sm) { item in
                             TileView(title: item.title, image: item.image, style: item.style, action: item.action, imageName: item.imageName)
                         }
                     }
 
-                    SectionContainer(header: StaticHomeData.sellCarHeader) {
+                    SectionContainer(header: StaticHomeData.sellCarHeader, perfIndex: 1, perfSectionCount: staticSectionCount) {
                         RailView(items: StaticHomeData.sellCarItems, itemWidth: .sm) { item in
                             TileView(title: item.title, image: item.image, style: item.style, action: item.action, imageName: item.imageName)
                         }
                     }
 
-                    SectionContainer(header: StaticHomeData.loansHeader) {
+                    SectionContainer(header: StaticHomeData.loansHeader, perfIndex: 2, perfSectionCount: staticSectionCount) {
                         RailView(items: StaticHomeData.loansItems, itemWidth: .sm) { item in
                             // swiftlint:disable:next line_length
                             IconTileView(label: item.label, image: item.image, imageShape: item.imageShape, imageName: item.imageName, action: item.action)
                         }
                     }
 
-                    SectionContainer(header: StaticHomeData.carCheckHeader) {
+                    SectionContainer(header: StaticHomeData.carCheckHeader, perfIndex: 3, perfSectionCount: staticSectionCount) {
                         GridView(items: StaticHomeData.carCheckItems, columns: 3) { item in
                             TileView(title: item.title, image: item.image, style: item.style, action: item.action, imageName: item.imageName)
                         }
                     }
 
-                    SectionContainer(header: StaticHomeData.usedCarsHeader) {
+                    SectionContainer(header: StaticHomeData.usedCarsHeader, perfIndex: 4, perfSectionCount: staticSectionCount) {
                         usedCarsSection
                     }
 
-                    SectionContainer(header: StaticHomeData.manageVehicleHeader, style: StaticHomeData.manageVehicleStyle) {
+                    SectionContainer(
+                        header: StaticHomeData.manageVehicleHeader,
+                        style: StaticHomeData.manageVehicleStyle,
+                        perfIndex: 5,
+                        perfSectionCount: staticSectionCount
+                    ) {
                         GridView(items: StaticHomeData.manageVehicleItems, columns: 3) { item in
                             TileView(title: item.title, image: item.image, style: item.style, action: item.action, imageName: item.imageName)
                         }
                     }
 
-                    SectionContainer {
+                    SectionContainer(perfIndex: 6, perfSectionCount: staticSectionCount) {
                         PromoCardView(
                             title: StaticHomeData.orbitPromo.title, image: StaticHomeData.orbitPromo.image,
                             eyebrow: StaticHomeData.orbitPromo.eyebrow, subtitle: StaticHomeData.orbitPromo.subtitle,
@@ -76,7 +90,7 @@ struct StaticHomeView: View {
                         .padding(.horizontal, Spacing.pageMargin)
                     }
 
-                    SectionContainer(header: StaticHomeData.showroomsHeader) {
+                    SectionContainer(header: StaticHomeData.showroomsHeader, perfIndex: 7, perfSectionCount: staticSectionCount) {
                         RailView(items: StaticHomeData.showroomsItems, itemWidth: .xl, itemHeight: 360) { item in
                             PlaceCardView(
                                 images: item.images, title: item.title, overlayBadge: item.overlayBadge,
@@ -86,7 +100,7 @@ struct StaticHomeView: View {
                         }
                     }
 
-                    SectionContainer(header: StaticHomeData.trendingHeader) {
+                    SectionContainer(header: StaticHomeData.trendingHeader, perfIndex: 8, perfSectionCount: staticSectionCount) {
                         RailView(items: StaticHomeData.trendingItems, itemWidth: .md, itemHeight: 250) { item in
                             ModelCardView(
                                 title: item.title, image: item.image, subtitle: item.subtitle,
@@ -95,7 +109,7 @@ struct StaticHomeView: View {
                         }
                     }
 
-                    SectionContainer {
+                    SectionContainer(perfIndex: 9, perfSectionCount: staticSectionCount) {
                         FeatureCardView(
                             title: StaticHomeData.findMatch.title, bodyText: StaticHomeData.findMatch.bodyText,
                             image: StaticHomeData.findMatch.image, imagePosition: StaticHomeData.findMatch.imagePosition,
@@ -105,7 +119,7 @@ struct StaticHomeView: View {
                         .padding(.horizontal, Spacing.pageMargin)
                     }
 
-                    SectionContainer {
+                    SectionContainer(perfIndex: 10, perfSectionCount: staticSectionCount) {
                         CarouselView(items: StaticHomeData.valuePropItems, loop: true, peek: true) { item in
                             PromoCardView(
                                 title: item.title, image: item.image, eyebrow: item.eyebrow,
@@ -114,7 +128,7 @@ struct StaticHomeView: View {
                         }
                     }
 
-                    SectionContainer {
+                    SectionContainer(perfIndex: 11, perfSectionCount: staticSectionCount) {
                         PromoCardView(
                             title: StaticHomeData.crashfreePromo.title, image: StaticHomeData.crashfreePromo.image,
                             eyebrow: StaticHomeData.crashfreePromo.eyebrow, subtitle: StaticHomeData.crashfreePromo.subtitle,
@@ -124,7 +138,7 @@ struct StaticHomeView: View {
                         .padding(.horizontal, Spacing.pageMargin)
                     }
 
-                    SectionContainer(style: StaticHomeData.brandFooterStyle) {
+                    SectionContainer(style: StaticHomeData.brandFooterStyle, perfIndex: 12, perfSectionCount: staticSectionCount) {
                         TextBlockView(
                             title: StaticHomeData.brandFooterTitle, subtitle: StaticHomeData.brandFooterSubtitle,
                             style: StaticHomeData.brandFooterTextStyle
@@ -149,9 +163,15 @@ struct StaticHomeView: View {
         .navigationBarHidden(true)
         .toolbar(.hidden, for: .navigationBar)
         .measuringAvailableWidth(into: $availableWidth)
+        .measuredFirstCommit { instant in marks.recordT3(instant) }
+        marks.recordT2(ContinuousClock.now)
+        return content
     }
 
     private func updateCollapseProgress(oldValue: CGFloat, newValue: CGFloat) {
+        if newValue != oldValue {
+            marks.recordTTI(ContinuousClock.now)
+        }
         collapseProgress = min(max(newValue / collapseScrollRange, 0), 1)
     }
 

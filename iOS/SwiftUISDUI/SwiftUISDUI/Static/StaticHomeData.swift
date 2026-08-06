@@ -14,7 +14,7 @@
 import SwiftUI
 
 extension EnvironmentValues {
-    @Entry var useImageAsset: Bool = false
+    @Entry var useImageAsset: Bool = true
 }
 
 enum StaticHomeData {

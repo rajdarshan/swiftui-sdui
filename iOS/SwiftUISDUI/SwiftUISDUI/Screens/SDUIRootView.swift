@@ -23,11 +23,14 @@ struct SDUIRootView: View {
     @State private var pageId: String
     @State private var store: PageStore
     @State private var knownPageIds: Set<String> = []
+    @State private var hasReportedLaunchMetrics = false
+    @Environment(\.performanceMarks) private var marks
 
     init(pageId: String, source: PayloadSource = BundlePayloadSource()) {
+        let t0 = ContinuousClock.now
         self.source = source
         _pageId = State(initialValue: pageId)
-        _store = State(initialValue: PageStore(pageId: pageId, source: source))
+        _store = State(initialValue: PageStore(pageId: pageId, source: source, t0: t0))
     }
 
     var body: some View {
@@ -46,6 +49,16 @@ struct SDUIRootView: View {
         }
         .task(id: pageId) {
             await store.load()
+            // Reported once: PageStore.load()'s loadState = .loaded assignment
+            // and this check run in the same synchronous continuation with no
+            // further await between them, so T0/T1 are always recorded before
+            // SDUIPageView's body (T2) ever runs. Guarded so in-app navigation
+            // (which builds a fresh, un-t0'd PageStore via navigate(to:))
+            // never re-reports after the initial launch-time load.
+            if !hasReportedLaunchMetrics, let t0 = store.t0, let t1 = store.t1 {
+                hasReportedLaunchMetrics = true
+                marks.recordLoad(t0: t0, t1: t1)
+            }
         }
         .task {
             if let manifest = try? await source.loadManifest() {

@@ -17,4 +17,5 @@ nonisolated struct ModelCardNode: ItemNode, Decodable, Equatable {
     let watermark: String?
     let style: Style?
     let action: Action
+    let imageName: String?
 }
