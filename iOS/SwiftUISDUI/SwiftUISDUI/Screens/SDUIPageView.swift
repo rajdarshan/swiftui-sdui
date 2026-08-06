@@ -85,8 +85,8 @@ struct SDUIPageView: View {
                     if headerSection != nil {
                         Color(Palette.brandPrimary).frame(height: 250)
                     }
-                    ForEach(contentSections, id: \.id) { section in
-                        sectionView(for: section)
+                    ForEach(Array(contentSections.enumerated()), id: \.element.id) { indexed in
+                        sectionView(for: indexed.element, index: indexed.offset, count: contentSections.count)
                     }
                 }
             }
@@ -120,28 +120,31 @@ struct SDUIPageView: View {
     }
 
     private func updateCollapseProgress(oldValue: CGFloat, newValue: CGFloat) {
+        if newValue != oldValue {
+            marks.recordTTI(ContinuousClock.now)
+        }
         collapseProgress = min(max(newValue / collapseScrollRange, 0), 1)
     }
 
     @ViewBuilder
-    private func sectionView(for section: SectionNode) -> some View {
+    private func sectionView(for section: SectionNode, index: Int, count: Int) -> some View {
         switch section {
         case .header:
             EmptyView() // rendered separately as the pinned overlay; unreachable via contentSections
         case .rail(let rail):
-            SectionContainer(header: rail.header, style: rail.style) {
+            SectionContainer(header: rail.header, style: rail.style, perfIndex: index, perfSectionCount: count) {
                 filterableContent(filter: rail.filter, plainItems: rail.items, sectionId: rail.id) { items in
                     RailView(items: wrap(items), itemWidth: rail.itemWidth, snap: rail.snap) { wrapped in itemView(for: wrapped.node) }
                 }
             }
         case .grid(let grid):
-            SectionContainer(header: grid.header, style: grid.style) {
+            SectionContainer(header: grid.header, style: grid.style, perfIndex: index, perfSectionCount: count) {
                 filterableContent(filter: grid.filter, plainItems: grid.items, sectionId: grid.id) { items in
                     GridView(items: wrap(items), columns: grid.columns) { wrapped in itemView(for: wrapped.node) }
                 }
             }
         case .carousel(let carousel):
-            SectionContainer(header: carousel.header, style: carousel.style) {
+            SectionContainer(header: carousel.header, style: carousel.style, perfIndex: index, perfSectionCount: count) {
                 CarouselView(items: wrap(carousel.items), loop: carousel.loop, peek: carousel.peek) { wrapped in itemView(for: wrapped.node) }
             }
         case .list:
@@ -150,7 +153,7 @@ struct SDUIPageView: View {
             // doesn't render rather than inventing an unrequested component.
             EmptyView()
         case .single(let single):
-            SectionContainer(header: single.header, style: single.style) {
+            SectionContainer(header: single.header, style: single.style, perfIndex: index, perfSectionCount: count) {
                 singleItemView(for: single.item)
             }
         }
