@@ -60,6 +60,7 @@ struct SDUIPageView: View {
     @State private var collapseProgress: CGFloat = 0
     @State private var availableWidth: CGFloat = 0
     @State private var debugPresentation: DebugActionPresentation?
+    @Environment(\.performanceMarks) private var marks
 
     private let collapseScrollRange: CGFloat = 250 - 151
 
@@ -78,7 +79,7 @@ struct SDUIPageView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .top) {
+        let content = ZStack(alignment: .top) {
             ScrollView {
                 LazyVStack(spacing: Spacing.sectionGap) {
                     if headerSection != nil {
@@ -113,6 +114,9 @@ struct SDUIPageView: View {
         .sheet(item: $debugPresentation) { presentation in
             DebugActionScreen(action: presentation.action)
         }
+        .measuredFirstCommit { instant in marks.recordT3(instant) }
+        marks.recordT2(ContinuousClock.now)
+        return content
     }
 
     private func updateCollapseProgress(oldValue: CGFloat, newValue: CGFloat) {

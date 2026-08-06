@@ -22,11 +22,16 @@ struct StaticHomeView: View {
     @State private var collapseProgress: CGFloat = 0
     @State private var availableWidth: CGFloat = 0
     @State private var usedCarsSelectedChipId = "wishlisted"
+    @Environment(\.performanceMarks) private var marks
 
     private let collapseScrollRange: CGFloat = 250 - 151
 
     var body: some View {
-        ZStack(alignment: .top) {
+        // design_spec.md §5: no decoder on this path, so T0 and T1 are
+        // reported as coincident — decode duration is 0 by design.
+        let t0t1 = ContinuousClock.now
+        marks.recordLoad(t0: t0t1, t1: t0t1)
+        let content = ZStack(alignment: .top) {
             ScrollView {
                 LazyVStack {
                     Color(Palette.brandPrimary).frame(height: 250)
@@ -149,6 +154,9 @@ struct StaticHomeView: View {
         .navigationBarHidden(true)
         .toolbar(.hidden, for: .navigationBar)
         .measuringAvailableWidth(into: $availableWidth)
+        .measuredFirstCommit { instant in marks.recordT3(instant) }
+        marks.recordT2(ContinuousClock.now)
+        return content
     }
 
     private func updateCollapseProgress(oldValue: CGFloat, newValue: CGFloat) {
