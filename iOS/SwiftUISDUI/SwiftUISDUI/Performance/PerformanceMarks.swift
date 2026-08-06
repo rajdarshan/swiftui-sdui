@@ -45,6 +45,11 @@ final class PerformanceMarks {
         return PerformanceMarks(enabled: true, variant: variant, pageId: pageId)
     }
 
+    /// Diagnostic-only view of which marks have landed on *this* instance.
+    var probeState: String {
+        "enabled=\(enabled) variant=\(variant) t0=\(t0 != nil) t1=\(t1 != nil) t2=\(t2 != nil)"
+    }
+
     func recordLoad(t0: ContinuousClock.Instant, t1: ContinuousClock.Instant) {
         guard enabled else { return }
         self.t0 = t0

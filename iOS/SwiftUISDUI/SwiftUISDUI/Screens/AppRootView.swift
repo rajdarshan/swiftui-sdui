@@ -49,7 +49,7 @@ struct AppRootView: View {
                 DebugFlowPicker()
             }
         }
-        .environment(\.performanceMarks, performanceMarks)
         .overlay(PerformanceProbeOverlay())
+        .environment(\.performanceMarks, performanceMarks)
     }
 }
