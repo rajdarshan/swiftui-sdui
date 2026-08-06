@@ -13,9 +13,19 @@ import SwiftUI
 
 struct AppRootView: View {
     private let launchFlow: LaunchFlow?
+    private let performanceMarks: PerformanceMarks
 
     init(environment: [String: String] = ProcessInfo.processInfo.environment) {
-        launchFlow = LaunchFlow.resolve(from: environment)
+        let launchFlow = LaunchFlow.resolve(from: environment)
+        self.launchFlow = launchFlow
+        switch launchFlow {
+        case .staticHome:
+            performanceMarks = .make(from: environment, variant: "static", pageId: nil)
+        case .sdui(let pageId):
+            performanceMarks = .make(from: environment, variant: "sdui", pageId: pageId)
+        case nil:
+            performanceMarks = .inactive
+        }
     }
 
     var body: some View {
@@ -30,5 +40,7 @@ struct AppRootView: View {
                 DebugFlowPicker()
             }
         }
+        .environment(\.performanceMarks, performanceMarks)
+        .overlay(PerformanceProbeOverlay())
     }
 }
