@@ -104,8 +104,8 @@ Truncation `.tail`.
 
 | Purpose | Value |
 |---|---|
-| Page horizontal margin | 16 |
-| Section vertical gap | 24 |
+| Page horizontal margin | 8 |
+| Section vertical gap | 16 |
 | Section header → content | 12 |
 | Rail inter-item gap | 12 |
 | Grid gutter (h and v) | 12 |
