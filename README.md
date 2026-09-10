@@ -10,9 +10,9 @@ The same screen is also built by hand in Swift, so the cost of doing it this way
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 <!-- Commit the gif to docs/demo.gif — the current private-user-images URL is signed, expires, and renders broken for every visitor. -->
-![Demo: a payload edit reflected live in the UI](demo/demo.gif)
+![Demo: a payload edit reflected live in the UI](Demo/demo.gif)
 
-*Longer walkthrough — action handling, a live payload edit, fallback behaviour: [`demo/demo.mp4`](demo/demo.mp4)*
+*Longer walkthrough — action handling, a live payload edit, fallback behaviour: [`demo/demo.mp4`](Demo/SDUI_app_demo.mp4)*
 
 ---
 
