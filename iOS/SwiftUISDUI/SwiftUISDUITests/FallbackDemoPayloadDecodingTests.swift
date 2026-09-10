@@ -131,7 +131,6 @@ struct FallbackDemoPayloadDecodingTests {
     }
 
     // ADDING_A_COMPONENT.md §5: "Old-client behaviour... the one people skip and
-    // the one the assignment explicitly asks you to demonstrate."
     @Test
     @MainActor
     func oldClientRegistryMissingCarCardStillDecodesTheRestOfThePageWithoutCrashing() throws {

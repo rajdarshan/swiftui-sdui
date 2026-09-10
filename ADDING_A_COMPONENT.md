@@ -125,7 +125,7 @@ In this order. Contract first, client second, payload last.
 
 ### 3.2 Validator — `sdui-config/scripts/validate-payloads.mjs`
 
-**Same commit as §3.1. The subagent fails the review if these drift.**
+**Same commit as §3.1. these must not drift — the validator's `Since` table and the contract are updated in the same commit.**
 
 ```js
 const SINCE = {
@@ -281,8 +281,7 @@ git commit -m "feat(ios): render videoTile with poster fallback"
 
 ## 7. Timed additions
 
-For the interview round where a component is added under observation, the
-critical-path order is:
+The critical-path order is:
 
 1. **Register first, render crudely.** Get the type recognised and a placeholder
    on screen. Proves the registry seam works.
